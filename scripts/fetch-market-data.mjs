@@ -116,6 +116,9 @@ async function main() {
 
   const entries = []
   const failures = []
+  // Twelve Data answers 403 for /dividends on the free tier. Once that is clear
+  // there is no point spending eight seconds per symbol rediscovering it.
+  let dividendsPlanGated = false
 
   for (const [index, entry] of queue.entries()) {
     const label = `[${String(index + 1).padStart(3)}/${queue.length}] ${entry.symbol}`
@@ -149,14 +152,19 @@ async function main() {
         // dividend adjustment, not the symbol — so fall back to price return and
         // record that, rather than dropping years of history over a 403.
         let dividends = cachedFresh ? published.dividends : null
-        let dividendsUnavailable = false
+        let dividendsUnavailable = dividendsPlanGated
+        if (!dividends && dividendsPlanGated) dividends = []
         if (!dividends) {
           try {
             dividends = await fetchDividends(entry, options)
           } catch (error) {
             dividends = []
             dividendsUnavailable = true
-            if (index === 0) console.log(`  (dividends unavailable: ${error.message.slice(0, 80)})`)
+            // A plan restriction applies to every symbol, not just this one.
+            if (/\b(403|plan|grow|pro|ultra|venture|enterprise)\b/i.test(error.message)) {
+              dividendsPlanGated = true
+              console.log(`  dividends unavailable on this plan — skipping for the rest of the run`)
+            }
           }
         }
 
