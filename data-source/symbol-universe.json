@@ -79,7 +79,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "EUNL.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "XDWD.DE",
@@ -92,7 +97,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "XDWD.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "SPPW.DE",
@@ -123,7 +133,12 @@
         "mic": "XLON",
         "exchange": "LSE"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "ISAC.LON",
+        "currency": "USD",
+        "region": "United Kingdom"
+      }
     },
     {
       "symbol": "MWRD.MI",
@@ -136,7 +151,12 @@
         "mic": "XMIL",
         "exchange": "MTA"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "MWRD.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "VHVG.L",
@@ -149,7 +169,12 @@
         "mic": "XLON",
         "exchange": "LSE"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VHVG.LON",
+        "currency": "GBP",
+        "region": "United Kingdom"
+      }
     },
     {
       "symbol": "VEVE.L",
