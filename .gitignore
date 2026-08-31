@@ -54,3 +54,6 @@ next-env.d.ts
 /.cache/
 *.local.json
 .verify-tmp.mjs
+
+# scratch
+/tmp/
