@@ -1,0 +1,64 @@
+name: Deploy to GitHub Pages
+
+# Builds the static export and publishes it.
+#
+# Requires Pages to be enabled for the repository with "Source: GitHub Actions"
+# (Settings → Pages). On a private repository that also needs a plan which
+# includes Pages for private repos.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  # Called by refresh-market-data.yml once new data lands.
+  workflow_call:
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm test
+
+      - name: Build static export
+        # A project site is served from /<repo>/, so asset and data URLs need
+        # that prefix. Drop this line if you move to a custom domain.
+        env:
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+        run: npm run build
+
+      # Pages serves the artifact as-is; without this, /_next/* 404s because
+      # Jekyll skips underscore-prefixed directories.
+      - run: touch out/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

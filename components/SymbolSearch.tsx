@@ -1,81 +1,48 @@
 'use client'
 
 import { useEffect, useId, useRef, useState } from 'react'
-
-export type SearchHit = {
-  symbol: string
-  name: string
-  exchange: string
-  type: 'ETF' | 'EQUITY'
-}
+import { loadSymbols, searchSymbols, type SymbolEntry } from '@/lib/marketData'
 
 /**
- * Debounced ticker autocomplete over /api/search. Kept deliberately quiet about
- * upstream trouble: if search is unavailable the user can still type a symbol
- * and press Enter, because the history endpoint is what actually validates it.
+ * Autocomplete over the curated symbol universe.
+ *
+ * The whole index ships as one small JSON file, so matching happens locally —
+ * no request per keystroke, no debounce, and results appear as fast as the user
+ * types. There is deliberately no "use whatever I typed" escape hatch any more:
+ * a symbol outside the universe has no published prices, so offering it would
+ * only produce a dead end.
  */
 export function SymbolSearch({
   onSelect,
   disabled,
-  placeholder = 'Search a stock or ETF — e.g. VWCE.DE, AAPL, SWDA.MI',
+  placeholder = 'Search a stock or ETF — e.g. VWCE.DE, Apple, S&P 500',
 }: {
-  onSelect: (hit: SearchHit) => void
+  onSelect: (entry: SymbolEntry) => void
   disabled?: boolean
   placeholder?: string
 }) {
   const [query, setQuery] = useState('')
-  /**
-   * Results are stamped with the query they came from, so a stale list is
-   * simply not rendered rather than being cleared by an extra effect pass.
-   */
-  const [results, setResults] = useState<{
-    query: string
-    hits: SearchHit[]
-    error: string | null
-  } | null>(null)
+  const [index, setIndex] = useState<SymbolEntry[] | null>(null)
+  const [loadError, setLoadError] = useState<string | null>(null)
   const [open, setOpen] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [highlighted, setHighlighted] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const listId = useId()
 
-  const trimmed = query.trim()
-  const isSearchable = trimmed.length >= 2
-  const current = results?.query === trimmed ? results : null
-  const hits = current?.hits ?? []
-  const error = current?.error ?? null
-
   useEffect(() => {
-    if (!isSearchable) return
-
-    const controller = new AbortController()
-    const timer = setTimeout(async () => {
-      setLoading(true)
-      try {
-        const response = await fetch(`/api/search?q=${encodeURIComponent(trimmed)}`, {
-          signal: controller.signal,
-        })
-        const data = await response.json()
-        setResults({
-          query: trimmed,
-          hits: data.results ?? [],
-          error: response.ok ? null : (data.error ?? 'Search is unavailable.'),
-        })
-      } catch (caught) {
-        if ((caught as Error).name !== 'AbortError') {
-          setResults({ query: trimmed, hits: [], error: 'Search is unavailable.' })
-        }
-      } finally {
-        setLoading(false)
-      }
-    }, 300)
-
+    let cancelled = false
+    loadSymbols()
+      .then((data) => {
+        if (!cancelled) setIndex(data.symbols)
+      })
+      .catch((error: Error) => {
+        if (!cancelled) setLoadError(error.message)
+      })
     return () => {
-      controller.abort()
-      clearTimeout(timer)
+      cancelled = true
     }
-  }, [trimmed, isSearchable])
+  }, [])
 
-  // Close the list when focus or a click goes elsewhere.
   useEffect(() => {
     const onPointerDown = (event: MouseEvent) => {
       if (!containerRef.current?.contains(event.target as Node)) setOpen(false)
@@ -84,11 +51,15 @@ export function SymbolSearch({
     return () => document.removeEventListener('mousedown', onPointerDown)
   }, [])
 
-  const choose = (hit: SearchHit) => {
-    onSelect(hit)
+  const trimmed = query.trim()
+  const hits = index ? searchSymbols(index, trimmed) : []
+  const showList = open && trimmed.length > 0
+
+  const choose = (entry: SymbolEntry) => {
+    onSelect(entry)
     setQuery('')
-    setResults(null)
     setOpen(false)
+    setHighlighted(0)
   }
 
   return (
@@ -96,56 +67,62 @@ export function SymbolSearch({
       <input
         type="text"
         role="combobox"
-        aria-expanded={open}
+        aria-expanded={showList}
         aria-controls={listId}
         aria-autocomplete="list"
         className="field"
-        placeholder={placeholder}
+        placeholder={index ? placeholder : 'Loading symbols…'}
         value={query}
-        disabled={disabled}
+        disabled={disabled || (!index && !loadError)}
         onChange={(event) => {
           setQuery(event.target.value)
+          setHighlighted(0)
           setOpen(true)
         }}
         onFocus={() => setOpen(true)}
         onKeyDown={(event) => {
           if (event.key === 'Escape') setOpen(false)
-          if (event.key === 'Enter') {
+          else if (event.key === 'ArrowDown') {
             event.preventDefault()
-            const typed = trimmed.toUpperCase()
-            if (hits.length > 0) choose(hits[0])
-            else if (typed.length >= 1) {
-              choose({ symbol: typed, name: typed, exchange: '', type: 'EQUITY' })
-            }
+            setHighlighted((current) => Math.min(current + 1, hits.length - 1))
+          } else if (event.key === 'ArrowUp') {
+            event.preventDefault()
+            setHighlighted((current) => Math.max(current - 1, 0))
+          } else if (event.key === 'Enter' && hits[highlighted]) {
+            event.preventDefault()
+            choose(hits[highlighted])
           }
         }}
       />
 
-      {open && isSearchable && (
+      {loadError && <p className="mt-1.5 text-[11px] text-ink-muted">{loadError}</p>}
+
+      {showList && (
         <ul
           id={listId}
           role="listbox"
           className="absolute z-20 mt-1 max-h-72 w-full overflow-auto rounded-lg border border-hairline bg-surface py-1 shadow-lg"
         >
-          {loading && hits.length === 0 && (
-            <li className="px-3 py-2 text-xs text-ink-muted">Searching…</li>
-          )}
-          {!loading && hits.length === 0 && (
+          {hits.length === 0 && (
             <li className="px-3 py-2 text-xs text-ink-muted">
-              {error ?? 'No matches.'} Press Enter to use “{trimmed.toUpperCase()}” anyway.
+              Nothing matches “{trimmed}”. The site carries a curated list of popular funds and
+              shares rather than every ticker.
             </li>
           )}
-          {hits.map((hit) => (
-            <li key={`${hit.symbol}-${hit.exchange}`} role="option" aria-selected={false}>
+          {hits.map((entry, position) => (
+            <li key={entry.symbol} role="option" aria-selected={position === highlighted}>
               <button
                 type="button"
-                onClick={() => choose(hit)}
-                className="flex w-full items-baseline gap-2 px-3 py-2 text-left text-xs hover:bg-sunken"
+                onMouseEnter={() => setHighlighted(position)}
+                onClick={() => choose(entry)}
+                className={`flex w-full items-baseline gap-2 px-3 py-2 text-left text-xs ${
+                  position === highlighted ? 'bg-sunken' : ''
+                }`}
               >
-                <span className="tabular font-semibold">{hit.symbol}</span>
-                <span className="min-w-0 flex-1 truncate text-ink-secondary">{hit.name}</span>
+                <span className="tabular font-semibold">{entry.symbol}</span>
+                <span className="min-w-0 flex-1 truncate text-ink-secondary">{entry.name}</span>
                 <span className="shrink-0 text-[10px] uppercase tracking-wide text-ink-muted">
-                  {hit.type === 'ETF' ? 'ETF' : hit.exchange}
+                  {entry.currency}
                 </span>
               </button>
             </li>

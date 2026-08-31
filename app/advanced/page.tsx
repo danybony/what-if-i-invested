@@ -4,11 +4,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { DeltaCards } from '@/components/DeltaCards'
 import { PortfolioBuilder, type PortfolioHolding } from '@/components/PortfolioBuilder'
 import { ResultChart, type ChartDatum } from '@/components/ResultChart'
-import type { SearchHit } from '@/components/SymbolSearch'
 import { YearTable, type YearRow } from '@/components/YearTable'
 import { Callout, Card, Field, NumberInput, Select, Toggle } from '@/components/ui'
 import { backtest, type BankConfigInput } from '@/lib/backtest'
 import { formatMonth, formatPercent } from '@/lib/format'
+import { loadHistory, loadRates, type SymbolEntry } from '@/lib/marketData'
 import { CONTRIBUTION_LABELS, type ContributionFrequency } from '@/lib/projection'
 
 const contributionOptions = (Object.keys(CONTRIBUTION_LABELS) as ContributionFrequency[]).map(
@@ -39,10 +39,9 @@ export default function AdvancedModePage() {
 
   useEffect(() => {
     let cancelled = false
-    fetch('/api/rates')
-      .then((response) => response.json())
+    loadRates()
       .then((data) => {
-        if (!cancelled && data?.monthlyRates) setEcbRates(data.monthlyRates)
+        if (!cancelled) setEcbRates(data.monthlyRates)
       })
       .catch(() => {})
     return () => {
@@ -51,28 +50,25 @@ export default function AdvancedModePage() {
   }, [])
 
   const addHolding = useCallback(
-    async (hit: SearchHit) => {
-      const symbol = hit.symbol.toUpperCase()
+    async (entry: SymbolEntry) => {
+      const symbol = entry.symbol.toUpperCase()
       if (holdings.some((holding) => holding.symbol === symbol) || pending.includes(symbol)) return
 
       setLoadError(null)
       setPending((previous) => [...previous, symbol])
       try {
-        const response = await fetch(`/api/history?symbol=${encodeURIComponent(symbol)}`)
-        const data = await response.json()
-        if (!response.ok) throw new Error(data.error ?? 'Could not load price history.')
+        const history = await loadHistory(entry)
 
         setHoldings((previous) => {
           const next: PortfolioHolding[] = [
             ...previous,
             {
-              symbol: data.symbol ?? symbol,
-              name: data.name ?? hit.name,
-              currency: data.currency ?? 'EUR',
+              symbol: history.symbol,
+              name: history.name,
+              currency: history.currency,
               weight: 0,
-              points: data.points,
-              firstMonth: data.points[0]?.month ?? '',
-              stale: Boolean(data.stale),
+              points: history.points,
+              firstMonth: history.points[0]?.month ?? '',
             },
           ]
           // A fresh holding with no weight is useless, so rebalance evenly.

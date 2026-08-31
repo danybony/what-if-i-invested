@@ -20,7 +20,10 @@ npm test         # engine unit tests
 npm run build    # production build
 ```
 
-No API keys and no environment variables — both upstreams are keyless.
+No API keys. `npm run build` emits a static site into `out/`.
+
+Set `NEXT_PUBLIC_BASE_PATH=/what-if-i-invested` when building for a GitHub Pages *project* site,
+which is served from a subdirectory. Leave it unset for local dev or a custom domain.
 
 ## How the numbers are worked out
 
@@ -49,41 +52,76 @@ Two return figures are reported because they answer different questions: the **m
 CAGR is what the holdings themselves did. Max drawdown is measured on a separate €1
 buy-and-hold stake, so the deposit schedule doesn't flatter it.
 
-## Data sources
+## Data sources — and why there is no backend
 
-| What | Where | Notes |
+The site is a **fully static export**. There are no API routes and no server: prices and bank
+rates are fetched at build time, committed into `public/data/`, and served as plain files
+alongside the page. That is what lets GitHub Pages host the whole thing, and it makes the
+privacy story simple — a visitor's browser never talks to a data provider.
+
+| What | Where | Refreshed |
 |---|---|---|
-| Prices | Yahoo Finance `v8/finance/chart` | Keyless, unofficial. Monthly closes + adjusted closes. |
-| Ticker search | Yahoo Finance `v1/finance/search` | Keyless, unofficial. |
-| Bank rates | [ECB Data Portal](https://data.ecb.europa.eu), series `MIR/M.U2.B.L22.A.R.A.2250.EUR.N` | Euro-area household deposits, new business. Free CSV, ~26 years of monthly history. |
+| Prices | Yahoo Finance `v8/finance/chart` | daily, by GitHub Actions |
+| Bank rates | [ECB Data Portal](https://data.ecb.europa.eu), series `MIR/M.U2.B.L22.A.R.A.2250.EUR.N` | daily, same run |
 
-Both block browser CORS and Yahoo rejects requests without a browser `User-Agent`, so all
-access goes through the server routes in `app/api/`.
+### The published files
 
-### About the Yahoo rate limit
+```
+public/data/
+  symbols.json          the searchable universe + each symbol's coverage
+  rates.json            ECB euro-area household deposit rates, monthly
+  prices/VWCE.DE.json   one file per symbol, monthly close + adjusted close
+```
 
-Yahoo rate-limits an IP hard — a few dozen uncached requests is enough to get `429`s for
-several minutes. Three things keep normal use under that ceiling:
+Only the symbols actually in a portfolio are downloaded, so a visit costs the index (a few KB)
+plus one small file per holding.
 
-1. **Full history is fetched once per symbol** (`period1=0`) and cached for a day. Every start
-   date the user then tries is served by slicing that one cache entry.
-2. Requests **fail over between Yahoo's two hosts** (`query1`/`query2`) with a short retry.
-3. If everything upstream fails, `lib/cache.ts` returns the **last known good answer marked
-   stale** rather than an error, and the UI labels it as cached.
+### Why this beats calling Yahoo from the browser
 
-If the site ever outgrows this, the upgrade path is a keyed provider (Twelve Data, Tiingo,
-EODHD) behind the same `fetchHistory`/`searchSymbols` interface in `lib/yahoo.ts` — nothing
-above that layer needs to change.
+Yahoo rate-limits an IP hard — a few dozen uncached requests is enough to earn `429`s for
+several minutes, and it sends no CORS headers, so a browser could not call it directly anyway.
+Fetching in CI turns a per-visitor problem into a once-a-day one: **~200 requests total**,
+rather than ~200 per visitor. The repo itself becomes the cache — shared by everyone, versioned,
+and free. (The ECB, unlike Yahoo, does send `Access-Control-Allow-Origin: *`, so it *could* be
+called from the browser; we bake it anyway to keep every request same-origin.)
 
-**Working offline, or while rate-limited:** capture a Yahoo chart response and seed the cache
-with it.
+The trade-off is a **curated universe** instead of every ticker on earth, and prices as fresh as
+the last refresh.
+
+### The symbol universe
+
+`data-source/symbol-universe.json` holds ~200 hand-picked funds and shares — world and regional
+UCITS ETFs, bond and commodity ETFs, US-listed ETFs, US large caps, and European and Italian
+blue chips. To add one, append it and run the refresh workflow. Yahoo is the authority on name,
+currency and exchange; the values in that file are only hints used before a symbol is first
+fetched.
+
+A symbol Yahoo cannot resolve is **reported and skipped**, not fatal — one dead ticker must not
+cost the other 200. If more than 25% of the universe fails, the run aborts and publishes nothing,
+on the assumption that it is an upstream outage rather than 50 simultaneously delisted funds.
+Symbols that fail keep whatever was last published, so a bad run degrades to stale data, never to
+no data.
+
+### Refreshing
 
 ```bash
-curl -H 'User-Agent: Mozilla/5.0' \
-  'https://query2.finance.yahoo.com/v8/finance/chart/VWCE.DE?period1=0&period2=9999999999&interval=1mo' \
-  > vwce.json
-node scripts/seed-cache.mjs VWCE.DE vwce.json
+node scripts/fetch-market-data.mjs                          # the whole universe
+node scripts/fetch-market-data.mjs --only VWCE.DE,AAPL      # just these
+node scripts/fetch-market-data.mjs --delay 3000             # slower, if throttled
 ```
+
+The script is dependency-free ESM so CI can run it with bare `node` — it cannot break on an
+unrelated dependency bump. `.github/workflows/refresh-market-data.yml` runs it daily, commits
+`public/data/` if anything changed, and then triggers a redeploy.
+
+### A note on Yahoo's month keys
+
+Monthly bars are stamped at **midnight in the exchange's own timezone**, so a XETRA September bar
+is `2019-08-31T22:00Z`. Reading those as UTC files European bars a month early, and
+`meta.gmtoffset` doesn't fix it either — it is the offset at fetch time, so it is an hour out for
+every bar on the far side of a DST boundary, which is enough to move a month-start bar into the
+previous month. `monthKeyInTimeZone()` formats in the named exchange timezone instead;
+`scripts/__tests__/market-data.test.mjs` guards it.
 
 ## Disclaimer and consent
 
@@ -134,29 +172,39 @@ refusal is remembered rather than re-asked on every visit.
 app/
   page.tsx              Basic mode
   advanced/page.tsx     Portfolio backtest
-  api/{search,history,rates}/route.ts
 lib/
   projection.ts         compounding engine (pure)
   backtest.ts           portfolio engine (pure)
-  yahoo.ts              price/search client
-  ecb.ts                deposit-rate client
-  cache.ts              read-through cache with stale fallback
+  marketData.ts         loads the published JSON; ranks symbol search
   consent.ts            disclaimer + storage-consent store
 components/             chart, cards, table, portfolio builder, consent UI
-scripts/seed-cache.mjs  prime the price cache from a saved response
+scripts/
+  market-data.mjs       Yahoo + ECB fetching and normalisation (build-time only)
+  fetch-market-data.mjs CLI that writes public/data/
+data-source/
+  symbol-universe.json  the curated ~200 symbols
+public/data/            the published data, committed and served as-is
 ```
 
-The engines in `lib/` are pure and have no React or network dependency, which is why they can
-be tested directly and why the backtest runs client-side.
+The engines in `lib/` are pure and have no React or network dependency, which is why they can be
+tested directly and why the backtest runs entirely in the browser.
 
-### A note on Yahoo's month keys
+## Deploying to GitHub Pages
 
-Monthly bars are stamped at **midnight in the exchange's own timezone**, so a XETRA September
-bar is `2019-08-31T22:00Z`. Reading those as UTC files European bars a month early, and
-`meta.gmtoffset` doesn't fix it either — it is the offset at fetch time, so it is an hour out
-for every bar on the far side of a DST boundary, which is enough to move a month-start bar
-into the previous month. `monthKeyInTimeZone()` formats in the named exchange timezone
-instead; `lib/__tests__/yahoo.test.ts` guards it.
+`.github/workflows/deploy-pages.yml` builds the export and publishes it. Two things have to be
+set up once, by hand:
+
+1. **Settings → Pages → Source: GitHub Actions.**
+2. On a **private** repository, Pages needs a plan that includes it (Pro, Team or Enterprise).
+   On a free account the repository has to be public instead.
+
+The workflow sets `NEXT_PUBLIC_BASE_PATH` to the repo name, because a project site is served
+from `https://<user>.github.io/<repo>/`. On a custom domain, drop that env line and add a
+`public/CNAME`.
+
+`refresh-market-data.yml` calls the deploy workflow directly after committing new data — a push
+made with `GITHUB_TOKEN` deliberately does not trigger other workflows, so relying on the `push`
+trigger would leave fresh data unpublished.
 
 ## Chart design
 

@@ -1,0 +1,80 @@
+name: Refresh market data
+
+# The site has no backend: prices and bank rates are baked into the repo and
+# served as static files. This job is what keeps them current.
+#
+# Running the fetch here rather than in a visitor's browser is the whole point —
+# Yahoo rate-limits an IP hard, and one scheduled run costs ~200 requests total
+# instead of ~200 per visitor.
+
+on:
+  schedule:
+    # 05:20 UTC daily. Monthly closes only change once a month, but the current
+    # month's bar moves daily, so a daily refresh keeps "today" honest.
+    - cron: '20 5 * * *'
+  workflow_dispatch:
+    inputs:
+      only:
+        description: 'Comma-separated symbols to refresh (blank = the whole universe)'
+        required: false
+        type: string
+      delay:
+        description: 'Milliseconds between requests'
+        required: false
+        default: '1500'
+        type: string
+
+# Never let two refreshes race for the same commit.
+concurrency:
+  group: refresh-market-data
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # No install step: the script is dependency-free ESM on purpose, so this
+      # job cannot break on an unrelated dependency bump.
+      - name: Fetch prices and ECB rates
+        run: |
+          node scripts/fetch-market-data.mjs \
+            ${{ inputs.only && format('--only {0}', inputs.only) || '' }} \
+            --delay ${{ inputs.delay || '1500' }}
+
+      - name: Commit refreshed data
+        id: commit
+        run: |
+          if [ -z "$(git status --porcelain public/data)" ]; then
+            echo "No change in public/data — nothing to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data
+          git commit -m "Refresh market data ($(date -u +%Y-%m-%d))"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+  # A push made with GITHUB_TOKEN does not trigger other workflows, so the
+  # deploy is called explicitly rather than left to the push trigger.
+  deploy:
+    needs: refresh
+    if: needs.refresh.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy-pages.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

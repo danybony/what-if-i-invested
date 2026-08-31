@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-08-31T16:26:20.728Z",
+  "symbols": [
+    {
+      "symbol": "AAPL",
+      "name": "Apple Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "file": "AAPL.json",
+      "firstMonth": "2000-01",
+      "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "VWCE.DE",
+      "name": "Vanguard FTSE All-World UCITS ETF USD Accumulation",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "file": "VWCE.DE.json",
+      "firstMonth": "2019-09",
+      "lastMonth": "2026-08"
+    }
+  ]
+}
