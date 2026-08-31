@@ -63,6 +63,7 @@ export default function AdvancedModePage() {
               weight: 0,
               points: history.points,
               firstMonth: history.points[0]?.month ?? '',
+              adjustedAvailable: history.adjustedAvailable !== false,
             },
           ]
           // A fresh holding with no weight is useless, so rebalance evenly.
@@ -98,6 +99,13 @@ export default function AdvancedModePage() {
       }))
     })
 
+  // Claiming a dividend adjustment we do not have would overstate the result,
+  // so the toggle is only offered when every holding can honour it.
+  const withoutAdjusted = holdings
+    .filter((holding) => !holding.adjustedAvailable)
+    .map((holding) => holding.symbol)
+  const dividendsAvailable = holdings.length > 0 && withoutAdjusted.length === 0
+
   const bank: BankConfigInput = useMemo(
     () =>
       useHistoricalRates && ecbRates
@@ -121,9 +129,18 @@ export default function AdvancedModePage() {
       contributionFrequency,
       startMonth,
       bank,
-      reinvestDividends,
+      reinvestDividends: reinvestDividends && dividendsAvailable,
     })
-  }, [holdings, initial, contribution, contributionFrequency, startMonth, bank, reinvestDividends])
+  }, [
+    holdings,
+    initial,
+    contribution,
+    contributionFrequency,
+    startMonth,
+    bank,
+    reinvestDividends,
+    dividendsAvailable,
+  ])
 
   const chartData: ChartDatum[] = useMemo(() => {
     if (!result?.ok) return []
@@ -217,10 +234,15 @@ export default function AdvancedModePage() {
                 </Field>
               </div>
               <Toggle
-                checked={reinvestDividends}
+                checked={reinvestDividends && dividendsAvailable}
                 onChange={(next) => setAdvanced('reinvestDividends', next)}
+                disabled={!dividendsAvailable}
                 label="Reinvest dividends"
-                hint="Off means price return only. On uses adjusted closes, so payouts are bought back in — the fair comparison for a distributing fund."
+                hint={
+                  dividendsAvailable
+                    ? 'Off means price return only. On uses adjusted closes, so payouts are bought back in — the fair comparison for a distributing fund.'
+                    : `No dividend data is published for ${withoutAdjusted.join(', ')}, so only price return can be shown for this portfolio.`
+                }
               />
             </div>
           </Card>

@@ -133,6 +133,7 @@ async function main() {
           apiKey: alphaKey,
           minIntervalMs: 1000,
         })
+        extra = { adjustedAvailable: true }
       } else {
         // Twelve Data gives split-adjusted closes only, so the adjusted series
         // is rebuilt from the dividend record. Dividends move quarterly at
@@ -143,11 +144,29 @@ async function main() {
           Date.parse(published.dividendsFetchedAt) > dividendCutoff
 
         const series = await fetchTimeSeries(entry, options)
-        const dividends = cachedFresh ? published.dividends : await fetchDividends(entry, options)
+
+        // The dividend record is paid-only on Twelve Data. Losing it costs the
+        // dividend adjustment, not the symbol — so fall back to price return and
+        // record that, rather than dropping years of history over a 403.
+        let dividends = cachedFresh ? published.dividends : null
+        let dividendsUnavailable = false
+        if (!dividends) {
+          try {
+            dividends = await fetchDividends(entry, options)
+          } catch (error) {
+            dividends = []
+            dividendsUnavailable = true
+            if (index === 0) console.log(`  (dividends unavailable: ${error.message.slice(0, 80)})`)
+          }
+        }
+
         history = buildHistory(entry, series, dividends)
         extra = {
           dividends,
           dividendsFetchedAt: cachedFresh ? published.dividendsFetchedAt : new Date().toISOString(),
+          // Adjusted closes equal raw closes here, so the app must not claim
+          // otherwise in its "reinvest dividends" toggle.
+          adjustedAvailable: !dividendsUnavailable,
         }
       }
 
@@ -161,6 +180,7 @@ async function main() {
         currency: history.currency,
         category: entry.category,
         file,
+        adjustedAvailable: extra.adjustedAvailable !== false,
         firstMonth: history.points[0].month,
         lastMonth: history.points[history.points.length - 1].month,
       })

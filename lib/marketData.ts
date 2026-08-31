@@ -24,6 +24,8 @@ export type SymbolEntry = {
   file: string
   firstMonth: string
   lastMonth: string
+  /** False when the provider gave no dividend record, so adjclose == close. */
+  adjustedAvailable?: boolean
 }
 
 export type SymbolsIndex = {
@@ -37,6 +39,7 @@ export type PriceHistory = {
   currency: string
   type: string
   points: PricePoint[]
+  adjustedAvailable?: boolean
 }
 
 export type DepositRates = {

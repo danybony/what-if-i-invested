@@ -15,6 +15,8 @@ export type PortfolioHolding = {
   points: PricePoint[]
   /** Earliest month with a price, used to explain a clamped start date. */
   firstMonth: string
+  /** False when the provider gave no dividend record, so adjclose == close. */
+  adjustedAvailable: boolean
 }
 
 export function PortfolioBuilder({
