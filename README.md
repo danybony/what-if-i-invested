@@ -61,8 +61,11 @@ privacy story simple — a visitor's browser never talks to a data provider.
 
 | What | Where | Refreshed |
 |---|---|---|
-| Prices | Yahoo Finance `v8/finance/chart` | daily, by GitHub Actions |
+| Prices & dividends | [Twelve Data](https://twelvedata.com) (free tier, API key) | daily, by GitHub Actions |
 | Bank rates | [ECB Data Portal](https://data.ecb.europa.eu), series `MIR/M.U2.B.L22.A.R.A.2250.EUR.N` | daily, same run |
+
+The refresh needs a `TWELVEDATA_API_KEY` repository secret. Nothing else needs a key, and the
+published site needs none at all.
 
 ### The published files
 
@@ -76,14 +79,28 @@ public/data/
 Only the symbols actually in a portfolio are downloaded, so a visit costs the index (a few KB)
 plus one small file per holding.
 
-### Why this beats calling Yahoo from the browser
+### Why the data is fetched in CI, and why not from Yahoo
 
-Yahoo rate-limits an IP hard — a few dozen uncached requests is enough to earn `429`s for
-several minutes, and it sends no CORS headers, so a browser could not call it directly anyway.
-Fetching in CI turns a per-visitor problem into a once-a-day one: **~200 requests total**,
-rather than ~200 per visitor. The repo itself becomes the cache — shared by everyone, versioned,
-and free. (The ECB, unlike Yahoo, does send `Access-Control-Allow-Origin: *`, so it *could* be
-called from the browser; we bake it anyway to keep every request same-origin.)
+Fetching in CI turns a per-visitor problem into a once-a-day one: **~200 requests total**, rather
+than ~200 per visitor. The repo itself becomes the cache — shared by everyone, versioned, free.
+(The ECB does send `Access-Control-Allow-Origin: *`, so it *could* be called from the browser;
+we bake it anyway to keep every request same-origin.)
+
+This started on Yahoo's keyless endpoints and had to move. Yahoo **blanket-blocks datacenter
+IPs**: a GitHub runner gets `429` on its very first request, not after a burst, so no amount of
+pacing helps. It also sends no CORS headers, so the browser was never an option either. Twelve
+Data issues a key and permits automated access, which is the difference that matters.
+
+Two things had to be rebuilt around that move:
+
+- **Adjusted closes.** Twelve Data's prices are split-adjusted but not dividend-adjusted, so
+  `buildHistory()` reconstructs the adjusted series from the dividend record — each payout buys
+  more shares at that month's close — and rebases it so the newest adjusted close equals the
+  newest close. Cross-checked against Yahoo's own adjusted close for AAPL: 25.9279 vs 25.90 at
+  2015-01, a 0.1% difference.
+- **Minor units.** London quotes in pence, and Twelve Data reports that as `GBp` — not a real ISO
+  4217 code, so it throws inside `Intl.NumberFormat`, and taken at face value it would show a UK
+  holding at 100x its worth. Prices and dividends are converted to pounds at the door.
 
 The trade-off is a **curated universe** instead of every ticker on earth, and prices as fresh as
 the last refresh.
@@ -92,9 +109,22 @@ the last refresh.
 
 `data-source/symbol-universe.json` holds ~200 hand-picked funds and shares — world and regional
 UCITS ETFs, bond and commodity ETFs, US-listed ETFs, US large caps, and European and Italian
-blue chips. To add one, append it and run the refresh workflow. Yahoo is the authority on name,
-currency and exchange; the values in that file are only hints used before a symbol is first
-fetched.
+blue chips.
+
+Each entry carries a `td` block naming the Twelve Data symbol and MIC code, because the two
+providers identify a listing differently: Yahoo uses a suffix (`VWCE.DE`), Twelve Data a bare
+symbol plus a venue (`VWCE` @ `XETR`). The same fund lists on several exchanges in different
+currencies, so `scripts/map-symbols.mjs` matches on venue first and currency second and reports
+anything ambiguous rather than guessing — picking the wrong row would silently change a
+backtest's currency.
+
+```bash
+node scripts/map-symbols.mjs           # dry run, prints what it would resolve
+node scripts/map-symbols.mjs --write   # update the universe file
+```
+
+That script needs no API key. To add a symbol, append it with a `symbol`, `name`, `type`,
+`currency` and `category`, run the mapper, then run the refresh.
 
 A symbol Yahoo cannot resolve is **reported and skipped**, not fatal — one dead ticker must not
 cost the other 200. If more than 25% of the universe fails, the run aborts and publishes nothing,
@@ -105,23 +135,20 @@ no data.
 ### Refreshing
 
 ```bash
-node scripts/fetch-market-data.mjs                          # the whole universe
-node scripts/fetch-market-data.mjs --only VWCE.DE,AAPL      # just these
-node scripts/fetch-market-data.mjs --delay 3000             # slower, if throttled
+export TWELVEDATA_API_KEY=...
+node scripts/fetch-market-data.mjs                       # the whole universe
+node scripts/fetch-market-data.mjs --only VWCE.DE,AAPL   # just these
+node scripts/fetch-market-data.mjs --interval 8000       # free tier allows 8 calls/min
+node scripts/fetch-market-data.mjs --dividend-age 0      # force a dividend refetch
 ```
+
+Dividends move quarterly at best, so a published record younger than 7 days is reused rather
+than refetched. That keeps a daily run at ~204 calls instead of ~408, comfortably inside the
+free tier's 800/day.
 
 The script is dependency-free ESM so CI can run it with bare `node` — it cannot break on an
 unrelated dependency bump. `.github/workflows/refresh-market-data.yml` runs it daily, commits
 `public/data/` if anything changed, and then triggers a redeploy.
-
-### A note on Yahoo's month keys
-
-Monthly bars are stamped at **midnight in the exchange's own timezone**, so a XETRA September bar
-is `2019-08-31T22:00Z`. Reading those as UTC files European bars a month early, and
-`meta.gmtoffset` doesn't fix it either — it is the offset at fetch time, so it is an hour out for
-every bar on the far side of a DST boundary, which is enough to move a month-start bar into the
-previous month. `monthKeyInTimeZone()` formats in the named exchange timezone instead;
-`scripts/__tests__/market-data.test.mjs` guards it.
 
 ## Disclaimer and consent
 
@@ -179,8 +206,9 @@ lib/
   consent.ts            disclaimer + storage-consent store
 components/             chart, cards, table, portfolio builder, consent UI
 scripts/
-  market-data.mjs       Yahoo + ECB fetching and normalisation (build-time only)
+  market-data.mjs       Twelve Data + ECB fetching and normalisation (build-time only)
   fetch-market-data.mjs CLI that writes public/data/
+  map-symbols.mjs       resolves tickers to Twelve Data symbol + MIC
 data-source/
   symbol-universe.json  the curated ~200 symbols
 public/data/            the published data, committed and served as-is

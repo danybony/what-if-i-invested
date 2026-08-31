@@ -1,16 +1,17 @@
 /**
  * Market-data helpers shared by the refresh script and its tests.
  *
- * This is plain ESM rather than TypeScript so the GitHub Action can run it with
- * bare `node`, no build step and no dev dependencies. It is build-time tooling:
+ * Plain ESM rather than TypeScript so the GitHub Action can run it with bare
+ * `node`, no build step and no dependencies. This is build-time tooling —
  * nothing here ships to the browser.
+ *
+ * Prices come from Twelve Data rather than Yahoo. Yahoo's keyless endpoints
+ * blanket-block datacenter IPs (every request from a GitHub runner returns 429
+ * from the first one), which makes them unusable from CI; Twelve Data issues a
+ * key and permits automated access.
  */
 
-const UA =
-  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
-
-/** Yahoo serves the same API from two hosts and rate-limits them separately. */
-const YAHOO_HOSTS = ['https://query2.finance.yahoo.com', 'https://query1.finance.yahoo.com']
+const TWELVE_DATA = 'https://api.twelvedata.com'
 
 const ECB_DEPOSIT_SERIES =
   'https://data-api.ecb.europa.eu/service/data/MIR/M.U2.B.L22.A.R.A.2250.EUR.N?format=csvdata&startPeriod=1999-01'
@@ -18,74 +19,25 @@ const ECB_DEPOSIT_SERIES =
 export const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 /**
- * Yahoo stamps monthly bars at midnight in the *exchange's* timezone, so a
- * XETRA September bar is 2019-08-31T22:00Z. Reading those as UTC files European
- * bars a month early, and `meta.gmtoffset` cannot fix it either — it is the
- * offset at fetch time, so it is an hour out for every bar on the far side of a
- * DST boundary, which is enough to move a month-start bar into the previous
- * month. Formatting in the named exchange timezone is exact.
+ * Some venues quote in minor units — London in pence, not pounds. 'GBp' is not
+ * a real ISO 4217 code, so passing it to Intl.NumberFormat throws; leaving it
+ * unconverted would also make a UK holding look 100x its true value. Convert to
+ * the major unit at the door and the rest of the app never has to know.
  */
-const formatters = new Map()
-
-export function monthKeyInTimeZone(epochSeconds, timeZone) {
-  let formatter = formatters.get(timeZone)
-  if (!formatter) {
-    try {
-      formatter = new Intl.DateTimeFormat('en-US', { timeZone, year: 'numeric', month: '2-digit' })
-    } catch {
-      formatter = new Intl.DateTimeFormat('en-US', {
-        timeZone: 'UTC',
-        year: 'numeric',
-        month: '2-digit',
-      })
-    }
-    formatters.set(timeZone, formatter)
-  }
-  const parts = formatter.formatToParts(new Date(epochSeconds * 1000))
-  const year = parts.find((part) => part.type === 'year').value
-  const month = parts.find((part) => part.type === 'month').value
-  return `${year}-${month}`
+const MINOR_UNITS = {
+  GBp: { currency: 'GBP', divisor: 100 },
+  GBX: { currency: 'GBP', divisor: 100 },
+  ZAc: { currency: 'ZAR', divisor: 100 },
+  ILA: { currency: 'ILS', divisor: 100 },
 }
 
-/**
- * Yahoo reports float32 artefacts like 72.56999969482422. Four decimals is far
- * more precision than a monthly close needs and roughly halves the payload.
- */
+export function normaliseCurrency(currency) {
+  return MINOR_UNITS[currency] ?? { currency, divisor: 1 }
+}
+
+/** Four decimals is far more precision than a monthly close needs. */
 export function roundPrice(value) {
   return Math.round(value * 10_000) / 10_000
-}
-
-/** Turn a raw Yahoo chart response into the shape the site serves. */
-export function normaliseChart(symbol, data) {
-  const result = data?.chart?.result?.[0]
-  if (!result?.timestamp) {
-    throw new Error(data?.chart?.error?.description ?? `no price history for ${symbol}`)
-  }
-
-  const closes = result.indicators?.quote?.[0]?.close ?? []
-  const adjcloses = result.indicators?.adjclose?.[0]?.adjclose ?? closes
-  const timeZone = result.meta?.exchangeTimezoneName ?? 'UTC'
-
-  const points = []
-  for (let i = 0; i < result.timestamp.length; i++) {
-    const close = closes[i]
-    if (close === null || close === undefined) continue
-    points.push({
-      month: monthKeyInTimeZone(result.timestamp[i], timeZone),
-      close: roundPrice(close),
-      adjclose: roundPrice(adjcloses[i] ?? close),
-    })
-  }
-
-  if (points.length === 0) throw new Error(`no usable price history for ${symbol}`)
-
-  return {
-    symbol: symbol.toUpperCase(),
-    name: result.meta?.longName ?? result.meta?.shortName ?? symbol,
-    currency: result.meta?.currency ?? 'EUR',
-    type: result.meta?.instrumentType ?? '',
-    points,
-  }
 }
 
 /** A symbol becomes a filename; keep it URL- and filesystem-safe. */
@@ -93,40 +45,130 @@ export function fileNameFor(symbol) {
   return `${symbol.toUpperCase().replace(/[^A-Za-z0-9._-]/g, '_')}.json`
 }
 
-async function getJson(path, { attempts = 3, backoffMs = 2000 } = {}) {
-  let lastError = new Error('unreachable')
+/**
+ * The free tier allows 8 requests a minute. One shared gate keeps prices and
+ * dividends from racing past it together.
+ */
+let nextSlot = 0
 
-  for (let attempt = 0; attempt < attempts; attempt++) {
-    for (const host of YAHOO_HOSTS) {
-      let response
-      try {
-        response = await fetch(`${host}${path}`, {
-          headers: { 'User-Agent': UA, Accept: 'application/json' },
-        })
-      } catch (error) {
-        lastError = error
-        continue
-      }
+export async function throttle(minIntervalMs) {
+  const now = Date.now()
+  const wait = Math.max(0, nextSlot - now)
+  nextSlot = Math.max(now, nextSlot) + minIntervalMs
+  if (wait > 0) await sleep(wait)
+}
 
-      if (response.ok) return response.json()
-      // A 404 is a genuine "no such symbol" — the other host will agree, and
-      // retrying wastes budget we need for the symbols that do exist.
-      if (response.status === 404) throw new Error('not found on Yahoo')
-      lastError = new Error(`HTTP ${response.status}`)
-    }
-    if (attempt < attempts - 1) await sleep(backoffMs * (attempt + 1))
+export function resetThrottle() {
+  nextSlot = 0
+}
+
+/**
+ * Twelve Data reports failures as HTTP 200 with an error body as often as not,
+ * so the body is what decides.
+ */
+async function getJson(path, params, { apiKey, minIntervalMs = 8000 }) {
+  await throttle(minIntervalMs)
+
+  const query = new URLSearchParams({ ...params, apikey: apiKey })
+  const response = await fetch(`${TWELVE_DATA}${path}?${query}`)
+  const body = await response.json().catch(() => null)
+
+  if (!body) throw new Error(`HTTP ${response.status} with an unreadable body`)
+  if (body.status === 'error' || typeof body.code === 'number') {
+    throw new Error(`${body.code ?? response.status}: ${body.message ?? 'unknown error'}`)
+  }
+  if (!response.ok) throw new Error(`HTTP ${response.status}`)
+  return body
+}
+
+export async function fetchTimeSeries(entry, options) {
+  return getJson(
+    '/time_series',
+    {
+      symbol: entry.td.symbol,
+      mic_code: entry.td.mic,
+      interval: '1month',
+      outputsize: '5000',
+      order: 'ASC',
+    },
+    options
+  )
+}
+
+export async function fetchDividends(entry, options) {
+  const body = await getJson(
+    '/dividends',
+    { symbol: entry.td.symbol, mic_code: entry.td.mic, range: 'full' },
+    options
+  )
+  return Array.isArray(body?.dividends) ? body.dividends : []
+}
+
+/**
+ * Build the published history from a monthly series and its dividend record.
+ *
+ * Twelve Data's closes are split-adjusted but not dividend-adjusted, so the
+ * adjusted series is reconstructed here: each dividend buys more shares at that
+ * month's close, and the resulting share count scales the price. The series is
+ * then rebased so the newest adjusted close equals the newest close, which is
+ * the convention the app and the earlier Yahoo data already used.
+ */
+export function buildHistory(entry, series, dividends = []) {
+  const values = series?.values
+  if (!Array.isArray(values) || values.length === 0) {
+    throw new Error('no price history returned')
   }
 
-  throw lastError
+  const rawCurrency = series.meta?.currency ?? entry.currency
+  const { currency, divisor } = normaliseCurrency(rawCurrency)
+
+  // order=ASC is requested, but never trust an upstream to honour it.
+  const rows = [...values].sort((a, b) => a.datetime.localeCompare(b.datetime))
+
+  const points = []
+  for (const row of rows) {
+    const close = Number(row.close)
+    if (!Number.isFinite(close) || close <= 0) continue
+    points.push({ month: row.datetime.slice(0, 7), close: close / divisor })
+  }
+  if (points.length === 0) throw new Error('no usable price history')
+
+  // Dividends per month, in the same major unit as the prices.
+  const paidIn = new Map()
+  for (const dividend of dividends) {
+    const amount = Number(dividend.amount)
+    if (!dividend.ex_date || !Number.isFinite(amount) || amount <= 0) continue
+    const month = dividend.ex_date.slice(0, 7)
+    paidIn.set(month, (paidIn.get(month) ?? 0) + amount / divisor)
+  }
+
+  let shares = 1
+  const shareCount = points.map((point) => {
+    const dividend = paidIn.get(point.month)
+    if (dividend) shares *= 1 + dividend / point.close
+    return shares
+  })
+
+  const finalShares = shareCount[shareCount.length - 1]
+  const withAdjusted = points.map((point, i) => ({
+    month: point.month,
+    close: roundPrice(point.close),
+    adjclose: roundPrice((point.close * shareCount[i]) / finalShares),
+  }))
+
+  return {
+    symbol: entry.symbol.toUpperCase(),
+    name: series.meta?.name || entry.name,
+    currency,
+    type: series.meta?.type || entry.type,
+    points: withAdjusted,
+    dividendCount: paidIn.size,
+  }
 }
 
-/** Full monthly history for `symbol`, oldest bar first. */
-export async function fetchYahooHistory(symbol, options) {
-  const path =
-    `/v8/finance/chart/${encodeURIComponent(symbol)}` +
-    `?period1=0&period2=${Math.floor(Date.now() / 1000)}&interval=1mo&includeAdjustedClose=true`
-  return normaliseChart(symbol, await getJson(path, options))
-}
+/* -------------------------------------------------------------------------- */
+/* ECB                                                                        */
+/* -------------------------------------------------------------------------- */
 
 /** Minimal CSV field splitter — the ECB quotes fields containing commas. */
 export function splitCsvLine(line) {

@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-08-31T16:26:20.728Z",
+  "generatedAt": "2026-08-31T21:27:45.086Z",
   "symbols": [
     {
       "symbol": "AAPL",
-      "name": "Apple Inc.",
-      "type": "EQUITY",
+      "name": "Apple Inc",
+      "type": "Common Stock",
       "currency": "USD",
       "category": "US shares",
       "file": "AAPL.json",
-      "firstMonth": "2000-01",
+      "firstMonth": "1980-12",
       "lastMonth": "2026-08"
     },
     {

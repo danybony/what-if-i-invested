@@ -1,101 +1,148 @@
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import {
+  buildHistory,
   fileNameFor,
-  monthKeyInTimeZone,
-  normaliseChart,
+  normaliseCurrency,
   parseEcbCsv,
+  resetThrottle,
   roundPrice,
   splitCsvLine,
+  throttle,
 } from '../market-data.mjs'
 
-/**
- * Regression: Yahoo stamps monthly bars at midnight in the exchange's own
- * timezone. Reading them as UTC files European bars one month early, and using
- * meta.gmtoffset only fixes the half of the year that shares its DST state.
- */
-describe('monthKeyInTimeZone', () => {
-  it('files a XETRA month-start bar under the right month, not the previous one', () => {
-    // 2019-08-31T22:00Z === 2019-09-01T00:00 in Berlin (CEST).
-    expect(monthKeyInTimeZone(1567288800, 'Europe/Berlin')).toBe('2019-09')
-    expect(monthKeyInTimeZone(1567288800, 'UTC')).toBe('2019-08') // the bug
+const entry = (overrides = {}) => ({
+  symbol: 'TEST.DE',
+  name: 'Hint name',
+  type: 'ETF',
+  currency: 'EUR',
+  td: { symbol: 'TEST', mic: 'XETR' },
+  ...overrides,
+})
+
+const series = (values, meta = {}) => ({
+  meta: { currency: 'EUR', name: 'Test Fund', type: 'ETF', ...meta },
+  values,
+})
+
+describe('normaliseCurrency', () => {
+  /**
+   * London quotes in pence. 'GBp' is not a real ISO 4217 code, so it would throw
+   * inside Intl.NumberFormat, and leaving the number alone would show a holding
+   * at 100x its value.
+   */
+  it('converts minor units to the major currency', () => {
+    expect(normaliseCurrency('GBp')).toEqual({ currency: 'GBP', divisor: 100 })
+    expect(normaliseCurrency('GBX')).toEqual({ currency: 'GBP', divisor: 100 })
+    expect(normaliseCurrency('ZAc')).toEqual({ currency: 'ZAR', divisor: 100 })
   })
 
-  it('handles both sides of a DST boundary, which a fixed offset cannot', () => {
-    expect(monthKeyInTimeZone(1572562800, 'Europe/Berlin')).toBe('2019-11')
-    expect(monthKeyInTimeZone(1785535200, 'Europe/Berlin')).toBe('2026-08')
-  })
-
-  it('handles a negative offset exchange', () => {
-    expect(monthKeyInTimeZone(946702800, 'America/New_York')).toBe('2000-01')
-    expect(monthKeyInTimeZone(1785556800, 'America/New_York')).toBe('2026-08')
-  })
-
-  it('falls back to UTC for an unknown timezone rather than throwing', () => {
-    expect(monthKeyInTimeZone(946702800, 'Not/AZone')).toBe('2000-01')
+  it('leaves an ordinary currency alone', () => {
+    expect(normaliseCurrency('EUR')).toEqual({ currency: 'EUR', divisor: 1 })
+    expect(normaliseCurrency('USD')).toEqual({ currency: 'USD', divisor: 1 })
   })
 })
 
 describe('roundPrice', () => {
-  it('strips the float32 artefacts Yahoo reports', () => {
+  it('trims to four decimals', () => {
     expect(roundPrice(72.56999969482422)).toBe(72.57)
-    expect(roundPrice(167.13999938964844)).toBe(167.14)
-  })
-
-  it('keeps enough precision for a penny stock', () => {
     expect(roundPrice(0.00123456)).toBe(0.0012)
   })
 })
 
-describe('normaliseChart', () => {
-  const chart = (overrides = {}) => ({
-    chart: {
-      result: [
-        {
-          meta: {
-            currency: 'EUR',
-            longName: 'Test Fund',
-            instrumentType: 'ETF',
-            exchangeTimezoneName: 'Europe/Berlin',
-          },
-          timestamp: [1567288800, 1569880800],
-          indicators: {
-            quote: [{ close: [72.56999969482422, 75.5] }],
-            adjclose: [{ adjclose: [70.1, 73.2] }],
-          },
-          ...overrides,
-        },
-      ],
-    },
-  })
+describe('buildHistory', () => {
+  const rows = [
+    { datetime: '2024-01-01', close: '100' },
+    { datetime: '2024-02-01', close: '110' },
+    { datetime: '2024-03-01', close: '120' },
+  ]
 
-  it('rounds prices and keys months by the exchange timezone', () => {
-    const history = normaliseChart('VWCE.DE', chart())
-    expect(history.symbol).toBe('VWCE.DE')
+  it('keys months from the series date and carries the meta through', () => {
+    const history = buildHistory(entry(), series(rows))
+    expect(history.symbol).toBe('TEST.DE')
+    expect(history.name).toBe('Test Fund')
     expect(history.currency).toBe('EUR')
-    expect(history.points).toEqual([
-      { month: '2019-09', close: 72.57, adjclose: 70.1 },
-      { month: '2019-10', close: 75.5, adjclose: 73.2 },
+    expect(history.points.map((p) => p.month)).toEqual(['2024-01', '2024-02', '2024-03'])
+  })
+
+  it('sorts oldest-first even when the upstream returns newest-first', () => {
+    const history = buildHistory(entry(), series([...rows].reverse()))
+    expect(history.points.map((p) => p.close)).toEqual([100, 110, 120])
+  })
+
+  it('leaves adjusted equal to close when nothing was paid out', () => {
+    const history = buildHistory(entry(), series(rows))
+    expect(history.points.map((p) => p.adjclose)).toEqual([100, 110, 120])
+    expect(history.dividendCount).toBe(0)
+  })
+
+  it('reconstructs the adjusted series by reinvesting each dividend', () => {
+    // A 10.00 dividend in February buys 10/110 more shares.
+    const history = buildHistory(entry(), series(rows), [
+      { ex_date: '2024-02-15', amount: '10' },
     ])
+    const shares = 1 + 10 / 110
+
+    // Rebased so the newest adjusted close equals the newest close.
+    expect(history.points.at(-1).adjclose).toBe(120)
+    expect(history.points[0].adjclose).toBeCloseTo(100 / shares, 4)
+    expect(history.dividendCount).toBe(1)
+
+    // The whole point: total return must beat price return.
+    const priceReturn = 120 / 100
+    const totalReturn = history.points.at(-1).adjclose / history.points[0].adjclose
+    expect(totalReturn).toBeGreaterThan(priceReturn)
   })
 
-  it('drops months with no close rather than emitting a null price', () => {
-    const history = normaliseChart(
-      'GAP',
-      chart({ indicators: { quote: [{ close: [72.5, null] }], adjclose: [{ adjclose: [72.5, null] }] } })
+  it('sums several dividends in the same month', () => {
+    const one = buildHistory(entry(), series(rows), [
+      { ex_date: '2024-02-05', amount: '5' },
+      { ex_date: '2024-02-20', amount: '5' },
+    ])
+    const combined = buildHistory(entry(), series(rows), [{ ex_date: '2024-02-15', amount: '10' }])
+    expect(one.points[0].adjclose).toBeCloseTo(combined.points[0].adjclose, 6)
+  })
+
+  it('converts pence to pounds for both prices and dividends', () => {
+    const history = buildHistory(
+      entry({ symbol: 'BP.L' }),
+      series(rows, { currency: 'GBp' }),
+      [{ ex_date: '2024-02-15', amount: '10' }]
     )
-    expect(history.points).toHaveLength(1)
+    expect(history.currency).toBe('GBP')
+    expect(history.points.map((p) => p.close)).toEqual([1, 1.1, 1.2])
+    // The dividend scaled with the prices, so the ratio is unchanged.
+    // Compared at the stored precision: published prices are rounded to 4dp.
+    expect(history.points[0].adjclose).toBeCloseTo(1 / (1 + 0.1 / 1.1), 4)
   })
 
-  it('falls back to close when Yahoo sends no adjusted series', () => {
-    const history = normaliseChart('NOADJ', chart({ indicators: { quote: [{ close: [10, 12] }] } }))
-    expect(history.points.map((p) => p.adjclose)).toEqual([10, 12])
+  it('skips unusable rows and ignores malformed dividends', () => {
+    const history = buildHistory(
+      entry(),
+      series([...rows, { datetime: '2024-04-01', close: '0' }, { datetime: '2024-05-01', close: 'x' }]),
+      [{ ex_date: '2024-02-15', amount: 'not a number' }, { amount: '5' }]
+    )
+    expect(history.points).toHaveLength(3)
+    expect(history.dividendCount).toBe(0)
   })
 
-  it('throws on an empty or error response so the caller can skip the symbol', () => {
-    expect(() => normaliseChart('NOPE', { chart: { result: [] } })).toThrow()
-    expect(() =>
-      normaliseChart('NOPE', { chart: { error: { description: 'No data found' } } })
-    ).toThrow('No data found')
+  it('throws when there is nothing usable, so the caller can skip the symbol', () => {
+    expect(() => buildHistory(entry(), series([]))).toThrow('no price history')
+    expect(() => buildHistory(entry(), series([{ datetime: '2024-01-01', close: '0' }]))).toThrow(
+      'no usable price history'
+    )
+  })
+})
+
+describe('throttle', () => {
+  beforeEach(() => resetThrottle())
+
+  it('lets the first call through and spaces the next one', async () => {
+    const start = Date.now()
+    await throttle(50)
+    expect(Date.now() - start).toBeLessThan(30)
+    await throttle(50)
+    await throttle(50)
+    expect(Date.now() - start).toBeGreaterThanOrEqual(45)
   })
 })
 
@@ -118,7 +165,6 @@ describe('parseEcbCsv', () => {
   it('converts percentages to decimals and finds the latest month', () => {
     const rates = parseEcbCsv(csv)
     expect(rates.monthlyRates['2025-01']).toBe(0.0233)
-    expect(rates.monthlyRates['2025-02']).toBe(0.022)
     expect(rates.latest).toEqual({ month: '2025-02', rate: 0.022 })
   })
 

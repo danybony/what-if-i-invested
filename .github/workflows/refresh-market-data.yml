@@ -4,8 +4,11 @@ name: Refresh market data
 # served as static files. This job is what keeps them current.
 #
 # Running the fetch here rather than in a visitor's browser is the whole point —
-# Yahoo rate-limits an IP hard, and one scheduled run costs ~200 requests total
-# instead of ~200 per visitor.
+# one scheduled run costs ~200 requests total instead of ~200 per visitor.
+#
+# Prices come from Twelve Data. Yahoo's keyless endpoints blanket-block
+# datacenter IPs: every request from a runner returned 429 from the first one,
+# so it is unusable from CI regardless of pacing.
 
 on:
   schedule:
@@ -18,10 +21,15 @@ on:
         description: 'Comma-separated symbols to refresh (blank = the whole universe)'
         required: false
         type: string
-      delay:
-        description: 'Milliseconds between requests'
+      interval:
+        description: 'Minimum ms between API calls (free tier allows 8/min)'
         required: false
-        default: '1500'
+        default: '8000'
+        type: string
+      dividend_age:
+        description: 'Refetch dividends older than N days (0 = always)'
+        required: false
+        default: '7'
         type: string
 
 # Never let two refreshes race for the same commit.
@@ -35,7 +43,9 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # ~204 price calls at 8s apart is ~27 minutes; a week's dividend refresh
+    # doubles that. Generous headroom so a slow upstream does not lose the run.
+    timeout-minutes: 120
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
     steps:
@@ -48,10 +58,17 @@ jobs:
       # No install step: the script is dependency-free ESM on purpose, so this
       # job cannot break on an unrelated dependency bump.
       - name: Fetch prices and ECB rates
+        env:
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
         run: |
+          if [ -z "$TWELVEDATA_API_KEY" ]; then
+            echo "::error::TWELVEDATA_API_KEY secret is not set."
+            exit 1
+          fi
           node scripts/fetch-market-data.mjs \
             ${{ inputs.only && format('--only {0}', inputs.only) || '' }} \
-            --delay ${{ inputs.delay || '1500' }}
+            --interval ${{ inputs.interval || '8000' }} \
+            --dividend-age ${{ inputs.dividend_age || '7' }}
 
       - name: Commit refreshed data
         id: commit

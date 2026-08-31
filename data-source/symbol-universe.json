@@ -1,220 +1,2453 @@
 {
   "$comment": "The symbol universe served by the site. Yahoo is the authority on name, currency and exchange — the values here are only hints used before a symbol has been fetched, and are overwritten by scripts/fetch-market-data.mjs. To add a symbol, append it here and run the refresh workflow; a symbol Yahoo cannot resolve is reported and skipped rather than failing the build.",
   "symbols": [
-    { "symbol": "VWCE.DE", "name": "Vanguard FTSE All-World UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "World equity" },
-    { "symbol": "VWRL.AS", "name": "Vanguard FTSE All-World UCITS ETF Dist", "type": "ETF", "currency": "EUR", "category": "World equity" },
-    { "symbol": "IWDA.AS", "name": "iShares Core MSCI World UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "World equity" },
-    { "symbol": "SWDA.MI", "name": "iShares Core MSCI World UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "World equity" },
-    { "symbol": "EUNL.DE", "name": "iShares Core MSCI World UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "World equity" },
-    { "symbol": "XDWD.DE", "name": "Xtrackers MSCI World UCITS ETF 1C", "type": "ETF", "currency": "EUR", "category": "World equity" },
-    { "symbol": "SPPW.DE", "name": "SPDR MSCI World UCITS ETF", "type": "ETF", "currency": "EUR", "category": "World equity" },
-    { "symbol": "ISAC.L", "name": "iShares MSCI ACWI UCITS ETF", "type": "ETF", "currency": "USD", "category": "World equity" },
-    { "symbol": "MWRD.MI", "name": "Amundi MSCI World UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "World equity" },
-    { "symbol": "LCWD.DE", "name": "Amundi MSCI World UCITS ETF", "type": "ETF", "currency": "EUR", "category": "World equity" },
-    { "symbol": "VHVG.L", "name": "Vanguard FTSE Developed World UCITS ETF Acc", "type": "ETF", "currency": "GBP", "category": "World equity" },
-    { "symbol": "VEVE.L", "name": "Vanguard FTSE Developed World UCITS ETF", "type": "ETF", "currency": "GBP", "category": "World equity" },
-    { "symbol": "WEBN.DE", "name": "Amundi Prime All Country World UCITS ETF", "type": "ETF", "currency": "EUR", "category": "World equity" },
-    { "symbol": "SPYI.DE", "name": "SPDR MSCI ACWI IMI UCITS ETF", "type": "ETF", "currency": "EUR", "category": "World equity" },
-    { "symbol": "IMIE.MI", "name": "iShares Core MSCI World UCITS ETF", "type": "ETF", "currency": "EUR", "category": "World equity" },
-
-    { "symbol": "CSPX.MI", "name": "iShares Core S&P 500 UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "US equity" },
-    { "symbol": "SXR8.DE", "name": "iShares Core S&P 500 UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "US equity" },
-    { "symbol": "VUSA.AS", "name": "Vanguard S&P 500 UCITS ETF Dist", "type": "ETF", "currency": "EUR", "category": "US equity" },
-    { "symbol": "VUAA.DE", "name": "Vanguard S&P 500 UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "US equity" },
-    { "symbol": "SPY5.MI", "name": "SPDR S&P 500 UCITS ETF", "type": "ETF", "currency": "EUR", "category": "US equity" },
-    { "symbol": "EQQQ.AS", "name": "Invesco EQQQ Nasdaq-100 UCITS ETF", "type": "ETF", "currency": "EUR", "category": "US equity" },
-    { "symbol": "SXRV.DE", "name": "iShares Nasdaq 100 UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "US equity" },
-    { "symbol": "CNDX.L", "name": "iShares Nasdaq 100 UCITS ETF Acc", "type": "ETF", "currency": "USD", "category": "US equity" },
-    { "symbol": "XDPU.DE", "name": "Xtrackers S&P 500 UCITS ETF", "type": "ETF", "currency": "EUR", "category": "US equity" },
-    { "symbol": "IUSA.AS", "name": "iShares S&P 500 UCITS ETF Dist", "type": "ETF", "currency": "EUR", "category": "US equity" },
-
-    { "symbol": "EIMI.MI", "name": "iShares Core MSCI EM IMI UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "Emerging markets" },
-    { "symbol": "IS3N.DE", "name": "iShares Core MSCI EM IMI UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "Emerging markets" },
-    { "symbol": "VFEM.AS", "name": "Vanguard FTSE Emerging Markets UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Emerging markets" },
-    { "symbol": "XMME.DE", "name": "Xtrackers MSCI Emerging Markets UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Emerging markets" },
-    { "symbol": "EMIM.AS", "name": "iShares Core MSCI EM IMI UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Emerging markets" },
-
-    { "symbol": "MEUD.PA", "name": "Amundi Stoxx Europe 600 UCITS ETF Acc", "type": "ETF", "currency": "EUR", "category": "Europe equity" },
-    { "symbol": "EXSA.DE", "name": "iShares STOXX Europe 600 UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Europe equity" },
-    { "symbol": "VERX.AS", "name": "Vanguard FTSE Developed Europe ex UK UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Europe equity" },
-    { "symbol": "SX5E.MI", "name": "Euro Stoxx 50 tracker", "type": "ETF", "currency": "EUR", "category": "Europe equity" },
-    { "symbol": "CSX5.DE", "name": "iShares Core EURO STOXX 50 UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Europe equity" },
-    { "symbol": "DAXEX.DE", "name": "iShares Core DAX UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Europe equity" },
-    { "symbol": "ISF.L", "name": "iShares Core FTSE 100 UCITS ETF", "type": "ETF", "currency": "GBP", "category": "Europe equity" },
-    { "symbol": "ETFMIB.MI", "name": "Lyxor FTSE MIB UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Europe equity" },
-    { "symbol": "SJPA.DE", "name": "iShares Core MSCI Japan IMI UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Asia equity" },
-    { "symbol": "VJPN.AS", "name": "Vanguard FTSE Japan UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Asia equity" },
-
-    { "symbol": "AGGH.MI", "name": "iShares Core Global Aggregate Bond UCITS ETF EUR Hedged", "type": "ETF", "currency": "EUR", "category": "Bonds" },
-    { "symbol": "VAGF.DE", "name": "Vanguard Global Aggregate Bond UCITS ETF EUR Hedged", "type": "ETF", "currency": "EUR", "category": "Bonds" },
-    { "symbol": "EUNA.DE", "name": "iShares Core Euro Government Bond UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Bonds" },
-    { "symbol": "IBGL.AS", "name": "iShares Euro Government Bond 15-30yr UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Bonds" },
-    { "symbol": "IBTS.L", "name": "iShares USD Treasury Bond 1-3yr UCITS ETF", "type": "ETF", "currency": "USD", "category": "Bonds" },
-    { "symbol": "IEAC.L", "name": "iShares Core Euro Corporate Bond UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Bonds" },
-    { "symbol": "XGLE.DE", "name": "Xtrackers Global Government Bond UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Bonds" },
-    { "symbol": "VGEA.DE", "name": "Vanguard EUR Eurozone Government Bond UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Bonds" },
-    { "symbol": "EUNW.DE", "name": "iShares Euro Aggregate Bond UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Bonds" },
-    { "symbol": "IHYG.L", "name": "iShares Euro High Yield Corp Bond UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Bonds" },
-
-    { "symbol": "IQQH.DE", "name": "iShares Global Clean Energy UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Sector & thematic" },
-    { "symbol": "XAIX.DE", "name": "Xtrackers AI & Big Data UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Sector & thematic" },
-    { "symbol": "WTEC.DE", "name": "iShares S&P 500 Information Technology Sector UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Sector & thematic" },
-    { "symbol": "HEAL.DE", "name": "iShares Healthcare Innovation UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Sector & thematic" },
-    { "symbol": "ESIT.MI", "name": "iShares Global Water UCITS ETF", "type": "ETF", "currency": "EUR", "category": "Sector & thematic" },
-    { "symbol": "SGLD.MI", "name": "Invesco Physical Gold ETC", "type": "ETF", "currency": "EUR", "category": "Commodities" },
-    { "symbol": "IGLN.L", "name": "iShares Physical Gold ETC", "type": "ETF", "currency": "USD", "category": "Commodities" },
-    { "symbol": "PPFB.DE", "name": "WisdomTree Physical Gold", "type": "ETF", "currency": "EUR", "category": "Commodities" },
-
-    { "symbol": "SPY", "name": "SPDR S&P 500 ETF Trust", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "VOO", "name": "Vanguard S&P 500 ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "IVV", "name": "iShares Core S&P 500 ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "VTI", "name": "Vanguard Total Stock Market ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "QQQ", "name": "Invesco QQQ Trust", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "VXUS", "name": "Vanguard Total International Stock ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "VEA", "name": "Vanguard FTSE Developed Markets ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "VWO", "name": "Vanguard FTSE Emerging Markets ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "VT", "name": "Vanguard Total World Stock ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "BND", "name": "Vanguard Total Bond Market ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "AGG", "name": "iShares Core U.S. Aggregate Bond ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "SCHD", "name": "Schwab US Dividend Equity ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "VIG", "name": "Vanguard Dividend Appreciation ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "VYM", "name": "Vanguard High Dividend Yield ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "IWM", "name": "iShares Russell 2000 ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "DIA", "name": "SPDR Dow Jones Industrial Average ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "ARKK", "name": "ARK Innovation ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "GLD", "name": "SPDR Gold Shares", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "SLV", "name": "iShares Silver Trust", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "TLT", "name": "iShares 20+ Year Treasury Bond ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "XLK", "name": "Technology Select Sector SPDR Fund", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "XLF", "name": "Financial Select Sector SPDR Fund", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "XLE", "name": "Energy Select Sector SPDR Fund", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "XLV", "name": "Health Care Select Sector SPDR Fund", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-    { "symbol": "SMH", "name": "VanEck Semiconductor ETF", "type": "ETF", "currency": "USD", "category": "US ETFs" },
-
-    { "symbol": "AAPL", "name": "Apple Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "MSFT", "name": "Microsoft Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "GOOGL", "name": "Alphabet Inc. Class A", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "AMZN", "name": "Amazon.com Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "NVDA", "name": "NVIDIA Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "META", "name": "Meta Platforms Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "TSLA", "name": "Tesla Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "BRK-B", "name": "Berkshire Hathaway Inc. Class B", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "JPM", "name": "JPMorgan Chase & Co.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "V", "name": "Visa Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "MA", "name": "Mastercard Incorporated", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "UNH", "name": "UnitedHealth Group Incorporated", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "JNJ", "name": "Johnson & Johnson", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "XOM", "name": "Exxon Mobil Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "PG", "name": "Procter & Gamble Company", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "HD", "name": "Home Depot Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "COST", "name": "Costco Wholesale Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "WMT", "name": "Walmart Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "KO", "name": "Coca-Cola Company", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "PEP", "name": "PepsiCo Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "AVGO", "name": "Broadcom Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "AMD", "name": "Advanced Micro Devices Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "INTC", "name": "Intel Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "CRM", "name": "Salesforce Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "ADBE", "name": "Adobe Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "NFLX", "name": "Netflix Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "DIS", "name": "Walt Disney Company", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "CSCO", "name": "Cisco Systems Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "ORCL", "name": "Oracle Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "IBM", "name": "International Business Machines", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "QCOM", "name": "QUALCOMM Incorporated", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "TXN", "name": "Texas Instruments Incorporated", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "PYPL", "name": "PayPal Holdings Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "BAC", "name": "Bank of America Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "WFC", "name": "Wells Fargo & Company", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "GS", "name": "Goldman Sachs Group Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "MS", "name": "Morgan Stanley", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "CVX", "name": "Chevron Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "PFE", "name": "Pfizer Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "MRK", "name": "Merck & Co. Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "ABBV", "name": "AbbVie Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "LLY", "name": "Eli Lilly and Company", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "TMO", "name": "Thermo Fisher Scientific Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "MCD", "name": "McDonald's Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "NKE", "name": "NIKE Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "SBUX", "name": "Starbucks Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "BA", "name": "Boeing Company", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "CAT", "name": "Caterpillar Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "GE", "name": "General Electric Company", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "UBER", "name": "Uber Technologies Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "ABNB", "name": "Airbnb Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "COIN", "name": "Coinbase Global Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "PLTR", "name": "Palantir Technologies Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "SHOP", "name": "Shopify Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "SQ", "name": "Block Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "T", "name": "AT&T Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "VZ", "name": "Verizon Communications Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "MU", "name": "Micron Technology Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "MRNA", "name": "Moderna Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "F", "name": "Ford Motor Company", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "GM", "name": "General Motors Company", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "DE", "name": "Deere & Company", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "LMT", "name": "Lockheed Martin Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "RTX", "name": "RTX Corporation", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "HON", "name": "Honeywell International Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "AXP", "name": "American Express Company", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "BLK", "name": "BlackRock Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "SPGI", "name": "S&P Global Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "NOW", "name": "ServiceNow Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "INTU", "name": "Intuit Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "AMAT", "name": "Applied Materials Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-    { "symbol": "BKNG", "name": "Booking Holdings Inc.", "type": "EQUITY", "currency": "USD", "category": "US shares" },
-
-    { "symbol": "ASML.AS", "name": "ASML Holding N.V.", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "SAP.DE", "name": "SAP SE", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "SIE.DE", "name": "Siemens AG", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "ALV.DE", "name": "Allianz SE", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "BAS.DE", "name": "BASF SE", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "BMW.DE", "name": "Bayerische Motoren Werke AG", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "MBG.DE", "name": "Mercedes-Benz Group AG", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "VOW3.DE", "name": "Volkswagen AG", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "DTE.DE", "name": "Deutsche Telekom AG", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "AIR.PA", "name": "Airbus SE", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "MC.PA", "name": "LVMH Moet Hennessy Louis Vuitton", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "OR.PA", "name": "L'Oreal S.A.", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "TTE.PA", "name": "TotalEnergies SE", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "SAN.PA", "name": "Sanofi", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "BNP.PA", "name": "BNP Paribas", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "RMS.PA", "name": "Hermes International", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "NESN.SW", "name": "Nestle S.A.", "type": "EQUITY", "currency": "CHF", "category": "European shares" },
-    { "symbol": "NOVN.SW", "name": "Novartis AG", "type": "EQUITY", "currency": "CHF", "category": "European shares" },
-    { "symbol": "ROG.SW", "name": "Roche Holding AG", "type": "EQUITY", "currency": "CHF", "category": "European shares" },
-    { "symbol": "UBSG.SW", "name": "UBS Group AG", "type": "EQUITY", "currency": "CHF", "category": "European shares" },
-    { "symbol": "ENEL.MI", "name": "Enel S.p.A.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "ENI.MI", "name": "Eni S.p.A.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "ISP.MI", "name": "Intesa Sanpaolo S.p.A.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "UCG.MI", "name": "UniCredit S.p.A.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "RACE.MI", "name": "Ferrari N.V.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "STLAM.MI", "name": "Stellantis N.V.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "G.MI", "name": "Assicurazioni Generali S.p.A.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "TIT.MI", "name": "Telecom Italia S.p.A.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "MONC.MI", "name": "Moncler S.p.A.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "PST.MI", "name": "Poste Italiane S.p.A.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "PRY.MI", "name": "Prysmian S.p.A.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "LDO.MI", "name": "Leonardo S.p.A.", "type": "EQUITY", "currency": "EUR", "category": "Italian shares" },
-    { "symbol": "SHEL.L", "name": "Shell plc", "type": "EQUITY", "currency": "GBP", "category": "UK shares" },
-    { "symbol": "AZN.L", "name": "AstraZeneca PLC", "type": "EQUITY", "currency": "GBP", "category": "UK shares" },
-    { "symbol": "HSBA.L", "name": "HSBC Holdings plc", "type": "EQUITY", "currency": "GBP", "category": "UK shares" },
-    { "symbol": "ULVR.L", "name": "Unilever PLC", "type": "EQUITY", "currency": "GBP", "category": "UK shares" },
-    { "symbol": "BP.L", "name": "BP p.l.c.", "type": "EQUITY", "currency": "GBP", "category": "UK shares" },
-    { "symbol": "GSK.L", "name": "GSK plc", "type": "EQUITY", "currency": "GBP", "category": "UK shares" },
-    { "symbol": "RIO.L", "name": "Rio Tinto Group", "type": "EQUITY", "currency": "GBP", "category": "UK shares" },
-    { "symbol": "NOVO-B.CO", "name": "Novo Nordisk A/S", "type": "EQUITY", "currency": "DKK", "category": "European shares" },
-    { "symbol": "INGA.AS", "name": "ING Groep N.V.", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "PHIA.AS", "name": "Koninklijke Philips N.V.", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "AD.AS", "name": "Koninklijke Ahold Delhaize N.V.", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "ITX.MC", "name": "Industria de Diseno Textil S.A.", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "SAN.MC", "name": "Banco Santander S.A.", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "IBE.MC", "name": "Iberdrola S.A.", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "ABI.BR", "name": "Anheuser-Busch InBev SA/NV", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "NDA-FI.HE", "name": "Nordea Bank Abp", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "NOKIA.HE", "name": "Nokia Oyj", "type": "EQUITY", "currency": "EUR", "category": "European shares" },
-    { "symbol": "ERIC-B.ST", "name": "Telefonaktiebolaget LM Ericsson", "type": "EQUITY", "currency": "SEK", "category": "European shares" },
-    { "symbol": "VOLV-B.ST", "name": "Volvo AB", "type": "EQUITY", "currency": "SEK", "category": "European shares" },
-    { "symbol": "EQNR.OL", "name": "Equinor ASA", "type": "EQUITY", "currency": "NOK", "category": "European shares" }
+    {
+      "symbol": "VWCE.DE",
+      "name": "Vanguard FTSE All-World UCITS ETF (USD) Accumulating",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "td": {
+        "symbol": "VWCE",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "VWRL.AS",
+      "name": "Vanguard FTSE All-World UCITS ETF (USD) Distributing",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "td": {
+        "symbol": "VWRL",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "IWDA.AS",
+      "name": "iShares Core MSCI World UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "td": {
+        "symbol": "IWDA",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "SWDA.MI",
+      "name": "iShares Core MSCI World UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "td": {
+        "symbol": "SWDA",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "EUNL.DE",
+      "name": "iShares Core MSCI World UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "td": {
+        "symbol": "EUNL",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "XDWD.DE",
+      "name": "Xtrackers MSCI World UCITS ETF 1C",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "td": {
+        "symbol": "XDWD",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "SPPW.DE",
+      "name": "SPDR MSCI World UCITS ETF",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "td": {
+        "symbol": "SPPW",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "ISAC.L",
+      "name": "iShares MSCI ACWI UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "World equity",
+      "td": {
+        "symbol": "ISAC",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "MWRD.MI",
+      "name": "Amundi MSCI World USD Acc",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "td": {
+        "symbol": "MWRD",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "VHVG.L",
+      "name": "Vanguard FTSE Developed World UCITS ETF (USD) Accumulating",
+      "type": "ETF",
+      "currency": "GBP",
+      "category": "World equity",
+      "td": {
+        "symbol": "VHVG",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "VEVE.L",
+      "name": "Vanguard FTSE Developed World UCITS ETF (USD) Distributing",
+      "type": "ETF",
+      "currency": "GBP",
+      "category": "World equity",
+      "td": {
+        "symbol": "VEVE",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "WEBN.DE",
+      "name": "Amundi Prime All Country World UCITS ETF Acc",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "td": {
+        "symbol": "WEBN",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "SPYI.DE",
+      "name": "SPDR MSCI All Country World Investable Market UCITS ETF (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "td": {
+        "symbol": "SPYI",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "IMIE.MI",
+      "name": "SPDR MSCI All Country World Investable Market UCITS ETF (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "td": {
+        "symbol": "IMIE",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "CSPX.MI",
+      "name": "iShares Core S&P 500 UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "td": {
+        "symbol": "CSPX",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "SXR8.DE",
+      "name": "iShares Core S&P 500 UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "td": {
+        "symbol": "SXR8",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "VUSA.AS",
+      "name": "Vanguard S&P 500 UCITS ETF (USD) Distributing",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "td": {
+        "symbol": "VUSA",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "VUAA.DE",
+      "name": "Vanguard S&P 500 UCITS ETF (USD) Accumulating (VUAA)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "td": {
+        "symbol": "VUAA",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "SPY5.MI",
+      "name": "SPDR S&P 500 UCITS ETF (Dist)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "td": {
+        "symbol": "SPY5",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "EQQQ.AS",
+      "name": "Invesco EQQQ NASDAQ-100 UCITS ETF Dist",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "td": {
+        "symbol": "EQQQ",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "SXRV.DE",
+      "name": "iShares NASDAQ 100 UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "td": {
+        "symbol": "SXRV",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "CNDX.L",
+      "name": "iShares NASDAQ 100 UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US equity",
+      "td": {
+        "symbol": "CNDX",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "XDPU.DE",
+      "name": "Xtrackers S&P 500 UCITS ETF 4C",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "td": {
+        "symbol": "XDPU",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "IUSA.AS",
+      "name": "iShares Core S&P 500 UCITS ETF USD (Dist)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "td": {
+        "symbol": "IUSA",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "EIMI.MI",
+      "name": "iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Emerging markets",
+      "td": {
+        "symbol": "EIMI",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "IS3N.DE",
+      "name": "iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Emerging markets",
+      "td": {
+        "symbol": "IS3N",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "VFEM.AS",
+      "name": "Vanguard FTSE Emerging Markets UCITS ETF (USD) Distributing",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Emerging markets",
+      "td": {
+        "symbol": "VFEM",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "XMME.DE",
+      "name": "Xtrackers MSCI Emerging Markets UCITS ETF 1C",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Emerging markets",
+      "td": {
+        "symbol": "XMME",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "EMIM.AS",
+      "name": "iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Emerging markets",
+      "td": {
+        "symbol": "EMIM",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "MEUD.PA",
+      "name": "Amundi Core Stoxx Europe 600 UCITS ETF Acc",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Europe equity",
+      "td": {
+        "symbol": "MEUD",
+        "mic": "XPAR",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "EXSA.DE",
+      "name": "iShares STOXX Europe 600 UCITS ETF (DE)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Europe equity",
+      "td": {
+        "symbol": "EXSA",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "VERX.AS",
+      "name": "Vanguard FTSE Developed Europe ex UK UCITS ETF (EUR) Distributing",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Europe equity",
+      "td": {
+        "symbol": "VERX",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "SX5E.MI",
+      "name": "Invesco EURO STOXX 50 UCITS ETF Acc",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Europe equity",
+      "td": {
+        "symbol": "SX5E",
+        "mic": "XSWX",
+        "exchange": "SIX"
+      }
+    },
+    {
+      "symbol": "CSX5.DE",
+      "name": "iShares Core EURO STOXX 50 UCITS ETF",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Europe equity",
+      "td": {
+        "symbol": "CSX5",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "ISF.L",
+      "name": "iShares Core FTSE 100 UCITS ETF GBP (Dist)",
+      "type": "ETF",
+      "currency": "GBp",
+      "category": "Europe equity",
+      "td": {
+        "symbol": "ISF",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "ETFMIB.MI",
+      "name": "Amundi FTSE MIB UCITS ETF Dist",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Europe equity",
+      "td": {
+        "symbol": "ETFMIB",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "SJPA.DE",
+      "name": "iShares Core MSCI Japan IMI UCITS ETF",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Asia equity",
+      "td": {
+        "symbol": "SJPA",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "VJPN.AS",
+      "name": "Vanguard FTSE Japan UCITS ETF (USD) Distributing",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Asia equity",
+      "td": {
+        "symbol": "VJPN",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "AGGH.MI",
+      "name": "iShares Core Global Aggregate Bond UCITS ETF EUR Hedged (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "td": {
+        "symbol": "AGGH",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "VAGF.DE",
+      "name": "Vanguard Global Aggregate Bond UCITS ETF EUR Hedged Accumulating",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "td": {
+        "symbol": "VAGF",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "EUNA.DE",
+      "name": "iShares Core Global Aggregate Bond UCITS ETF EUR Hedged (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "td": {
+        "symbol": "EUNA",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "IBGL.AS",
+      "name": "iShares € Govt Bond 15-30yr UCITS ETF EUR (Dist)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "td": {
+        "symbol": "IBGL",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "IBTS.L",
+      "name": "iShares USD Treasury Bond 1-3yr UCITS ETF (Dist)",
+      "type": "ETF",
+      "currency": "GBP",
+      "category": "Bonds",
+      "td": {
+        "symbol": "IBTS",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "IEAC.L",
+      "name": "iShares Core € Corp Bond UCITS ETF EUR (Dist)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "td": {
+        "symbol": "IEAC",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "XGLE.DE",
+      "name": "Xtrackers II Eurozone Government Bond UCITS ETF 1C",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "td": {
+        "symbol": "XGLE",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "VGEA.DE",
+      "name": "Vanguard EUR Eurozone Government Bond UCITS ETF Accumulating",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "td": {
+        "symbol": "VGEA",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "EUNW.DE",
+      "name": "iShares € High Yield Corp Bond UCITS ETF EUR (Dist)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "td": {
+        "symbol": "EUNW",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "IHYG.L",
+      "name": "iShares € High Yield Corp Bond UCITS ETF EUR (Dist)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "td": {
+        "symbol": "IHYG",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "IQQH.DE",
+      "name": "iShares Global Clean Energy Transition UCITS ETF",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Sector & thematic",
+      "td": {
+        "symbol": "IQQH",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "XAIX.DE",
+      "name": "Xtrackers Artificial Intelligence and Big Data ETF 1C",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Sector & thematic",
+      "td": {
+        "symbol": "XAIX",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "WTEC.DE",
+      "name": "SPDR MSCI World Technology UCITS ETF",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Sector & thematic",
+      "td": {
+        "symbol": "WTEC",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "HEAL.DE",
+      "name": "iShares Healthcare Innovation UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Sector & thematic",
+      "td": {
+        "symbol": "HEAL",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "ESIT.MI",
+      "name": "iShares MSCI Europe Information Technology Sector UCITS ETF EUR (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Sector & thematic",
+      "td": {
+        "symbol": "ESIT",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "SGLD.MI",
+      "name": "Invesco Physical Gold ETC",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Commodities",
+      "td": {
+        "symbol": "SGLD",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "IGLN.L",
+      "name": "iShares Physical Gold ETC",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "Commodities",
+      "td": {
+        "symbol": "IGLN",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "PPFB.DE",
+      "name": "iShares Physical Gold ETC",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Commodities",
+      "td": {
+        "symbol": "PPFB",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "SPY",
+      "name": "State Street SPDR S&P 500 ETF Trust",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "SPY",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "VOO",
+      "name": "Vanguard S&P 500 ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "VOO",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "IVV",
+      "name": "iShares Core S&P 500 ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "IVV",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "VTI",
+      "name": "Vanguard Total Stock Market ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "VTI",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "QQQ",
+      "name": "Invesco QQQ Trust, Series 1",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "QQQ",
+        "mic": "XNMS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "VXUS",
+      "name": "Vanguard Total International Stock ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "VXUS",
+        "mic": "XNMS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "VEA",
+      "name": "Vanguard FTSE Developed Markets ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "VEA",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "VWO",
+      "name": "Vanguard FTSE Emerging Markets ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "VWO",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "VT",
+      "name": "Vanguard Total World Stock ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "VT",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "BND",
+      "name": "Vanguard Total Bond Market ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "BND",
+        "mic": "XNMS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "AGG",
+      "name": "iShares Core U.S. Aggregate Bond ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "AGG",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "SCHD",
+      "name": "Schwab U.S. Dividend Equity ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "SCHD",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "VIG",
+      "name": "Vanguard Dividend Appreciation ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "VIG",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "VYM",
+      "name": "Vanguard High Dividend Yield ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "VYM",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "IWM",
+      "name": "iShares Russell 2000 ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "IWM",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "DIA",
+      "name": "State Street SPDR Dow Jones Industrial Average ETF Trust",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "DIA",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "ARKK",
+      "name": "ARK Innovation ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "ARKK",
+        "mic": "BATS",
+        "exchange": "CBOE"
+      }
+    },
+    {
+      "symbol": "GLD",
+      "name": "SPDR Gold Shares",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "GLD",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "SLV",
+      "name": "iShares Silver Trust",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "SLV",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "TLT",
+      "name": "iShares 20+ Year Treasury Bond ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "TLT",
+        "mic": "XNMS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "XLK",
+      "name": "State Street Technology Select Sector SPDR ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "XLK",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "XLF",
+      "name": "State Street Financial Select Sector SPDR ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "XLF",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "XLE",
+      "name": "State Street Energy Select Sector SPDR ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "XLE",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "XLV",
+      "name": "State Street Health Care Select Sector SPDR ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "XLV",
+        "mic": "ARCX",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "SMH",
+      "name": "VanEck Semiconductor ETF",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US ETFs",
+      "td": {
+        "symbol": "SMH",
+        "mic": "XNMS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "AAPL",
+      "name": "Apple Inc",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "AAPL",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft Corporation Common Stock",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "MSFT",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "GOOGL",
+      "name": "Alphabet Inc. Class A Common Stock",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "GOOGL",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "AMZN",
+      "name": "Amazon.com Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "AMZN",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA Corporation",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "NVDA",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "META",
+      "name": "Meta Platforms Inc. Class A Common Stock",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "META",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "TSLA",
+      "name": "Tesla, Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "TSLA",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "BRK-B",
+      "name": "Berkshire Hathaway Inc. Class B",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "BRK.B",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "JPM",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "V",
+      "name": "Visa Inc. Class A",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "V",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "MA",
+      "name": "Mastercard Incorporated Class A",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "MA",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "UNH",
+      "name": "UnitedHealth Group Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "UNH",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "JNJ",
+      "name": "Johnson & Johnson",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "JNJ",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "XOM",
+      "name": "ExxonMobil Holdings Corporation Common Stock",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "XOM",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "PG",
+      "name": "Procter & Gamble Co.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "PG",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "HD",
+      "name": "The Home Depot, Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "HD",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "COST",
+      "name": "Costco Wholesale Corporation",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "COST",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "WMT",
+      "name": "Walmart Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "WMT",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "KO",
+      "name": "The Coca-Cola Company",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "KO",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "PEP",
+      "name": "PepsiCo, Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "PEP",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "AVGO",
+      "name": "Broadcom Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "AVGO",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "AMD",
+      "name": "Advanced Micro Devices Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "AMD",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "INTC",
+      "name": "Intel Corporation",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "INTC",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "CRM",
+      "name": "Salesforce, Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "CRM",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "ADBE",
+      "name": "Adobe Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "ADBE",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "NFLX",
+      "name": "Netflix Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "NFLX",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "DIS",
+      "name": "The Walt Disney Company",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "DIS",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "CSCO",
+      "name": "Cisco Systems Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "CSCO",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "ORCL",
+      "name": "Oracle Corporation",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "ORCL",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "IBM",
+      "name": "International Business Machines Corporation",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "IBM",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "QCOM",
+      "name": "QUALCOMM Incorporated",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "QCOM",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "TXN",
+      "name": "Texas Instruments Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "TXN",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "PYPL",
+      "name": "PayPal Holdings, Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "PYPL",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "BAC",
+      "name": "Bank of America Corp.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "BAC",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "WFC",
+      "name": "Wells Fargo & Company",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "WFC",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "GS",
+      "name": "The Goldman Sachs Group, Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "GS",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "MS",
+      "name": "Morgan Stanley Common Stock",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "MS",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "CVX",
+      "name": "Chevron Corp.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "CVX",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "PFE",
+      "name": "Pfizer Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "PFE",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "MRK",
+      "name": "Merck & Co., Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "MRK",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "ABBV",
+      "name": "AbbVie Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "ABBV",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "LLY",
+      "name": "Eli Lilly and Company",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "LLY",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "TMO",
+      "name": "Thermo Fisher Scientific Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "TMO",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "MCD",
+      "name": "McDonald's Corp.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "MCD",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "NKE",
+      "name": "Nike, Inc. Class B Common Stock",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "NKE",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "SBUX",
+      "name": "Starbucks Corp.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "SBUX",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "BA",
+      "name": "Boeing Co/The",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "BA",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "CAT",
+      "name": "Caterpillar Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "CAT",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "GE",
+      "name": "General Electric Company",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "GE",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "UBER",
+      "name": "Uber Technologies Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "UBER",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "ABNB",
+      "name": "Airbnb Inc. Class A Common Stock",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "ABNB",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "COIN",
+      "name": "Coinbase Global Inc. Class A Common Stock",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "COIN",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "PLTR",
+      "name": "Palantir Technologies Inc. Class A Common Stock",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "PLTR",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "SHOP",
+      "name": "Shopify Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "SHOP",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "SQ",
+      "name": "Block, Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "SQ",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "T",
+      "name": "AT&T Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "T",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "VZ",
+      "name": "Verizon Communications Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "VZ",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "MU",
+      "name": "Micron Technology Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "MU",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "MRNA",
+      "name": "Moderna Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "MRNA",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "F",
+      "name": "Ford Motor Co.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "F",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "GM",
+      "name": "General Motors Co.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "GM",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "DE",
+      "name": "Deere & Company",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "DE",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "LMT",
+      "name": "Lockheed Martin Corporation",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "LMT",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "RTX",
+      "name": "RTX Corporation",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "RTX",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "HON",
+      "name": "Honeywell International Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "HON",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "AXP",
+      "name": "American Express Company",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "AXP",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "BLK",
+      "name": "BlackRock Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "BLK",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "SPGI",
+      "name": "S&P Global Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "SPGI",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "NOW",
+      "name": "ServiceNow Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "NOW",
+        "mic": "XNYS",
+        "exchange": "NYSE"
+      }
+    },
+    {
+      "symbol": "INTU",
+      "name": "Intuit Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "INTU",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "AMAT",
+      "name": "Applied Materials Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "AMAT",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "BKNG",
+      "name": "Booking Holdings Inc.",
+      "type": "EQUITY",
+      "currency": "USD",
+      "category": "US shares",
+      "td": {
+        "symbol": "BKNG",
+        "mic": "XNGS",
+        "exchange": "NASDAQ"
+      }
+    },
+    {
+      "symbol": "ASML.AS",
+      "name": "ASML Holding N.V.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "ASML",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "SAP.DE",
+      "name": "SAP SE",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "SAP",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "SIE.DE",
+      "name": "Siemens Aktiengesellschaft",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "SIE",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "ALV.DE",
+      "name": "Allianz SE",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "ALV",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "BAS.DE",
+      "name": "BASF SE",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "BAS",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "BMW.DE",
+      "name": "Bayerische Motoren Werke AG",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "BMW",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "MBG.DE",
+      "name": "Mercedes-Benz Group AG",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "MBG",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "VOW3.DE",
+      "name": "Volkswagen AG Preferred Stock",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "VOW3",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "DTE.DE",
+      "name": "Deutsche Telekom AG",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "DTE",
+        "mic": "XETR",
+        "exchange": "XETR"
+      }
+    },
+    {
+      "symbol": "AIR.PA",
+      "name": "Airbus SE",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "AIR",
+        "mic": "XPAR",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "MC.PA",
+      "name": "LVMH Moët Hennessy Louis Vuitton SE",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "MC",
+        "mic": "XPAR",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "OR.PA",
+      "name": "L'Oréal S.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "OR",
+        "mic": "XPAR",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "TTE.PA",
+      "name": "TotalEnergies SE",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "TTE",
+        "mic": "XPAR",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "SAN.PA",
+      "name": "Sanofi SA",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "SAN",
+        "mic": "XPAR",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "BNP.PA",
+      "name": "BNP Paribas SA",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "BNP",
+        "mic": "XPAR",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "RMS.PA",
+      "name": "Hermès International Société en commandite par actions",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "RMS",
+        "mic": "XPAR",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "NESN.SW",
+      "name": "Nestlé S.A.",
+      "type": "EQUITY",
+      "currency": "CHF",
+      "category": "European shares",
+      "td": {
+        "symbol": "NESN",
+        "mic": "XSWX",
+        "exchange": "SIX"
+      }
+    },
+    {
+      "symbol": "NOVN.SW",
+      "name": "Novartis AG Registered Shares",
+      "type": "EQUITY",
+      "currency": "CHF",
+      "category": "European shares",
+      "td": {
+        "symbol": "NOVN",
+        "mic": "XSWX",
+        "exchange": "SIX"
+      }
+    },
+    {
+      "symbol": "UBSG.SW",
+      "name": "UBS Group AG",
+      "type": "EQUITY",
+      "currency": "CHF",
+      "category": "European shares",
+      "td": {
+        "symbol": "UBSG",
+        "mic": "XSWX",
+        "exchange": "SIX"
+      }
+    },
+    {
+      "symbol": "ENEL.MI",
+      "name": "Enel S.p.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "ENEL",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "ENI.MI",
+      "name": "Eni S.p.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "ENI",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "ISP.MI",
+      "name": "Intesa Sanpaolo S.p.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "ISP",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "UCG.MI",
+      "name": "UniCredit S.p.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "UCG",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "RACE.MI",
+      "name": "Ferrari N.V.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "RACE",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "STLAM.MI",
+      "name": "Stellantis N.V.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "STLAM",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "G.MI",
+      "name": "Assicurazioni Generali S.p.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "G",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "TIT.MI",
+      "name": "Telecom Italia S.p.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "TIT",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "MONC.MI",
+      "name": "Moncler S.p.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "MONC",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "PST.MI",
+      "name": "Poste Italiane SpA",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "PST",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "PRY.MI",
+      "name": "Prysmian S.p.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "PRY",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "LDO.MI",
+      "name": "Leonardo S.p.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "Italian shares",
+      "td": {
+        "symbol": "LDO",
+        "mic": "XMIL",
+        "exchange": "MTA"
+      }
+    },
+    {
+      "symbol": "SHEL.L",
+      "name": "Shell plc",
+      "type": "EQUITY",
+      "currency": "GBp",
+      "category": "UK shares",
+      "td": {
+        "symbol": "SHEL",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "AZN.L",
+      "name": "AstraZeneca PLC",
+      "type": "EQUITY",
+      "currency": "GBp",
+      "category": "UK shares",
+      "td": {
+        "symbol": "AZN",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "HSBA.L",
+      "name": "HSBC Holdings plc",
+      "type": "EQUITY",
+      "currency": "GBp",
+      "category": "UK shares",
+      "td": {
+        "symbol": "HSBA",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "ULVR.L",
+      "name": "Unilever PLC",
+      "type": "EQUITY",
+      "currency": "GBp",
+      "category": "UK shares",
+      "td": {
+        "symbol": "ULVR",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "BP.L",
+      "name": "BP p.l.c.",
+      "type": "EQUITY",
+      "currency": "GBp",
+      "category": "UK shares",
+      "td": {
+        "symbol": "BP",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "GSK.L",
+      "name": "GSK plc",
+      "type": "EQUITY",
+      "currency": "GBp",
+      "category": "UK shares",
+      "td": {
+        "symbol": "GSK",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "RIO.L",
+      "name": "Rio Tinto plc",
+      "type": "EQUITY",
+      "currency": "GBp",
+      "category": "UK shares",
+      "td": {
+        "symbol": "RIO",
+        "mic": "XLON",
+        "exchange": "LSE"
+      }
+    },
+    {
+      "symbol": "NOVO-B.CO",
+      "name": "Novo Nordisk A/S",
+      "type": "EQUITY",
+      "currency": "DKK",
+      "category": "European shares",
+      "td": {
+        "symbol": "NOVO.B",
+        "mic": "XCSE",
+        "exchange": "OMXC"
+      }
+    },
+    {
+      "symbol": "INGA.AS",
+      "name": "ING Groep N.V.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "INGA",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "PHIA.AS",
+      "name": "Koninklijke Philips N.V.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "PHIA",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "AD.AS",
+      "name": "Koninklijke Ahold Delhaize N.V.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "AD",
+        "mic": "XAMS",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "ITX.MC",
+      "name": "Industria de Diseño Textil, S.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "ITX",
+        "mic": "XMAD",
+        "exchange": "BME"
+      }
+    },
+    {
+      "symbol": "SAN.MC",
+      "name": "Banco Santander, S.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "SAN",
+        "mic": "XMAD",
+        "exchange": "BME"
+      }
+    },
+    {
+      "symbol": "IBE.MC",
+      "name": "Iberdrola, S.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "IBE",
+        "mic": "XMAD",
+        "exchange": "BME"
+      }
+    },
+    {
+      "symbol": "ABI.BR",
+      "name": "Anheuser-Busch InBev SA/NV",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "ABI",
+        "mic": "XBRU",
+        "exchange": "Euronext"
+      }
+    },
+    {
+      "symbol": "NDA-FI.HE",
+      "name": "Nordea Bank Abp",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "NDA.FI",
+        "mic": "XHEL",
+        "exchange": "OMXH"
+      }
+    },
+    {
+      "symbol": "NOKIA.HE",
+      "name": "Nokia Oyj",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "td": {
+        "symbol": "NOKIA",
+        "mic": "XHEL",
+        "exchange": "OMXH"
+      }
+    },
+    {
+      "symbol": "ERIC-B.ST",
+      "name": "Telefonaktiebolaget LM Ericsson",
+      "type": "EQUITY",
+      "currency": "SEK",
+      "category": "European shares",
+      "td": {
+        "symbol": "ERIC.B",
+        "mic": "XSTO",
+        "exchange": "OMX"
+      }
+    },
+    {
+      "symbol": "VOLV-B.ST",
+      "name": "Volvo AB",
+      "type": "EQUITY",
+      "currency": "SEK",
+      "category": "European shares",
+      "td": {
+        "symbol": "VOLV.B",
+        "mic": "XSTO",
+        "exchange": "OMX"
+      }
+    },
+    {
+      "symbol": "EQNR.OL",
+      "name": "Equinor ASA",
+      "type": "EQUITY",
+      "currency": "NOK",
+      "category": "European shares",
+      "td": {
+        "symbol": "EQNR",
+        "mic": "XOSL",
+        "exchange": "OSE"
+      }
+    }
   ]
 }

@@ -41,7 +41,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
                 results.
               </p>
               <p>
-                Bank rates: ECB Data Portal (euro-area household deposits). Prices: Yahoo Finance,
+                Bank rates: ECB Data Portal (euro-area household deposits). Prices: Twelve Data,
                 monthly closes. Both ship as static files with the site and are refreshed on a
                 schedule, so nothing you do here is sent to a data provider.
               </p>
