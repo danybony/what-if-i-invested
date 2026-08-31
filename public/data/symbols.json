@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T21:27:45.086Z",
+  "generatedAt": "2026-08-31T21:49:03.598Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -13,12 +13,12 @@
     },
     {
       "symbol": "VWCE.DE",
-      "name": "Vanguard FTSE All-World UCITS ETF USD Accumulation",
+      "name": "Vanguard FTSE All-World UCITS ETF (USD) Accumulating",
       "type": "ETF",
       "currency": "EUR",
       "category": "World equity",
       "file": "VWCE.DE.json",
-      "firstMonth": "2019-09",
+      "firstMonth": "2019-08",
       "lastMonth": "2026-08"
     }
   ]

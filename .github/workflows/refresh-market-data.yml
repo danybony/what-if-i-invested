@@ -6,9 +6,16 @@ name: Refresh market data
 # Running the fetch here rather than in a visitor's browser is the whole point —
 # one scheduled run costs ~200 requests total instead of ~200 per visitor.
 #
-# Prices come from Twelve Data. Yahoo's keyless endpoints blanket-block
-# datacenter IPs: every request from a runner returned 429 from the first one,
-# so it is unusable from CI regardless of pacing.
+# Prices come from two providers, because no free tier covers everything.
+# Yahoo's keyless endpoints blanket-block datacenter IPs (a runner gets 429 on
+# request #1), so they are unusable from CI at all. Twelve Data's free tier is
+# generous but US-only. Alpha Vantage covers the European venues but allows only
+# ~25 calls a day.
+#
+# So US venues refresh daily from Twelve Data, and the European half rotates
+# through Alpha Vantage stalest-first — a full European cycle every ~5 days.
+# That is fine for this site: each symbol's *entire* price history is stored on
+# first fetch and committed, so a rotation only ever ages the current month.
 
 on:
   schedule:
@@ -30,6 +37,11 @@ on:
         description: 'Refetch dividends older than N days (0 = always)'
         required: false
         default: '7'
+        type: string
+      alpha_budget:
+        description: 'How many European symbols to refresh this run'
+        required: false
+        default: '12'
         type: string
 
 # Never let two refreshes race for the same commit.
@@ -57,30 +69,43 @@ jobs:
 
       # No install step: the script is dependency-free ESM on purpose, so this
       # job cannot break on an unrelated dependency bump.
+      # Alpha Vantage's daily quota is shared between mapping and fetching, so
+      # only a few symbols are mapped per run. This is a no-op once the whole
+      # universe is resolved.
+      - name: Map any symbols still missing a provider id
+        continue-on-error: true
+        env:
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
+        run: node scripts/map-alphavantage.mjs --limit 6 --write
+
       - name: Fetch prices and ECB rates
         env:
           TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
         run: |
-          if [ -z "$TWELVEDATA_API_KEY" ]; then
-            echo "::error::TWELVEDATA_API_KEY secret is not set."
-            exit 1
-          fi
+          for name in TWELVEDATA_API_KEY ALPHAVANTAGE_API_KEY; do
+            if [ -z "${!name}" ]; then
+              echo "::error::$name secret is not set."
+              exit 1
+            fi
+          done
           node scripts/fetch-market-data.mjs \
             ${{ inputs.only && format('--only {0}', inputs.only) || '' }} \
             --interval ${{ inputs.interval || '8000' }} \
-            --dividend-age ${{ inputs.dividend_age || '7' }}
+            --dividend-age ${{ inputs.dividend_age || '7' }} \
+            --alpha-budget ${{ inputs.alpha_budget || '12' }}
 
       - name: Commit refreshed data
         id: commit
         run: |
-          if [ -z "$(git status --porcelain public/data)" ]; then
+          if [ -z "$(git status --porcelain public/data data-source)" ]; then
             echo "No change in public/data — nothing to commit."
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/data
+          git add public/data data-source
           git commit -m "Refresh market data ($(date -u +%Y-%m-%d))"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"

@@ -5,13 +5,18 @@
  * `node`, no build step and no dependencies. This is build-time tooling —
  * nothing here ships to the browser.
  *
- * Prices come from Twelve Data rather than Yahoo. Yahoo's keyless endpoints
- * blanket-block datacenter IPs (every request from a GitHub runner returns 429
- * from the first one), which makes them unusable from CI; Twelve Data issues a
- * key and permits automated access.
+ * Prices come from two providers, because no single free tier covers what the
+ * site needs. Yahoo's keyless endpoints blanket-block datacenter IPs (a GitHub
+ * runner gets 429 on its first request), so they are unusable from CI at all.
+ * Twelve Data's free tier is generous but US-only. Alpha Vantage covers XETRA,
+ * Frankfurt, London and Amsterdam but allows only ~25 calls a day.
+ *
+ * So: US venues come from Twelve Data daily, everything else from Alpha Vantage
+ * on a rotation. Each universe entry names its own provider.
  */
 
 const TWELVE_DATA = 'https://api.twelvedata.com'
+const ALPHA_VANTAGE = 'https://www.alphavantage.co/query'
 
 const ECB_DEPOSIT_SERIES =
   'https://data-api.ecb.europa.eu/service/data/MIR/M.U2.B.L22.A.R.A.2250.EUR.N?format=csvdata&startPeriod=1999-01'
@@ -163,6 +168,68 @@ export function buildHistory(entry, series, dividends = []) {
     type: series.meta?.type || entry.type,
     points: withAdjusted,
     dividendCount: paidIn.size,
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Alpha Vantage                                                              */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Unlike Twelve Data, Alpha Vantage returns the adjusted close outright, so
+ * there is nothing to reconstruct — one call per symbol, and the dividend
+ * handling is the provider's problem rather than ours.
+ */
+export async function fetchAlphaVantageHistory(entry, { apiKey, minIntervalMs = 1000 }) {
+  await throttle(minIntervalMs)
+
+  const url =
+    `${ALPHA_VANTAGE}?function=TIME_SERIES_MONTHLY_ADJUSTED` +
+    `&symbol=${encodeURIComponent(entry.av.symbol)}&apikey=${apiKey}`
+  const response = await fetch(url)
+  const body = await response.json().catch(() => null)
+  if (!body) throw new Error(`HTTP ${response.status} with an unreadable body`)
+
+  // Throttling and errors both arrive as HTTP 200 with a prose field.
+  if (body.Note || body.Information) {
+    throw new Error(`rate limited: ${(body.Note ?? body.Information).slice(0, 140)}`)
+  }
+  if (body['Error Message']) throw new Error(body['Error Message'].slice(0, 140))
+
+  const seriesKey = Object.keys(body).find((key) => key.includes('Time Series'))
+  const series = seriesKey ? body[seriesKey] : null
+  if (!series || Object.keys(series).length === 0) throw new Error('no price history returned')
+
+  return buildAlphaVantageHistory(entry, series)
+}
+
+export function buildAlphaVantageHistory(entry, series) {
+  // The response carries no currency, so the one the mapper recorded stands.
+  const { currency, divisor } = normaliseCurrency(entry.av?.currency ?? entry.currency)
+
+  const points = []
+  let dividendMonths = 0
+  for (const date of Object.keys(series).sort()) {
+    const row = series[date]
+    const close = Number(row['4. close'])
+    const adjusted = Number(row['5. adjusted close'])
+    if (!Number.isFinite(close) || close <= 0) continue
+    if (Number(row['7. dividend amount']) > 0) dividendMonths++
+    points.push({
+      month: date.slice(0, 7),
+      close: roundPrice(close / divisor),
+      adjclose: roundPrice((Number.isFinite(adjusted) && adjusted > 0 ? adjusted : close) / divisor),
+    })
+  }
+  if (points.length === 0) throw new Error('no usable price history')
+
+  return {
+    symbol: entry.symbol.toUpperCase(),
+    name: entry.name,
+    currency,
+    type: entry.type,
+    points,
+    dividendCount: dividendMonths,
   }
 }
 

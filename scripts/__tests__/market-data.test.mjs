@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import {
+  buildAlphaVantageHistory,
   buildHistory,
   fileNameFor,
   normaliseCurrency,
@@ -130,6 +131,62 @@ describe('buildHistory', () => {
     expect(() => buildHistory(entry(), series([{ datetime: '2024-01-01', close: '0' }]))).toThrow(
       'no usable price history'
     )
+  })
+})
+
+describe('buildAlphaVantageHistory', () => {
+  const series = {
+    '2024-01-31': { '4. close': '100', '5. adjusted close': '98', '7. dividend amount': '0.0000' },
+    '2024-03-28': { '4. close': '120', '5. adjusted close': '120', '7. dividend amount': '1.5000' },
+    '2024-02-29': { '4. close': '110', '5. adjusted close': '109', '7. dividend amount': '0.0000' },
+  }
+
+  it('takes the adjusted close as given rather than reconstructing it', () => {
+    const history = buildAlphaVantageHistory(entry({ av: { symbol: 'X.DEX', currency: 'EUR' } }), series)
+    expect(history.points).toEqual([
+      { month: '2024-01', close: 100, adjclose: 98 },
+      { month: '2024-02', close: 110, adjclose: 109 },
+      { month: '2024-03', close: 120, adjclose: 120 },
+    ])
+  })
+
+  it('sorts by date, since object key order is not a contract', () => {
+    const history = buildAlphaVantageHistory(entry({ av: { symbol: 'X.DEX', currency: 'EUR' } }), series)
+    expect(history.points.map((p) => p.month)).toEqual(['2024-01', '2024-02', '2024-03'])
+  })
+
+  it('counts the months that paid something out', () => {
+    const history = buildAlphaVantageHistory(entry({ av: { symbol: 'X.DEX', currency: 'EUR' } }), series)
+    expect(history.dividendCount).toBe(1)
+  })
+
+  it('converts a London listing from pence to pounds', () => {
+    const history = buildAlphaVantageHistory(
+      entry({ symbol: 'SHEL.L', av: { symbol: 'SHEL.LON', currency: 'GBX' } }),
+      series
+    )
+    expect(history.currency).toBe('GBP')
+    expect(history.points.map((p) => p.close)).toEqual([1, 1.1, 1.2])
+    expect(history.points[0].adjclose).toBe(0.98)
+  })
+
+  it('takes the currency from the mapping, since the response carries none', () => {
+    const history = buildAlphaVantageHistory(
+      entry({ currency: 'EUR', av: { symbol: 'X.LON', currency: 'GBX' } }),
+      series
+    )
+    expect(history.currency).toBe('GBP')
+  })
+
+  it('falls back to close when a row has no usable adjusted value', () => {
+    const history = buildAlphaVantageHistory(entry({ av: { symbol: 'X.DEX', currency: 'EUR' } }), {
+      '2024-01-31': { '4. close': '100', '5. adjusted close': '0', '7. dividend amount': '0' },
+    })
+    expect(history.points[0].adjclose).toBe(100)
+  })
+
+  it('throws on an empty series so the caller can skip the symbol', () => {
+    expect(() => buildAlphaVantageHistory(entry({ av: { symbol: 'X.DEX' } }), {})).toThrow()
   })
 })
 

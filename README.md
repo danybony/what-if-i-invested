@@ -61,11 +61,17 @@ privacy story simple — a visitor's browser never talks to a data provider.
 
 | What | Where | Refreshed |
 |---|---|---|
-| Prices & dividends | [Twelve Data](https://twelvedata.com) (free tier, API key) | daily, by GitHub Actions |
-| Bank rates | [ECB Data Portal](https://data.ecb.europa.eu), series `MIR/M.U2.B.L22.A.R.A.2250.EUR.N` | daily, same run |
+| US prices & dividends | [Twelve Data](https://twelvedata.com) free tier | daily |
+| European prices | [Alpha Vantage](https://www.alphavantage.co) free tier | rotation, ~5 days |
+| Bank rates | [ECB Data Portal](https://data.ecb.europa.eu), series `MIR/M.U2.B.L22.A.R.A.2250.EUR.N` | daily |
 
-The refresh needs a `TWELVEDATA_API_KEY` repository secret. Nothing else needs a key, and the
-published site needs none at all.
+The refresh needs `TWELVEDATA_API_KEY` and `ALPHAVANTAGE_API_KEY` repository secrets. The
+published site needs no key at all — it only ever reads static files.
+
+**Staleness barely matters here.** A symbol's *entire* history is fetched and committed the first
+time it is seen, so the rotation only ever ages the current month. Never-fetched symbols sort as
+infinitely stale and go to the front of the queue, and a failed fetch keeps the last published
+file — so history is never lost once acquired.
 
 ### The published files
 
@@ -86,21 +92,34 @@ than ~200 per visitor. The repo itself becomes the cache — shared by everyone,
 (The ECB does send `Access-Control-Allow-Origin: *`, so it *could* be called from the browser;
 we bake it anyway to keep every request same-origin.)
 
-This started on Yahoo's keyless endpoints and had to move. Yahoo **blanket-blocks datacenter
-IPs**: a GitHub runner gets `429` on its very first request, not after a burst, so no amount of
-pacing helps. It also sends no CORS headers, so the browser was never an option either. Twelve
-Data issues a key and permits automated access, which is the difference that matters.
+This started on Yahoo's keyless endpoints and had to move twice.
 
-Two things had to be rebuilt around that move:
+**Yahoo blanket-blocks datacenter IPs** — a GitHub runner gets `429` on its very first request,
+not after a burst, so no amount of pacing helps. It also sends no CORS headers, so the browser
+was never an option. **Twelve Data's free tier turned out to be US-only**: `VWCE.DE` and `SHEL.L`
+both come back as *"available starting with the Grow plan"*, which is most of what this site is
+for. Its symbol *search* happily lists European venues you cannot then fetch — a trap worth
+knowing about.
 
-- **Adjusted closes.** Twelve Data's prices are split-adjusted but not dividend-adjusted, so
-  `buildHistory()` reconstructs the adjusted series from the dividend record — each payout buys
-  more shares at that month's close — and rebases it so the newest adjusted close equals the
-  newest close. Cross-checked against Yahoo's own adjusted close for AAPL: 25.9279 vs 25.90 at
-  2015-01, a 0.1% difference.
-- **Minor units.** London quotes in pence, and Twelve Data reports that as `GBp` — not a real ISO
-  4217 code, so it throws inside `Intl.NumberFormat`, and taken at face value it would show a UK
-  holding at 100x its worth. Prices and dividends are converted to pounds at the door.
+So the universe is split by provider. Twelve Data covers the 97 US-venue symbols daily; Alpha
+Vantage covers the 107 European ones, and its `TIME_SERIES_MONTHLY_ADJUSTED` is free, carries
+XETRA, Frankfurt, London and Amsterdam, and returns the adjusted close outright. Its ceiling is
+about 25 calls a day, hence the rotation.
+
+Three things had to be handled around all this:
+
+- **Adjusted closes differ by provider.** Alpha Vantage gives them directly. Twelve Data's prices
+  are split-adjusted but not dividend-adjusted, so `buildHistory()` reconstructs the series from
+  the dividend record — each payout buys more shares at that month's close — and rebases it so the
+  newest adjusted close equals the newest close. Cross-checked against Yahoo's own adjusted close
+  for AAPL: 25.9279 against 25.90 at 2015-01, 0.1% apart.
+- **Minor units.** London quotes in pence, reported as `GBp` by Twelve Data and `GBX` by Alpha
+  Vantage. Neither is a real ISO 4217 code, so both throw inside `Intl.NumberFormat`, and taken at
+  face value they would show a UK holding at 100x its worth. Converted to pounds at the door.
+- **Alpha Vantage does not carry Borsa Italiana.** Milan-listed symbols are mapped to their XETRA,
+  Frankfurt or Amsterdam listing in the same currency — the same instruments, quoted on a
+  different venue. Italian names are all cross-listed on XETRA in EUR (Enel is `ENL.DEX`,
+  UniCredit `CRIN.DEX`), so nothing is lost but the venue.
 
 The trade-off is a **curated universe** instead of every ticker on earth, and prices as fresh as
 the last refresh.
@@ -119,12 +138,17 @@ anything ambiguous rather than guessing — picking the wrong row would silently
 backtest's currency.
 
 ```bash
-node scripts/map-symbols.mjs           # dry run, prints what it would resolve
-node scripts/map-symbols.mjs --write   # update the universe file
+node scripts/map-symbols.mjs --write          # Twelve Data ids; needs no key
+node scripts/map-alphavantage.mjs --write     # Alpha Vantage ids; needs a key, resumable
 ```
 
-That script needs no API key. To add a symbol, append it with a `symbol`, `name`, `type`,
-`currency` and `category`, run the mapper, then run the refresh.
+`map-symbols.mjs` needs no API key. `map-alphavantage.mjs` does, and because the daily quota is
+far smaller than the universe it is **resumable**: it skips anything already mapped and stops at
+`--limit`, so it can be run across several days — which is what the workflow does automatically
+until nothing is left to resolve.
+
+To add a symbol, append it with a `symbol`, `name`, `type`, `currency` and `category`, run both
+mappers, then run the refresh.
 
 A symbol Yahoo cannot resolve is **reported and skipped**, not fatal — one dead ticker must not
 cost the other 200. If more than 25% of the universe fails, the run aborts and publishes nothing,
@@ -135,11 +159,11 @@ no data.
 ### Refreshing
 
 ```bash
-export TWELVEDATA_API_KEY=...
-node scripts/fetch-market-data.mjs                       # the whole universe
+export TWELVEDATA_API_KEY=... ALPHAVANTAGE_API_KEY=...
+node scripts/fetch-market-data.mjs                       # US in full, Europe up to the budget
 node scripts/fetch-market-data.mjs --only VWCE.DE,AAPL   # just these
-node scripts/fetch-market-data.mjs --interval 8000       # free tier allows 8 calls/min
-node scripts/fetch-market-data.mjs --dividend-age 0      # force a dividend refetch
+node scripts/fetch-market-data.mjs --alpha-budget 20     # how many European symbols this run
+node scripts/fetch-market-data.mjs --dividend-age 0      # force a Twelve Data dividend refetch
 ```
 
 Dividends move quarterly at best, so a published record younger than 7 days is reused rather
@@ -209,6 +233,7 @@ scripts/
   market-data.mjs       Twelve Data + ECB fetching and normalisation (build-time only)
   fetch-market-data.mjs CLI that writes public/data/
   map-symbols.mjs       resolves tickers to Twelve Data symbol + MIC
+  map-alphavantage.mjs  resolves the European half to Alpha Vantage symbols
 data-source/
   symbol-universe.json  the curated ~200 symbols
 public/data/            the published data, committed and served as-is

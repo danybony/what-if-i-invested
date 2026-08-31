@@ -1,5 +1,5 @@
 {
-  "$comment": "The symbol universe served by the site. Yahoo is the authority on name, currency and exchange — the values here are only hints used before a symbol has been fetched, and are overwritten by scripts/fetch-market-data.mjs. To add a symbol, append it here and run the refresh workflow; a symbol Yahoo cannot resolve is reported and skipped rather than failing the build.",
+  "$comment": "The symbol universe served by the site. Each entry names the provider that carries it: Twelve Data's free tier covers US venues, Alpha Vantage covers XETRA, Frankfurt, London and Amsterdam. Alpha Vantage does not carry Borsa Italiana, so Milan-listed symbols are mapped to their XETRA or Amsterdam listing in the same currency. Add a symbol here, run scripts/map-symbols.mjs to resolve its provider ids, then run scripts/fetch-market-data.mjs.",
   "symbols": [
     {
       "symbol": "VWCE.DE",
@@ -11,6 +11,12 @@
         "symbol": "VWCE",
         "mic": "XETR",
         "exchange": "XETR"
+      },
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VWCE.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
       }
     },
     {
@@ -23,6 +29,12 @@
         "symbol": "VWRL",
         "mic": "XAMS",
         "exchange": "Euronext"
+      },
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VWRL.AMS",
+        "currency": "EUR",
+        "region": "Amsterdam"
       }
     },
     {
@@ -35,6 +47,12 @@
         "symbol": "IWDA",
         "mic": "XAMS",
         "exchange": "Euronext"
+      },
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IWDA.AMS",
+        "currency": "EUR",
+        "region": "Amsterdam"
       }
     },
     {
@@ -47,7 +65,8 @@
         "symbol": "SWDA",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "EUNL.DE",
@@ -59,7 +78,8 @@
         "symbol": "EUNL",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "XDWD.DE",
@@ -71,7 +91,8 @@
         "symbol": "XDWD",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SPPW.DE",
@@ -83,6 +104,12 @@
         "symbol": "SPPW",
         "mic": "XETR",
         "exchange": "XETR"
+      },
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SPFS.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
       }
     },
     {
@@ -95,7 +122,8 @@
         "symbol": "ISAC",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "MWRD.MI",
@@ -107,7 +135,8 @@
         "symbol": "MWRD",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "VHVG.L",
@@ -119,7 +148,8 @@
         "symbol": "VHVG",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "VEVE.L",
@@ -131,7 +161,8 @@
         "symbol": "VEVE",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "WEBN.DE",
@@ -143,7 +174,8 @@
         "symbol": "WEBN",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SPYI.DE",
@@ -155,7 +187,8 @@
         "symbol": "SPYI",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "IMIE.MI",
@@ -167,7 +200,8 @@
         "symbol": "IMIE",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "CSPX.MI",
@@ -179,7 +213,8 @@
         "symbol": "CSPX",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SXR8.DE",
@@ -191,7 +226,8 @@
         "symbol": "SXR8",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "VUSA.AS",
@@ -203,7 +239,8 @@
         "symbol": "VUSA",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "VUAA.DE",
@@ -215,7 +252,8 @@
         "symbol": "VUAA",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SPY5.MI",
@@ -227,7 +265,8 @@
         "symbol": "SPY5",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "EQQQ.AS",
@@ -239,7 +278,8 @@
         "symbol": "EQQQ",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SXRV.DE",
@@ -251,7 +291,8 @@
         "symbol": "SXRV",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "CNDX.L",
@@ -263,7 +304,8 @@
         "symbol": "CNDX",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "XDPU.DE",
@@ -275,7 +317,8 @@
         "symbol": "XDPU",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "IUSA.AS",
@@ -287,7 +330,8 @@
         "symbol": "IUSA",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "EIMI.MI",
@@ -299,7 +343,8 @@
         "symbol": "EIMI",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "IS3N.DE",
@@ -311,7 +356,8 @@
         "symbol": "IS3N",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "VFEM.AS",
@@ -323,7 +369,8 @@
         "symbol": "VFEM",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "XMME.DE",
@@ -335,7 +382,8 @@
         "symbol": "XMME",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "EMIM.AS",
@@ -347,7 +395,8 @@
         "symbol": "EMIM",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "MEUD.PA",
@@ -359,7 +408,8 @@
         "symbol": "MEUD",
         "mic": "XPAR",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "EXSA.DE",
@@ -371,7 +421,8 @@
         "symbol": "EXSA",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "VERX.AS",
@@ -383,7 +434,8 @@
         "symbol": "VERX",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SX5E.MI",
@@ -395,7 +447,8 @@
         "symbol": "SX5E",
         "mic": "XSWX",
         "exchange": "SIX"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "CSX5.DE",
@@ -407,7 +460,8 @@
         "symbol": "CSX5",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "ISF.L",
@@ -419,7 +473,8 @@
         "symbol": "ISF",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "ETFMIB.MI",
@@ -431,7 +486,8 @@
         "symbol": "ETFMIB",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SJPA.DE",
@@ -443,7 +499,8 @@
         "symbol": "SJPA",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "VJPN.AS",
@@ -455,7 +512,8 @@
         "symbol": "VJPN",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "AGGH.MI",
@@ -467,7 +525,8 @@
         "symbol": "AGGH",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "VAGF.DE",
@@ -479,7 +538,8 @@
         "symbol": "VAGF",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "EUNA.DE",
@@ -491,7 +551,8 @@
         "symbol": "EUNA",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "IBGL.AS",
@@ -503,7 +564,8 @@
         "symbol": "IBGL",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "IBTS.L",
@@ -515,7 +577,8 @@
         "symbol": "IBTS",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "IEAC.L",
@@ -527,7 +590,8 @@
         "symbol": "IEAC",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "XGLE.DE",
@@ -539,7 +603,8 @@
         "symbol": "XGLE",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "VGEA.DE",
@@ -551,7 +616,8 @@
         "symbol": "VGEA",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "EUNW.DE",
@@ -563,7 +629,8 @@
         "symbol": "EUNW",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "IHYG.L",
@@ -575,7 +642,8 @@
         "symbol": "IHYG",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "IQQH.DE",
@@ -587,7 +655,8 @@
         "symbol": "IQQH",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "XAIX.DE",
@@ -599,7 +668,8 @@
         "symbol": "XAIX",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "WTEC.DE",
@@ -611,7 +681,8 @@
         "symbol": "WTEC",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "HEAL.DE",
@@ -623,7 +694,8 @@
         "symbol": "HEAL",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "ESIT.MI",
@@ -635,7 +707,8 @@
         "symbol": "ESIT",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SGLD.MI",
@@ -647,7 +720,8 @@
         "symbol": "SGLD",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "IGLN.L",
@@ -659,7 +733,8 @@
         "symbol": "IGLN",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "PPFB.DE",
@@ -671,7 +746,8 @@
         "symbol": "PPFB",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SPY",
@@ -683,7 +759,8 @@
         "symbol": "SPY",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "VOO",
@@ -695,7 +772,8 @@
         "symbol": "VOO",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "IVV",
@@ -707,7 +785,8 @@
         "symbol": "IVV",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "VTI",
@@ -719,7 +798,8 @@
         "symbol": "VTI",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "QQQ",
@@ -731,7 +811,8 @@
         "symbol": "QQQ",
         "mic": "XNMS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "VXUS",
@@ -743,7 +824,8 @@
         "symbol": "VXUS",
         "mic": "XNMS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "VEA",
@@ -755,7 +837,8 @@
         "symbol": "VEA",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "VWO",
@@ -767,7 +850,8 @@
         "symbol": "VWO",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "VT",
@@ -779,7 +863,8 @@
         "symbol": "VT",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "BND",
@@ -791,7 +876,8 @@
         "symbol": "BND",
         "mic": "XNMS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "AGG",
@@ -803,7 +889,8 @@
         "symbol": "AGG",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "SCHD",
@@ -815,7 +902,8 @@
         "symbol": "SCHD",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "VIG",
@@ -827,7 +915,8 @@
         "symbol": "VIG",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "VYM",
@@ -839,7 +928,8 @@
         "symbol": "VYM",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "IWM",
@@ -851,7 +941,8 @@
         "symbol": "IWM",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "DIA",
@@ -863,7 +954,8 @@
         "symbol": "DIA",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "ARKK",
@@ -875,7 +967,8 @@
         "symbol": "ARKK",
         "mic": "BATS",
         "exchange": "CBOE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "GLD",
@@ -887,7 +980,8 @@
         "symbol": "GLD",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "SLV",
@@ -899,7 +993,8 @@
         "symbol": "SLV",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "TLT",
@@ -911,7 +1006,8 @@
         "symbol": "TLT",
         "mic": "XNMS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "XLK",
@@ -923,7 +1019,8 @@
         "symbol": "XLK",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "XLF",
@@ -935,7 +1032,8 @@
         "symbol": "XLF",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "XLE",
@@ -947,7 +1045,8 @@
         "symbol": "XLE",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "XLV",
@@ -959,7 +1058,8 @@
         "symbol": "XLV",
         "mic": "ARCX",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "SMH",
@@ -971,7 +1071,8 @@
         "symbol": "SMH",
         "mic": "XNMS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "AAPL",
@@ -983,7 +1084,8 @@
         "symbol": "AAPL",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "MSFT",
@@ -995,7 +1097,8 @@
         "symbol": "MSFT",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "GOOGL",
@@ -1007,7 +1110,8 @@
         "symbol": "GOOGL",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "AMZN",
@@ -1019,7 +1123,8 @@
         "symbol": "AMZN",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "NVDA",
@@ -1031,7 +1136,8 @@
         "symbol": "NVDA",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "META",
@@ -1043,7 +1149,8 @@
         "symbol": "META",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "TSLA",
@@ -1055,7 +1162,8 @@
         "symbol": "TSLA",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "BRK-B",
@@ -1067,7 +1175,8 @@
         "symbol": "BRK.B",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "JPM",
@@ -1079,7 +1188,8 @@
         "symbol": "JPM",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "V",
@@ -1091,7 +1201,8 @@
         "symbol": "V",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "MA",
@@ -1103,7 +1214,8 @@
         "symbol": "MA",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "UNH",
@@ -1115,7 +1227,8 @@
         "symbol": "UNH",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "JNJ",
@@ -1127,7 +1240,8 @@
         "symbol": "JNJ",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "XOM",
@@ -1139,7 +1253,8 @@
         "symbol": "XOM",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "PG",
@@ -1151,7 +1266,8 @@
         "symbol": "PG",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "HD",
@@ -1163,7 +1279,8 @@
         "symbol": "HD",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "COST",
@@ -1175,7 +1292,8 @@
         "symbol": "COST",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "WMT",
@@ -1187,7 +1305,8 @@
         "symbol": "WMT",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "KO",
@@ -1199,7 +1318,8 @@
         "symbol": "KO",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "PEP",
@@ -1211,7 +1331,8 @@
         "symbol": "PEP",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "AVGO",
@@ -1223,7 +1344,8 @@
         "symbol": "AVGO",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "AMD",
@@ -1235,7 +1357,8 @@
         "symbol": "AMD",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "INTC",
@@ -1247,7 +1370,8 @@
         "symbol": "INTC",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "CRM",
@@ -1259,7 +1383,8 @@
         "symbol": "CRM",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "ADBE",
@@ -1271,7 +1396,8 @@
         "symbol": "ADBE",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "NFLX",
@@ -1283,7 +1409,8 @@
         "symbol": "NFLX",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "DIS",
@@ -1295,7 +1422,8 @@
         "symbol": "DIS",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "CSCO",
@@ -1307,7 +1435,8 @@
         "symbol": "CSCO",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "ORCL",
@@ -1319,7 +1448,8 @@
         "symbol": "ORCL",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "IBM",
@@ -1331,7 +1461,8 @@
         "symbol": "IBM",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "QCOM",
@@ -1343,7 +1474,8 @@
         "symbol": "QCOM",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "TXN",
@@ -1355,7 +1487,8 @@
         "symbol": "TXN",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "PYPL",
@@ -1367,7 +1500,8 @@
         "symbol": "PYPL",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "BAC",
@@ -1379,7 +1513,8 @@
         "symbol": "BAC",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "WFC",
@@ -1391,7 +1526,8 @@
         "symbol": "WFC",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "GS",
@@ -1403,7 +1539,8 @@
         "symbol": "GS",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "MS",
@@ -1415,7 +1552,8 @@
         "symbol": "MS",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "CVX",
@@ -1427,7 +1565,8 @@
         "symbol": "CVX",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "PFE",
@@ -1439,7 +1578,8 @@
         "symbol": "PFE",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "MRK",
@@ -1451,7 +1591,8 @@
         "symbol": "MRK",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "ABBV",
@@ -1463,7 +1604,8 @@
         "symbol": "ABBV",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "LLY",
@@ -1475,7 +1617,8 @@
         "symbol": "LLY",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "TMO",
@@ -1487,7 +1630,8 @@
         "symbol": "TMO",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "MCD",
@@ -1499,7 +1643,8 @@
         "symbol": "MCD",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "NKE",
@@ -1511,7 +1656,8 @@
         "symbol": "NKE",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "SBUX",
@@ -1523,7 +1669,8 @@
         "symbol": "SBUX",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "BA",
@@ -1535,7 +1682,8 @@
         "symbol": "BA",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "CAT",
@@ -1547,7 +1695,8 @@
         "symbol": "CAT",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "GE",
@@ -1559,7 +1708,8 @@
         "symbol": "GE",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "UBER",
@@ -1571,7 +1721,8 @@
         "symbol": "UBER",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "ABNB",
@@ -1583,7 +1734,8 @@
         "symbol": "ABNB",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "COIN",
@@ -1595,7 +1747,8 @@
         "symbol": "COIN",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "PLTR",
@@ -1607,7 +1760,8 @@
         "symbol": "PLTR",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "SHOP",
@@ -1619,7 +1773,8 @@
         "symbol": "SHOP",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "SQ",
@@ -1631,7 +1786,8 @@
         "symbol": "SQ",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "T",
@@ -1643,7 +1799,8 @@
         "symbol": "T",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "VZ",
@@ -1655,7 +1812,8 @@
         "symbol": "VZ",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "MU",
@@ -1667,7 +1825,8 @@
         "symbol": "MU",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "MRNA",
@@ -1679,7 +1838,8 @@
         "symbol": "MRNA",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "F",
@@ -1691,7 +1851,8 @@
         "symbol": "F",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "GM",
@@ -1703,7 +1864,8 @@
         "symbol": "GM",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "DE",
@@ -1715,7 +1877,8 @@
         "symbol": "DE",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "LMT",
@@ -1727,7 +1890,8 @@
         "symbol": "LMT",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "RTX",
@@ -1739,7 +1903,8 @@
         "symbol": "RTX",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "HON",
@@ -1751,7 +1916,8 @@
         "symbol": "HON",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "AXP",
@@ -1763,7 +1929,8 @@
         "symbol": "AXP",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "BLK",
@@ -1775,7 +1942,8 @@
         "symbol": "BLK",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "SPGI",
@@ -1787,7 +1955,8 @@
         "symbol": "SPGI",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "NOW",
@@ -1799,7 +1968,8 @@
         "symbol": "NOW",
         "mic": "XNYS",
         "exchange": "NYSE"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "INTU",
@@ -1811,7 +1981,8 @@
         "symbol": "INTU",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "AMAT",
@@ -1823,7 +1994,8 @@
         "symbol": "AMAT",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "BKNG",
@@ -1835,7 +2007,8 @@
         "symbol": "BKNG",
         "mic": "XNGS",
         "exchange": "NASDAQ"
-      }
+      },
+      "provider": "twelvedata"
     },
     {
       "symbol": "ASML.AS",
@@ -1847,7 +2020,8 @@
         "symbol": "ASML",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SAP.DE",
@@ -1859,7 +2033,8 @@
         "symbol": "SAP",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SIE.DE",
@@ -1871,7 +2046,8 @@
         "symbol": "SIE",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "ALV.DE",
@@ -1883,7 +2059,8 @@
         "symbol": "ALV",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "BAS.DE",
@@ -1895,7 +2072,8 @@
         "symbol": "BAS",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "BMW.DE",
@@ -1907,7 +2085,8 @@
         "symbol": "BMW",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "MBG.DE",
@@ -1919,7 +2098,8 @@
         "symbol": "MBG",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "VOW3.DE",
@@ -1931,7 +2111,8 @@
         "symbol": "VOW3",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "DTE.DE",
@@ -1943,7 +2124,8 @@
         "symbol": "DTE",
         "mic": "XETR",
         "exchange": "XETR"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "AIR.PA",
@@ -1955,7 +2137,8 @@
         "symbol": "AIR",
         "mic": "XPAR",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "MC.PA",
@@ -1967,7 +2150,8 @@
         "symbol": "MC",
         "mic": "XPAR",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "OR.PA",
@@ -1979,7 +2163,8 @@
         "symbol": "OR",
         "mic": "XPAR",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "TTE.PA",
@@ -1991,7 +2176,8 @@
         "symbol": "TTE",
         "mic": "XPAR",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SAN.PA",
@@ -2003,7 +2189,8 @@
         "symbol": "SAN",
         "mic": "XPAR",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "BNP.PA",
@@ -2015,7 +2202,8 @@
         "symbol": "BNP",
         "mic": "XPAR",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "RMS.PA",
@@ -2027,7 +2215,8 @@
         "symbol": "RMS",
         "mic": "XPAR",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "NESN.SW",
@@ -2039,7 +2228,8 @@
         "symbol": "NESN",
         "mic": "XSWX",
         "exchange": "SIX"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "NOVN.SW",
@@ -2051,7 +2241,8 @@
         "symbol": "NOVN",
         "mic": "XSWX",
         "exchange": "SIX"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "UBSG.SW",
@@ -2063,7 +2254,8 @@
         "symbol": "UBSG",
         "mic": "XSWX",
         "exchange": "SIX"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "ENEL.MI",
@@ -2075,7 +2267,8 @@
         "symbol": "ENEL",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "ENI.MI",
@@ -2087,7 +2280,8 @@
         "symbol": "ENI",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "ISP.MI",
@@ -2099,7 +2293,8 @@
         "symbol": "ISP",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "UCG.MI",
@@ -2111,7 +2306,8 @@
         "symbol": "UCG",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "RACE.MI",
@@ -2123,7 +2319,8 @@
         "symbol": "RACE",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "STLAM.MI",
@@ -2135,7 +2332,8 @@
         "symbol": "STLAM",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "G.MI",
@@ -2147,7 +2345,8 @@
         "symbol": "G",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "TIT.MI",
@@ -2159,7 +2358,8 @@
         "symbol": "TIT",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "MONC.MI",
@@ -2171,7 +2371,8 @@
         "symbol": "MONC",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "PST.MI",
@@ -2183,7 +2384,8 @@
         "symbol": "PST",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "PRY.MI",
@@ -2195,7 +2397,8 @@
         "symbol": "PRY",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "LDO.MI",
@@ -2207,7 +2410,8 @@
         "symbol": "LDO",
         "mic": "XMIL",
         "exchange": "MTA"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SHEL.L",
@@ -2219,7 +2423,8 @@
         "symbol": "SHEL",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "AZN.L",
@@ -2231,7 +2436,8 @@
         "symbol": "AZN",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "HSBA.L",
@@ -2243,7 +2449,8 @@
         "symbol": "HSBA",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "ULVR.L",
@@ -2255,7 +2462,8 @@
         "symbol": "ULVR",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "BP.L",
@@ -2267,7 +2475,8 @@
         "symbol": "BP",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "GSK.L",
@@ -2279,7 +2488,8 @@
         "symbol": "GSK",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "RIO.L",
@@ -2291,7 +2501,8 @@
         "symbol": "RIO",
         "mic": "XLON",
         "exchange": "LSE"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "NOVO-B.CO",
@@ -2303,7 +2514,8 @@
         "symbol": "NOVO.B",
         "mic": "XCSE",
         "exchange": "OMXC"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "INGA.AS",
@@ -2315,7 +2527,8 @@
         "symbol": "INGA",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "PHIA.AS",
@@ -2327,7 +2540,8 @@
         "symbol": "PHIA",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "AD.AS",
@@ -2339,7 +2553,8 @@
         "symbol": "AD",
         "mic": "XAMS",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "ITX.MC",
@@ -2351,7 +2566,8 @@
         "symbol": "ITX",
         "mic": "XMAD",
         "exchange": "BME"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "SAN.MC",
@@ -2363,7 +2579,8 @@
         "symbol": "SAN",
         "mic": "XMAD",
         "exchange": "BME"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "IBE.MC",
@@ -2375,7 +2592,8 @@
         "symbol": "IBE",
         "mic": "XMAD",
         "exchange": "BME"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "ABI.BR",
@@ -2387,7 +2605,8 @@
         "symbol": "ABI",
         "mic": "XBRU",
         "exchange": "Euronext"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "NDA-FI.HE",
@@ -2399,7 +2618,8 @@
         "symbol": "NDA.FI",
         "mic": "XHEL",
         "exchange": "OMXH"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "NOKIA.HE",
@@ -2411,7 +2631,8 @@
         "symbol": "NOKIA",
         "mic": "XHEL",
         "exchange": "OMXH"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "ERIC-B.ST",
@@ -2423,7 +2644,8 @@
         "symbol": "ERIC.B",
         "mic": "XSTO",
         "exchange": "OMX"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "VOLV-B.ST",
@@ -2435,7 +2657,8 @@
         "symbol": "VOLV.B",
         "mic": "XSTO",
         "exchange": "OMX"
-      }
+      },
+      "provider": "alphavantage"
     },
     {
       "symbol": "EQNR.OL",
@@ -2447,7 +2670,8 @@
         "symbol": "EQNR",
         "mic": "XOSL",
         "exchange": "OSE"
-      }
+      },
+      "provider": "alphavantage"
     }
   ]
 }
