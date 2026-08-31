@@ -6,8 +6,9 @@ import { ResultChart, type ChartDatum } from '@/components/ResultChart'
 import { YearTable, type YearRow } from '@/components/YearTable'
 import { Callout, Card, Field, NumberInput, Select } from '@/components/ui'
 import { CURRENCIES, formatPercent } from '@/lib/format'
+import { useCalculatorState } from '@/components/CalculatorState'
 import { loadRates } from '@/lib/marketData'
-import { DEFAULT_BASIC_FORM, RATE_PRESETS, type BasicFormState } from '@/lib/presets'
+import { RATE_PRESETS } from '@/lib/presets'
 import {
   COMPOUND_LABELS,
   CONTRIBUTION_LABELS,
@@ -26,11 +27,8 @@ const contributionOptions = (Object.keys(CONTRIBUTION_LABELS) as ContributionFre
 )
 
 export default function BasicModePage() {
-  const [form, setForm] = useState<BasicFormState>(DEFAULT_BASIC_FORM)
+  const { shared, setShared, basic, setBasic, setRateAndVariance } = useCalculatorState()
   const [ecbRate, setEcbRate] = useState<{ month: string; rate: number } | null>(null)
-
-  const update = <K extends keyof BasicFormState>(key: K, value: BasicFormState[K]) =>
-    setForm((previous) => ({ ...previous, [key]: value }))
 
   // Offered as a one-click fill, not applied automatically — the default stays
   // 0%, which is what most euro-area current accounts actually pay.
@@ -49,16 +47,16 @@ export default function BasicModePage() {
   const result = useMemo(
     () =>
       project({
-        initial: form.initial,
-        contribution: form.contribution,
-        contributionFrequency: form.contributionFrequency,
-        years: form.years,
-        rate: form.rate,
-        variance: form.variance,
-        compoundFrequency: form.compoundFrequency,
-        bank: { mode: 'fixed', rate: form.bankRate },
+        initial: shared.initial,
+        contribution: shared.contribution,
+        contributionFrequency: shared.contributionFrequency,
+        years: basic.years,
+        rate: basic.rate,
+        variance: basic.variance,
+        compoundFrequency: basic.compoundFrequency,
+        bank: { mode: 'fixed', rate: shared.bankRate },
       }),
-    [form]
+    [shared, basic]
   )
 
   const chartData: ChartDatum[] = useMemo(
@@ -88,9 +86,9 @@ export default function BasicModePage() {
     [result]
   )
 
-  const showBand = form.variance > 0
+  const showBand = basic.variance > 0
   const activePreset = RATE_PRESETS.find(
-    (preset) => preset.rate === form.rate && preset.variance === form.variance
+    (preset) => preset.rate === basic.rate && preset.variance === basic.variance
   )
 
   return (
@@ -111,8 +109,8 @@ export default function BasicModePage() {
             <div className="space-y-3">
               <Field label="Initial investment">
                 <NumberInput
-                  value={form.initial}
-                  onChange={(value) => update('initial', value)}
+                  value={shared.initial}
+                  onChange={(value) => setShared('initial', value)}
                   prefix="€"
                   min={0}
                   ariaLabel="Initial investment"
@@ -121,8 +119,8 @@ export default function BasicModePage() {
               <div className="grid grid-cols-2 gap-3">
                 <Field label="Contribution">
                   <NumberInput
-                    value={form.contribution}
-                    onChange={(value) => update('contribution', value)}
+                    value={shared.contribution}
+                    onChange={(value) => setShared('contribution', value)}
                     prefix="€"
                     min={0}
                     ariaLabel="Recurring contribution"
@@ -130,8 +128,8 @@ export default function BasicModePage() {
                 </Field>
                 <Field label="How often">
                   <Select
-                    value={form.contributionFrequency}
-                    onChange={(value) => update('contributionFrequency', value)}
+                    value={shared.contributionFrequency}
+                    onChange={(value) => setShared('contributionFrequency', value)}
                     options={contributionOptions}
                     ariaLabel="Contribution frequency"
                   />
@@ -139,8 +137,8 @@ export default function BasicModePage() {
               </div>
               <Field label="Length of time" hint="Contributions are added at the end of each period.">
                 <NumberInput
-                  value={form.years}
-                  onChange={(value) => update('years', Math.max(1, Math.min(60, value)))}
+                  value={basic.years}
+                  onChange={(value) => setBasic('years', Math.max(1, Math.min(60, value)))}
                   suffix="yrs"
                   min={1}
                   max={60}
@@ -149,8 +147,8 @@ export default function BasicModePage() {
               </Field>
               <Field label="Currency">
                 <Select
-                  value={form.currency}
-                  onChange={(value) => update('currency', value)}
+                  value={basic.currency}
+                  onChange={(value) => setBasic('currency', value)}
                   options={CURRENCIES.map((code) => ({ value: code, label: code }))}
                   ariaLabel="Currency"
                 />
@@ -171,13 +169,7 @@ export default function BasicModePage() {
                       key={preset.id}
                       type="button"
                       title={preset.note}
-                      onClick={() =>
-                        setForm((previous) => ({
-                          ...previous,
-                          rate: preset.rate,
-                          variance: preset.variance,
-                        }))
-                      }
+                      onClick={() => setRateAndVariance(preset.rate, preset.variance)}
                       className={`rounded-full border px-2.5 py-1 text-[11px] transition-colors ${
                         isActive
                           ? 'border-transparent bg-invest text-white'
@@ -193,8 +185,8 @@ export default function BasicModePage() {
               <div className="grid grid-cols-2 gap-3">
                 <Field label="Estimated interest rate">
                   <NumberInput
-                    value={round(form.rate * 100)}
-                    onChange={(value) => update('rate', value / 100)}
+                    value={round(basic.rate * 100)}
+                    onChange={(value) => setBasic('rate', value / 100)}
                     suffix="%"
                     step={0.1}
                     ariaLabel="Estimated interest rate"
@@ -202,8 +194,8 @@ export default function BasicModePage() {
                 </Field>
                 <Field label="Variance range">
                   <NumberInput
-                    value={round(form.variance * 100)}
-                    onChange={(value) => update('variance', Math.max(0, value) / 100)}
+                    value={round(basic.variance * 100)}
+                    onChange={(value) => setBasic('variance', Math.max(0, value) / 100)}
                     prefix="±"
                     suffix="%"
                     step={0.1}
@@ -226,8 +218,8 @@ export default function BasicModePage() {
 
               <Field label="Compound frequency">
                 <Select
-                  value={form.compoundFrequency}
-                  onChange={(value) => update('compoundFrequency', value)}
+                  value={basic.compoundFrequency}
+                  onChange={(value) => setBasic('compoundFrequency', value)}
                   options={compoundOptions}
                   ariaLabel="Compound frequency"
                 />
@@ -241,8 +233,8 @@ export default function BasicModePage() {
           >
             <Field label="Savings rate">
               <NumberInput
-                value={round(form.bankRate * 100)}
-                onChange={(value) => update('bankRate', value / 100)}
+                value={round(shared.bankRate * 100)}
+                onChange={(value) => setShared('bankRate', value / 100)}
                 suffix="%"
                 step={0.1}
                 min={0}
@@ -252,7 +244,7 @@ export default function BasicModePage() {
             {ecbRate && (
               <button
                 type="button"
-                onClick={() => update('bankRate', ecbRate.rate)}
+                onClick={() => setShared('bankRate', ecbRate.rate)}
                 className="mt-2 text-[11px] text-invest underline underline-offset-2 hover:no-underline"
               >
                 Use the current euro-area deposit rate ({formatPercent(ecbRate.rate, 2)})
@@ -263,12 +255,12 @@ export default function BasicModePage() {
 
         <div className="min-w-0 space-y-4">
           <DeltaCards
-            currency={form.currency}
+            currency={basic.currency}
             invested={result.finalAverage}
             bank={result.finalBank}
             paidIn={result.totalContributed}
-            investedLabel={`Invested at ${formatPercent(form.rate)}`}
-            bankLabel={`In the bank at ${formatPercent(form.bankRate, 2)}`}
+            investedLabel={`Invested at ${formatPercent(basic.rate)}`}
+            bankLabel={`In the bank at ${formatPercent(shared.bankRate, 2)}`}
             gapRange={
               showBand ? { worst: result.gapWorst, best: result.gapBest } : undefined
             }
@@ -277,14 +269,14 @@ export default function BasicModePage() {
           <Card>
             <ResultChart
               data={chartData}
-              currency={form.currency}
-              mainLabel={`Invested at ${formatPercent(form.rate)}`}
+              currency={basic.currency}
+              mainLabel={`Invested at ${formatPercent(basic.rate)}`}
               bankLabel="In the bank"
               showBand={showBand}
             />
           </Card>
 
-          {form.bankRate === 0 && (
+          {shared.bankRate === 0 && (
             <Callout>
               With a 0% savings rate the bank line is simply the money you paid in — every euro of
               the difference is compounding you did not get.
@@ -294,7 +286,7 @@ export default function BasicModePage() {
           <Card title="Year by year">
             <YearTable
               rows={tableRows}
-              currency={form.currency}
+              currency={basic.currency}
               mainLabel="Invested"
               bankLabel="In the bank"
               showBand={showBand}

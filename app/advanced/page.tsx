@@ -9,6 +9,7 @@ import { Callout, Card, Field, NumberInput, Select, Toggle } from '@/components/
 import { backtest, type BankConfigInput } from '@/lib/backtest'
 import { formatMonth, formatPercent } from '@/lib/format'
 import { loadHistory, loadRates, type SymbolEntry } from '@/lib/marketData'
+import { useCalculatorState } from '@/components/CalculatorState'
 import { CONTRIBUTION_LABELS, type ContributionFrequency } from '@/lib/projection'
 
 const contributionOptions = (Object.keys(CONTRIBUTION_LABELS) as ContributionFrequency[]).map(
@@ -22,19 +23,12 @@ function monthsAgo(count: number): string {
 }
 
 export default function AdvancedModePage() {
-  const [holdings, setHoldings] = useState<PortfolioHolding[]>([])
+  const { shared, setShared, advanced, setAdvanced, updateHoldings } = useCalculatorState()
+  const { holdings, startMonth, useHistoricalRates, reinvestDividends } = advanced
+  const { initial, contribution, contributionFrequency, bankRate } = shared
+
   const [pending, setPending] = useState<string[]>([])
   const [loadError, setLoadError] = useState<string | null>(null)
-
-  const [initial, setInitial] = useState(10_000)
-  const [contribution, setContribution] = useState(300)
-  const [contributionFrequency, setContributionFrequency] =
-    useState<ContributionFrequency>('monthly')
-  const [startMonth, setStartMonth] = useState(() => monthsAgo(120))
-  const [bankRate, setBankRate] = useState(0)
-  const [useHistoricalRates, setUseHistoricalRates] = useState(false)
-  const [reinvestDividends, setReinvestDividends] = useState(false)
-
   const [ecbRates, setEcbRates] = useState<Record<string, number> | null>(null)
 
   useEffect(() => {
@@ -59,7 +53,7 @@ export default function AdvancedModePage() {
       try {
         const history = await loadHistory(entry)
 
-        setHoldings((previous) => {
+        updateHoldings((previous) => {
           const next: PortfolioHolding[] = [
             ...previous,
             {
@@ -84,19 +78,19 @@ export default function AdvancedModePage() {
         setPending((previous) => previous.filter((item) => item !== symbol))
       }
     },
-    [holdings, pending]
+    [holdings, pending, updateHoldings]
   )
 
   const removeHolding = (symbol: string) =>
-    setHoldings((previous) => previous.filter((holding) => holding.symbol !== symbol))
+    updateHoldings((previous) => previous.filter((holding) => holding.symbol !== symbol))
 
   const setWeight = (symbol: string, weight: number) =>
-    setHoldings((previous) =>
+    updateHoldings((previous) =>
       previous.map((holding) => (holding.symbol === symbol ? { ...holding, weight } : holding))
     )
 
   const evenSplit = () =>
-    setHoldings((previous) => {
+    updateHoldings((previous) => {
       const even = Math.round((100 / previous.length) * 10) / 10
       return previous.map((holding, index) => ({
         ...holding,
@@ -190,18 +184,24 @@ export default function AdvancedModePage() {
                   className="field"
                   value={startMonth}
                   max={monthsAgo(1)}
-                  onChange={(event) => setStartMonth(event.target.value)}
+                  onChange={(event) => setAdvanced('startMonth', event.target.value)}
                   aria-label="Start month"
                 />
               </Field>
               <Field label="Initial investment">
-                <NumberInput value={initial} onChange={setInitial} prefix="€" min={0} ariaLabel="Initial investment" />
+                <NumberInput
+                  value={initial}
+                  onChange={(next) => setShared('initial', next)}
+                  prefix="€"
+                  min={0}
+                  ariaLabel="Initial investment"
+                />
               </Field>
               <div className="grid grid-cols-2 gap-3">
                 <Field label="Contribution">
                   <NumberInput
                     value={contribution}
-                    onChange={setContribution}
+                    onChange={(next) => setShared('contribution', next)}
                     prefix="€"
                     min={0}
                     ariaLabel="Recurring contribution"
@@ -210,7 +210,7 @@ export default function AdvancedModePage() {
                 <Field label="How often">
                   <Select
                     value={contributionFrequency}
-                    onChange={setContributionFrequency}
+                    onChange={(next) => setShared('contributionFrequency', next)}
                     options={contributionOptions}
                     ariaLabel="Contribution frequency"
                   />
@@ -218,7 +218,7 @@ export default function AdvancedModePage() {
               </div>
               <Toggle
                 checked={reinvestDividends}
-                onChange={setReinvestDividends}
+                onChange={(next) => setAdvanced('reinvestDividends', next)}
                 label="Reinvest dividends"
                 hint="Off means price return only. On uses adjusted closes, so payouts are bought back in — the fair comparison for a distributing fund."
               />
@@ -230,7 +230,7 @@ export default function AdvancedModePage() {
               <Field label="Savings rate">
                 <NumberInput
                   value={Math.round(bankRate * 100 * 1000) / 1000}
-                  onChange={(value) => setBankRate(value / 100)}
+                  onChange={(value) => setShared('bankRate', value / 100)}
                   suffix="%"
                   step={0.1}
                   min={0}
@@ -239,7 +239,7 @@ export default function AdvancedModePage() {
               </Field>
               <Toggle
                 checked={useHistoricalRates}
-                onChange={setUseHistoricalRates}
+                onChange={(next) => setAdvanced('useHistoricalRates', next)}
                 label="Use real historical ECB rates"
                 hint={
                   ecbRates
