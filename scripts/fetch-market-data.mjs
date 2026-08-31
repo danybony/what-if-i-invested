@@ -2,100 +2,215 @@
 /**
  * Refresh the static market data the site is built on.
  *
- *   node scripts/fetch-market-data.mjs [--only VWCE.DE,AAPL] [--delay 1500]
+ *   TWELVEDATA_API_KEY=... node scripts/fetch-market-data.mjs [options]
+ *
+ *   --only VWCE.DE,AAPL   refresh just these
+ *   --interval 8000       minimum ms between API calls (free tier: 8/min)
+ *   --dividend-age 7      refetch dividends older than N days (0 = always)
  *
  * Reads the curated universe in data-source/symbol-universe.json, fetches each
- * symbol's full monthly history from Yahoo plus the ECB deposit-rate series,
- * and writes them into public/data/ as plain JSON that GitHub Pages can serve.
+ * symbol's monthly history plus the ECB deposit-rate series, and writes them
+ * into public/data/ as plain JSON that GitHub Pages serves directly.
  *
- * Yahoo rate-limits an IP hard, so requests are spaced out and retried, and a
- * symbol that fails is reported and skipped rather than failing the run — one
- * dead ticker must not cost us the other two hundred. Existing files for failed
- * symbols are left in place, so a bad run degrades to stale data, never to no
- * data.
+ * A symbol that fails is reported and skipped rather than failing the run — one
+ * dead ticker must not cost us the other two hundred — and it keeps whatever was
+ * last published, so a bad run degrades to stale data, never to no data. If more
+ * than a quarter of the universe fails, that is an upstream outage rather than
+ * bad tickers, and nothing is published at all.
  */
 
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { fetchEcbRates, fetchYahooHistory, fileNameFor, sleep } from './market-data.mjs'
+import {
+  buildHistory,
+  fetchAlphaVantageHistory,
+  fetchDividends,
+  fetchEcbRates,
+  fetchTimeSeries,
+  fileNameFor,
+} from './market-data.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const UNIVERSE_FILE = join(ROOT, 'data-source', 'symbol-universe.json')
 const DATA_DIR = join(ROOT, 'public', 'data')
 const PRICES_DIR = join(DATA_DIR, 'prices')
 
-/** Abort if more than this share of the universe fails — that is a real outage. */
 const FAILURE_BUDGET = 0.25
 
 function parseArgs(argv) {
-  const args = { only: null, delayMs: 1500 }
+  const args = { only: null, minIntervalMs: 8000, dividendMaxAgeDays: 7, alphaBudget: 20 }
   for (let i = 0; i < argv.length; i++) {
-    if (argv[i] === '--only') args.only = new Set(argv[++i].split(',').map((s) => s.trim().toUpperCase()))
-    else if (argv[i] === '--delay') args.delayMs = Number(argv[++i])
+    if (argv[i] === '--only') {
+      args.only = new Set(argv[++i].split(',').map((s) => s.trim().toUpperCase()))
+    } else if (argv[i] === '--interval') args.minIntervalMs = Number(argv[++i])
+    else if (argv[i] === '--dividend-age') args.dividendMaxAgeDays = Number(argv[++i])
+    else if (argv[i] === '--alpha-budget') args.alphaBudget = Number(argv[++i])
   }
   return args
 }
 
-async function readExistingSymbols() {
+async function readJson(path, fallback) {
   try {
-    const parsed = JSON.parse(await readFile(join(DATA_DIR, 'symbols.json'), 'utf8'))
-    return new Map(parsed.symbols.map((entry) => [entry.symbol, entry]))
+    return JSON.parse(await readFile(path, 'utf8'))
   } catch {
-    return new Map()
+    return fallback
   }
 }
 
 async function main() {
+  const apiKey = process.env.TWELVEDATA_API_KEY
+  const alphaKey = process.env.ALPHAVANTAGE_API_KEY
+  if (!apiKey) throw new Error('TWELVEDATA_API_KEY is not set')
+  if (!alphaKey) throw new Error('ALPHAVANTAGE_API_KEY is not set')
+
   const args = parseArgs(process.argv.slice(2))
   const universe = JSON.parse(await readFile(UNIVERSE_FILE, 'utf8')).symbols
-  const wanted = args.only ? universe.filter((s) => args.only.has(s.symbol.toUpperCase())) : universe
+  const wanted = args.only
+    ? universe.filter((s) => args.only.has(s.symbol.toUpperCase()))
+    : universe
 
   await mkdir(PRICES_DIR, { recursive: true })
-  const existing = await readExistingSymbols()
+  const previousIndex = await readJson(join(DATA_DIR, 'symbols.json'), { symbols: [] })
+  const existing = new Map(previousIndex.symbols.map((entry) => [entry.symbol, entry]))
 
-  console.log(`Refreshing ${wanted.length} of ${universe.length} symbols (${args.delayMs}ms apart)\n`)
+  /**
+   * Twelve Data's quota comfortably covers its whole US slice every day.
+   * Alpha Vantage's ~25 calls a day does not cover its 107, so it takes the
+   * stalest first — a rotation that needs no cursor file and heals itself, since
+   * anything that fails simply stays stale and comes back to the front.
+   */
+  const mapped = wanted.filter((entry) =>
+    entry.provider === 'alphavantage' ? Boolean(entry.av) : Boolean(entry.td)
+  )
+  const unmapped = wanted.filter((entry) => !mapped.includes(entry))
+
+  const staleness = new Map()
+  for (const entry of mapped) {
+    const published = await readJson(join(PRICES_DIR, fileNameFor(entry.symbol)), null)
+    staleness.set(entry.symbol, published?.fetchedAt ? Date.parse(published.fetchedAt) : 0)
+  }
+
+  const twelve = mapped.filter((entry) => entry.provider !== 'alphavantage')
+  const alpha = mapped
+    .filter((entry) => entry.provider === 'alphavantage')
+    .sort((a, b) => staleness.get(a.symbol) - staleness.get(b.symbol))
+    .slice(0, args.alphaBudget)
+
+  const queue = [...twelve, ...alpha]
+
+  if (unmapped.length > 0) {
+    console.log(
+      `${unmapped.length} symbol(s) are not mapped to a provider yet and are skipped ` +
+        `(run scripts/map-symbols.mjs / map-alphavantage.mjs).\n`
+    )
+  }
+  console.log(
+    `Twelve Data: ${twelve.length} symbol(s). ` +
+      `Alpha Vantage: ${alpha.length} of ` +
+      `${mapped.filter((e) => e.provider === 'alphavantage').length} (stalest first).\n`
+  )
+
+  const options = { apiKey, minIntervalMs: args.minIntervalMs }
+  const dividendCutoff = Date.now() - args.dividendMaxAgeDays * 24 * 60 * 60 * 1000
 
   const entries = []
   const failures = []
+  // Twelve Data answers 403 for /dividends on the free tier. Once that is clear
+  // there is no point spending eight seconds per symbol rediscovering it.
+  let dividendsPlanGated = false
 
-  for (const [index, entry] of wanted.entries()) {
-    const label = `[${String(index + 1).padStart(3)}/${wanted.length}] ${entry.symbol}`
+  for (const [index, entry] of queue.entries()) {
+    const label = `[${String(index + 1).padStart(3)}/${queue.length}] ${entry.symbol}`
+    const file = fileNameFor(entry.symbol)
+    const filePath = join(PRICES_DIR, file)
+
     try {
-      const history = await fetchYahooHistory(entry.symbol)
-      const file = fileNameFor(entry.symbol)
-      await writeFile(join(PRICES_DIR, file), JSON.stringify(history), 'utf8')
+      const published = await readJson(filePath, null)
+      let history
+      let extra = {}
+
+      if (entry.provider === 'alphavantage') {
+        // Adjusted closes come straight from the provider here.
+        history = await fetchAlphaVantageHistory(entry, {
+          apiKey: alphaKey,
+          minIntervalMs: 1000,
+        })
+        extra = { adjustedAvailable: true }
+      } else {
+        // Twelve Data gives split-adjusted closes only, so the adjusted series
+        // is rebuilt from the dividend record. Dividends move quarterly at
+        // best, so a recent one is reused rather than spending quota again.
+        const cachedFresh =
+          published?.dividends &&
+          published.dividendsFetchedAt &&
+          Date.parse(published.dividendsFetchedAt) > dividendCutoff
+
+        const series = await fetchTimeSeries(entry, options)
+
+        // The dividend record is paid-only on Twelve Data. Losing it costs the
+        // dividend adjustment, not the symbol — so fall back to price return and
+        // record that, rather than dropping years of history over a 403.
+        let dividends = cachedFresh ? published.dividends : null
+        let dividendsUnavailable = dividendsPlanGated
+        if (!dividends && dividendsPlanGated) dividends = []
+        if (!dividends) {
+          try {
+            dividends = await fetchDividends(entry, options)
+          } catch (error) {
+            dividends = []
+            dividendsUnavailable = true
+            // A plan restriction applies to every symbol, not just this one.
+            if (/\b(403|plan|grow|pro|ultra|venture|enterprise)\b/i.test(error.message)) {
+              dividendsPlanGated = true
+              console.log(`  dividends unavailable on this plan — skipping for the rest of the run`)
+            }
+          }
+        }
+
+        history = buildHistory(entry, series, dividends)
+        extra = {
+          dividends,
+          dividendsFetchedAt: cachedFresh ? published.dividendsFetchedAt : new Date().toISOString(),
+          // Adjusted closes equal raw closes here, so the app must not claim
+          // otherwise in its "reinvest dividends" toggle.
+          adjustedAvailable: !dividendsUnavailable,
+        }
+      }
+
+      const fetchedAt = new Date().toISOString()
+      await writeFile(filePath, JSON.stringify({ ...history, ...extra, fetchedAt }), 'utf8')
 
       entries.push({
         symbol: history.symbol,
-        // Yahoo is the authority on these; the universe file only holds hints.
-        name: history.name || entry.name,
-        type: history.type || entry.type,
-        currency: history.currency || entry.currency,
+        name: history.name,
+        type: history.type,
+        currency: history.currency,
         category: entry.category,
         file,
+        adjustedAvailable: extra.adjustedAvailable !== false,
         firstMonth: history.points[0].month,
         lastMonth: history.points[history.points.length - 1].month,
       })
+
       console.log(
         `${label} ok — ${history.points.length} months, ${history.currency}, ` +
-          `${history.points[0].month} to ${history.points.at(-1).month}`
+          `${history.points[0].month} to ${history.points.at(-1).month}` +
+          `, ${history.dividendCount} dividend month(s) [${entry.provider ?? 'twelvedata'}]`
       )
     } catch (error) {
       failures.push({ symbol: entry.symbol, reason: error.message })
       console.log(`${label} FAILED — ${error.message}`)
-      // Keep whatever we published last time rather than dropping the symbol.
       const previous = existing.get(entry.symbol.toUpperCase())
       if (previous) entries.push(previous)
     }
-    if (index < wanted.length - 1) await sleep(args.delayMs)
   }
 
-  // A partial run (--only) must not delete the symbols it did not touch.
-  if (args.only) {
-    const refreshed = new Set(entries.map((e) => e.symbol))
-    for (const [symbol, entry] of existing) if (!refreshed.has(symbol)) entries.push(entry)
-  }
+  // Anything not in this run's queue — an unmapped symbol, or one waiting its
+  // turn in the Alpha Vantage rotation — keeps its published entry, so the
+  // search index never loses a symbol just because it was not refreshed today.
+  const refreshed = new Set(entries.map((e) => e.symbol))
+  for (const [symbol, entry] of existing) if (!refreshed.has(symbol)) entries.push(entry)
   entries.sort((a, b) => a.symbol.localeCompare(b.symbol))
 
   console.log('\nFetching ECB deposit rates…')
@@ -108,12 +223,9 @@ async function main() {
     )
   } catch (error) {
     console.log(`FAILED — ${error.message}`)
-    try {
-      rates = JSON.parse(await readFile(join(DATA_DIR, 'rates.json'), 'utf8'))
-      console.log('reusing the previously published rates')
-    } catch {
-      throw new Error('ECB rates unavailable and nothing published to fall back on')
-    }
+    rates = await readJson(join(DATA_DIR, 'rates.json'), null)
+    if (!rates) throw new Error('ECB rates unavailable and nothing published to fall back on')
+    console.log('reusing the previously published rates')
   }
 
   const generatedAt = new Date().toISOString()
@@ -139,7 +251,7 @@ async function main() {
     for (const failure of failures) console.log(`  ${failure.symbol}: ${failure.reason}`)
   }
 
-  const failureRate = wanted.length === 0 ? 0 : failures.length / wanted.length
+  const failureRate = queue.length === 0 ? 0 : failures.length / queue.length
   if (failureRate > FAILURE_BUDGET) {
     throw new Error(
       `${(failureRate * 100).toFixed(0)}% of symbols failed, over the ${FAILURE_BUDGET * 100}% budget — ` +
