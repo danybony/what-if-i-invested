@@ -43,7 +43,8 @@ export function CookieBanner() {
                 seen the disclaimer. That much is needed for the site to work. Anything beyond it is
                 optional and stays off unless you turn it on.{' '}
                 <span className="text-ink-muted">
-                  No advertising, no profiling, and nothing is sold or shared.
+                  Nothing you enter leaves your device: there is no backend, no advertising and no
+                  profiling, and nothing is sold or shared.
                 </span>
               </p>
             </div>
@@ -114,9 +115,10 @@ function ConsentSettingsPanel() {
       </div>
 
       <p className="mt-4 text-[11px] leading-relaxed text-ink-muted">
-        Calculations run in your browser. The only requests leaving it are for share prices and ECB
-        interest rates, fetched through this site&apos;s own server so the data providers never see
-        you. You can change or withdraw this at any time from{' '}
+        This is a static site with no backend. Prices and ECB interest rates are published as files
+        alongside the page and refreshed on a schedule, so your browser never contacts a data
+        provider and no server of ours logs what you look up — every calculation runs on your own
+        machine. You can change or withdraw this at any time from{' '}
         <span className="whitespace-nowrap">“Storage preferences”</span> in the footer.
       </p>
 

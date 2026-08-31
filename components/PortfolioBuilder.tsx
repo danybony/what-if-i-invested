@@ -1,9 +1,10 @@
 'use client'
 
-import { SymbolSearch, type SearchHit } from '@/components/SymbolSearch'
+import { SymbolSearch } from '@/components/SymbolSearch'
 import { NumberInput } from '@/components/ui'
 import { formatMonth } from '@/lib/format'
 import type { PricePoint } from '@/lib/backtest'
+import type { SymbolEntry } from '@/lib/marketData'
 
 export type PortfolioHolding = {
   symbol: string
@@ -14,8 +15,6 @@ export type PortfolioHolding = {
   points: PricePoint[]
   /** Earliest month with a price, used to explain a clamped start date. */
   firstMonth: string
-  /** Served from cache because the provider was unreachable. */
-  stale: boolean
 }
 
 export function PortfolioBuilder({
@@ -28,7 +27,7 @@ export function PortfolioBuilder({
 }: {
   holdings: PortfolioHolding[]
   pending: string[]
-  onAdd: (hit: SearchHit) => void
+  onAdd: (entry: SymbolEntry) => void
   onRemove: (symbol: string) => void
   onWeightChange: (symbol: string, weight: number) => void
   onEvenSplit: () => void
@@ -64,7 +63,6 @@ export function PortfolioBuilder({
                 <p className="truncate text-[11px] text-ink-secondary">{holding.name}</p>
                 <p className="text-[10px] text-ink-muted">
                   History from {formatMonth(holding.firstMonth)}
-                  {holding.stale && ' · cached'}
                 </p>
               </div>
               <div className="w-24 shrink-0">

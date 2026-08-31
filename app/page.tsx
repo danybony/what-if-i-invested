@@ -6,6 +6,7 @@ import { ResultChart, type ChartDatum } from '@/components/ResultChart'
 import { YearTable, type YearRow } from '@/components/YearTable'
 import { Callout, Card, Field, NumberInput, Select } from '@/components/ui'
 import { CURRENCIES, formatPercent } from '@/lib/format'
+import { loadRates } from '@/lib/marketData'
 import { DEFAULT_BASIC_FORM, RATE_PRESETS, type BasicFormState } from '@/lib/presets'
 import {
   COMPOUND_LABELS,
@@ -35,10 +36,9 @@ export default function BasicModePage() {
   // 0%, which is what most euro-area current accounts actually pay.
   useEffect(() => {
     let cancelled = false
-    fetch('/api/rates')
-      .then((response) => response.json())
+    loadRates()
       .then((data) => {
-        if (!cancelled && data?.latest) setEcbRate(data.latest)
+        if (!cancelled && data.latest) setEcbRate(data.latest)
       })
       .catch(() => {})
     return () => {
