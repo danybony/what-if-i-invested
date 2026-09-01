@@ -68,7 +68,7 @@ export const DEFAULT_BASIC = {
   years: 20,
   rate: DEFAULT_PRESET.rate,
   variance: DEFAULT_PRESET.variance,
-  compoundFrequency: 'monthly' as CompoundFrequency,
+  compoundFrequency: 'quarterly' as CompoundFrequency,
   currency: 'EUR',
 }
 
