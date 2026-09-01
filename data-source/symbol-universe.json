@@ -1,5 +1,5 @@
 {
-  "$comment": "The symbol universe served by the site. Each entry names the provider that carries it: Twelve Data's free tier covers US venues, Alpha Vantage covers XETRA, Frankfurt, London and Amsterdam. Alpha Vantage does not carry Borsa Italiana, so Milan-listed symbols are mapped to their XETRA or Amsterdam listing in the same currency. Add a symbol here, run scripts/map-symbols.mjs to resolve its provider ids, then run scripts/fetch-market-data.mjs.",
+  "$comment": "The symbol universe served by the site. Every symbol is fetched from Alpha Vantage, whose TIME_SERIES_MONTHLY_ADJUSTED is free and returns adjusted closes directly. Alpha Vantage does not carry Borsa Italiana, so Milan-listed symbols are mapped to their XETRA, Frankfurt or Amsterdam listing in the same currency. Add a symbol here, run scripts/map-alphavantage.mjs to resolve non-US ids, then run scripts/fetch-market-data.mjs.",
   "symbols": [
     {
       "symbol": "VWCE.DE",
@@ -785,7 +785,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SPY",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "VOO",
@@ -798,7 +803,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VOO",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "IVV",
@@ -811,7 +821,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IVV",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "VTI",
@@ -824,7 +839,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VTI",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "QQQ",
@@ -837,7 +857,12 @@
         "mic": "XNMS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "QQQ",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "VXUS",
@@ -850,7 +875,12 @@
         "mic": "XNMS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VXUS",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "VEA",
@@ -863,7 +893,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VEA",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "VWO",
@@ -876,7 +911,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VWO",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "VT",
@@ -889,7 +929,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VT",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "BND",
@@ -902,7 +947,12 @@
         "mic": "XNMS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "BND",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "AGG",
@@ -915,7 +965,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "AGG",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "SCHD",
@@ -928,7 +983,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SCHD",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "VIG",
@@ -941,7 +1001,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VIG",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "VYM",
@@ -954,7 +1019,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VYM",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "IWM",
@@ -967,7 +1037,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IWM",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "DIA",
@@ -980,7 +1055,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "DIA",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "ARKK",
@@ -993,7 +1073,12 @@
         "mic": "BATS",
         "exchange": "CBOE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "ARKK",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "GLD",
@@ -1006,7 +1091,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "GLD",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "SLV",
@@ -1019,7 +1109,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SLV",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "TLT",
@@ -1032,7 +1127,12 @@
         "mic": "XNMS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "TLT",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "XLK",
@@ -1045,7 +1145,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "XLK",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "XLF",
@@ -1058,7 +1163,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "XLF",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "XLE",
@@ -1071,7 +1181,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "XLE",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "XLV",
@@ -1084,7 +1199,12 @@
         "mic": "ARCX",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "XLV",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "SMH",
@@ -1097,7 +1217,12 @@
         "mic": "XNMS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SMH",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "AAPL",
@@ -1110,7 +1235,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "AAPL",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "MSFT",
@@ -1123,7 +1253,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "MSFT",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "GOOGL",
@@ -1136,7 +1271,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "GOOGL",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "AMZN",
@@ -1149,7 +1289,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "AMZN",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "NVDA",
@@ -1162,7 +1307,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "NVDA",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "META",
@@ -1175,7 +1325,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "META",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "TSLA",
@@ -1188,7 +1343,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "TSLA",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "BRK-B",
@@ -1201,7 +1361,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "BRK-B",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "JPM",
@@ -1214,7 +1379,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "JPM",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "V",
@@ -1227,7 +1397,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "V",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "MA",
@@ -1240,7 +1415,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "MA",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "UNH",
@@ -1253,7 +1433,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "UNH",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "JNJ",
@@ -1266,7 +1451,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "JNJ",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "XOM",
@@ -1279,7 +1469,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "XOM",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "PG",
@@ -1292,7 +1487,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "PG",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "HD",
@@ -1305,7 +1505,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "HD",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "COST",
@@ -1318,7 +1523,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "COST",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "WMT",
@@ -1331,7 +1541,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "WMT",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "KO",
@@ -1344,7 +1559,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "KO",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "PEP",
@@ -1357,7 +1577,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "PEP",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "AVGO",
@@ -1370,7 +1595,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "AVGO",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "AMD",
@@ -1383,7 +1613,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "AMD",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "INTC",
@@ -1396,7 +1631,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "INTC",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "CRM",
@@ -1409,7 +1649,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "CRM",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "ADBE",
@@ -1422,7 +1667,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "ADBE",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "NFLX",
@@ -1435,7 +1685,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "NFLX",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "DIS",
@@ -1448,7 +1703,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "DIS",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "CSCO",
@@ -1461,7 +1721,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "CSCO",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "ORCL",
@@ -1474,7 +1739,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "ORCL",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "IBM",
@@ -1487,7 +1757,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IBM",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "QCOM",
@@ -1500,7 +1775,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "QCOM",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "TXN",
@@ -1513,7 +1793,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "TXN",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "PYPL",
@@ -1526,7 +1811,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "PYPL",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "BAC",
@@ -1539,7 +1829,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "BAC",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "WFC",
@@ -1552,7 +1847,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "WFC",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "GS",
@@ -1565,7 +1865,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "GS",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "MS",
@@ -1578,7 +1883,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "MS",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "CVX",
@@ -1591,7 +1901,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "CVX",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "PFE",
@@ -1604,7 +1919,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "PFE",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "MRK",
@@ -1617,7 +1937,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "MRK",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "ABBV",
@@ -1630,7 +1955,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "ABBV",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "LLY",
@@ -1643,7 +1973,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "LLY",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "TMO",
@@ -1656,7 +1991,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "TMO",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "MCD",
@@ -1669,7 +2009,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "MCD",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "NKE",
@@ -1682,7 +2027,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "NKE",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "SBUX",
@@ -1695,7 +2045,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SBUX",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "BA",
@@ -1708,7 +2063,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "BA",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "CAT",
@@ -1721,7 +2081,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "CAT",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "GE",
@@ -1734,7 +2099,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "GE",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "UBER",
@@ -1747,7 +2117,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "UBER",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "ABNB",
@@ -1760,7 +2135,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "ABNB",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "COIN",
@@ -1773,7 +2153,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "COIN",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "PLTR",
@@ -1786,7 +2171,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "PLTR",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "SHOP",
@@ -1799,7 +2189,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SHOP",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "SQ",
@@ -1812,7 +2207,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SQ",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "T",
@@ -1825,7 +2225,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "T",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "VZ",
@@ -1838,7 +2243,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VZ",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "MU",
@@ -1851,7 +2261,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "MU",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "MRNA",
@@ -1864,7 +2279,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "MRNA",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "F",
@@ -1877,7 +2297,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "F",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "GM",
@@ -1890,7 +2315,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "GM",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "DE",
@@ -1903,7 +2333,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "DE",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "LMT",
@@ -1916,7 +2351,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "LMT",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "RTX",
@@ -1929,7 +2369,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "RTX",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "HON",
@@ -1942,7 +2387,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "HON",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "AXP",
@@ -1955,7 +2405,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "AXP",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "BLK",
@@ -1968,7 +2423,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "BLK",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "SPGI",
@@ -1981,7 +2441,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SPGI",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "NOW",
@@ -1994,7 +2459,12 @@
         "mic": "XNYS",
         "exchange": "NYSE"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "NOW",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "INTU",
@@ -2007,7 +2477,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "INTU",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "AMAT",
@@ -2020,7 +2495,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "AMAT",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "BKNG",
@@ -2033,7 +2513,12 @@
         "mic": "XNGS",
         "exchange": "NASDAQ"
       },
-      "provider": "twelvedata"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "BKNG",
+        "currency": "USD",
+        "region": "United States"
+      }
     },
     {
       "symbol": "ASML.AS",

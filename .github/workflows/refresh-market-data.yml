@@ -6,16 +6,15 @@ name: Refresh market data
 # Running the fetch here rather than in a visitor's browser is the whole point —
 # one scheduled run costs ~200 requests total instead of ~200 per visitor.
 #
-# Prices come from two providers, because no free tier covers everything.
-# Yahoo's keyless endpoints blanket-block datacenter IPs (a runner gets 429 on
-# request #1), so they are unusable from CI at all. Twelve Data's free tier is
-# generous but US-only. Alpha Vantage covers the European venues but allows only
-# ~25 calls a day.
+# Prices come from Alpha Vantage. Yahoo blanket-blocks datacenter IPs (a runner
+# gets 429 on request #1), and Twelve Data's free tier is US-only and charges for
+# the dividend record, which would mean price return instead of total return for
+# most of the universe.
 #
-# So US venues refresh daily from Twelve Data, and the European half rotates
-# through Alpha Vantage stalest-first — a full European cycle every ~5 days.
-# That is fine for this site: each symbol's *entire* price history is stored on
-# first fetch and committed, so a rotation only ever ages the current month.
+# Alpha Vantage allows ~25 calls a day, so the universe rotates rather than
+# refreshing whole — a full cycle every ~10 days. That is fine here: each
+# symbol's *entire* history is stored on first fetch and committed, so the
+# rotation only ever ages the current month.
 
 on:
   schedule:
@@ -29,19 +28,14 @@ on:
         required: false
         type: string
       interval:
-        description: 'Minimum ms between API calls (free tier allows 8/min)'
+        description: 'Minimum ms between API calls'
         required: false
-        default: '8000'
+        default: '1000'
         type: string
-      dividend_age:
-        description: 'Refetch dividends older than N days (0 = always)'
+      budget:
+        description: 'How many symbols to refresh this run'
         required: false
-        default: '7'
-        type: string
-      alpha_budget:
-        description: 'How many European symbols to refresh this run'
-        required: false
-        default: '12'
+        default: '16'
         type: string
 
 # Never let two refreshes race for the same commit.
@@ -55,9 +49,7 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    # ~204 price calls at 8s apart is ~27 minutes; a week's dividend refresh
-    # doubles that. Generous headroom so a slow upstream does not lose the run.
-    timeout-minutes: 120
+    timeout-minutes: 30
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
     steps:
@@ -80,20 +72,16 @@ jobs:
 
       - name: Fetch prices and ECB rates
         env:
-          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
           ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
         run: |
-          for name in TWELVEDATA_API_KEY ALPHAVANTAGE_API_KEY; do
-            if [ -z "${!name}" ]; then
-              echo "::error::$name secret is not set."
-              exit 1
-            fi
-          done
+          if [ -z "$ALPHAVANTAGE_API_KEY" ]; then
+            echo "::error::ALPHAVANTAGE_API_KEY secret is not set."
+            exit 1
+          fi
           node scripts/fetch-market-data.mjs \
             ${{ inputs.only && format('--only {0}', inputs.only) || '' }} \
-            --interval ${{ inputs.interval || '8000' }} \
-            --dividend-age ${{ inputs.dividend_age || '7' }} \
-            --alpha-budget ${{ inputs.alpha_budget || '12' }}
+            --interval ${{ inputs.interval || '1000' }} \
+            --budget ${{ inputs.budget || '16' }}
 
       - name: Commit refreshed data
         id: commit

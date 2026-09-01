@@ -5,17 +5,17 @@
  * `node`, no build step and no dependencies. This is build-time tooling —
  * nothing here ships to the browser.
  *
- * Prices come from two providers, because no single free tier covers what the
- * site needs. Yahoo's keyless endpoints blanket-block datacenter IPs (a GitHub
- * runner gets 429 on its first request), so they are unusable from CI at all.
- * Twelve Data's free tier is generous but US-only. Alpha Vantage covers XETRA,
- * Frankfurt, London and Amsterdam but allows only ~25 calls a day.
+ * Prices come from Alpha Vantage. Yahoo's keyless endpoints blanket-block
+ * datacenter IPs (a GitHub runner gets 429 on its first request), and Twelve
+ * Data's free tier is US-only and charges for the dividend record — which would
+ * mean price return rather than total return for most of the universe. Alpha
+ * Vantage's TIME_SERIES_MONTHLY_ADJUSTED is free, covers the venues this site
+ * needs, and returns adjusted closes outright.
  *
- * So: US venues come from Twelve Data daily, everything else from Alpha Vantage
- * on a rotation. Each universe entry names its own provider.
+ * The cost is a ceiling of roughly 25 calls a day, so the refresh rotates
+ * through the universe stalest-first rather than fetching all of it.
  */
 
-const TWELVE_DATA = 'https://api.twelvedata.com'
 const ALPHA_VANTAGE = 'https://www.alphavantage.co/query'
 
 const ECB_DEPOSIT_SERIES =
@@ -68,117 +68,9 @@ export function resetThrottle() {
 }
 
 /**
- * Twelve Data reports failures as HTTP 200 with an error body as often as not,
- * so the body is what decides.
- */
-async function getJson(path, params, { apiKey, minIntervalMs = 8000 }) {
-  await throttle(minIntervalMs)
-
-  const query = new URLSearchParams({ ...params, apikey: apiKey })
-  const response = await fetch(`${TWELVE_DATA}${path}?${query}`)
-  const body = await response.json().catch(() => null)
-
-  if (!body) throw new Error(`HTTP ${response.status} with an unreadable body`)
-  if (body.status === 'error' || typeof body.code === 'number') {
-    throw new Error(`${body.code ?? response.status}: ${body.message ?? 'unknown error'}`)
-  }
-  if (!response.ok) throw new Error(`HTTP ${response.status}`)
-  return body
-}
-
-export async function fetchTimeSeries(entry, options) {
-  return getJson(
-    '/time_series',
-    {
-      symbol: entry.td.symbol,
-      mic_code: entry.td.mic,
-      interval: '1month',
-      outputsize: '5000',
-      order: 'ASC',
-    },
-    options
-  )
-}
-
-export async function fetchDividends(entry, options) {
-  const body = await getJson(
-    '/dividends',
-    { symbol: entry.td.symbol, mic_code: entry.td.mic, range: 'full' },
-    options
-  )
-  return Array.isArray(body?.dividends) ? body.dividends : []
-}
-
-/**
- * Build the published history from a monthly series and its dividend record.
- *
- * Twelve Data's closes are split-adjusted but not dividend-adjusted, so the
- * adjusted series is reconstructed here: each dividend buys more shares at that
- * month's close, and the resulting share count scales the price. The series is
- * then rebased so the newest adjusted close equals the newest close, which is
- * the convention the app and the earlier Yahoo data already used.
- */
-export function buildHistory(entry, series, dividends = []) {
-  const values = series?.values
-  if (!Array.isArray(values) || values.length === 0) {
-    throw new Error('no price history returned')
-  }
-
-  const rawCurrency = series.meta?.currency ?? entry.currency
-  const { currency, divisor } = normaliseCurrency(rawCurrency)
-
-  // order=ASC is requested, but never trust an upstream to honour it.
-  const rows = [...values].sort((a, b) => a.datetime.localeCompare(b.datetime))
-
-  const points = []
-  for (const row of rows) {
-    const close = Number(row.close)
-    if (!Number.isFinite(close) || close <= 0) continue
-    points.push({ month: row.datetime.slice(0, 7), close: close / divisor })
-  }
-  if (points.length === 0) throw new Error('no usable price history')
-
-  // Dividends per month, in the same major unit as the prices.
-  const paidIn = new Map()
-  for (const dividend of dividends) {
-    const amount = Number(dividend.amount)
-    if (!dividend.ex_date || !Number.isFinite(amount) || amount <= 0) continue
-    const month = dividend.ex_date.slice(0, 7)
-    paidIn.set(month, (paidIn.get(month) ?? 0) + amount / divisor)
-  }
-
-  let shares = 1
-  const shareCount = points.map((point) => {
-    const dividend = paidIn.get(point.month)
-    if (dividend) shares *= 1 + dividend / point.close
-    return shares
-  })
-
-  const finalShares = shareCount[shareCount.length - 1]
-  const withAdjusted = points.map((point, i) => ({
-    month: point.month,
-    close: roundPrice(point.close),
-    adjclose: roundPrice((point.close * shareCount[i]) / finalShares),
-  }))
-
-  return {
-    symbol: entry.symbol.toUpperCase(),
-    name: series.meta?.name || entry.name,
-    currency,
-    type: series.meta?.type || entry.type,
-    points: withAdjusted,
-    dividendCount: paidIn.size,
-  }
-}
-
-/* -------------------------------------------------------------------------- */
-/* Alpha Vantage                                                              */
-/* -------------------------------------------------------------------------- */
-
-/**
- * Unlike Twelve Data, Alpha Vantage returns the adjusted close outright, so
- * there is nothing to reconstruct — one call per symbol, and the dividend
- * handling is the provider's problem rather than ours.
+ * Alpha Vantage returns the adjusted close outright, so there is nothing to
+ * reconstruct — one call per symbol, and dividend handling is the provider's
+ * problem rather than ours.
  */
 export async function fetchAlphaVantageHistory(entry, { apiKey, minIntervalMs = 1000 }) {
   await throttle(minIntervalMs)
