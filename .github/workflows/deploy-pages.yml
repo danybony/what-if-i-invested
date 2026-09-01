@@ -26,7 +26,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Check out the branch head rather than the triggering SHA. When
+      # refresh-market-data.yml calls this workflow, the commit it just made is
+      # newer than the SHA that started the run — checking out that SHA would
+      # rebuild the tree from *before* the data landed, and publish stale data.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-node@v4
         with:
