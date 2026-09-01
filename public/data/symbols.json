@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T22:46:12.875Z",
+  "generatedAt": "2026-09-01T08:44:58.274Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -173,8 +173,8 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "BND.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2007-04",
+      "adjustedAvailable": true,
+      "firstMonth": "2007-05",
       "lastMonth": "2026-08"
     },
     {
@@ -241,6 +241,17 @@
       "file": "CSCO.json",
       "adjustedAvailable": false,
       "firstMonth": "1990-02",
+      "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "CSPX.MI",
+      "name": "iShares Core S&P 500 UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "file": "CSPX.MI.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2014-06",
       "lastMonth": "2026-08"
     },
     {
@@ -398,6 +409,17 @@
       "lastMonth": "2026-08"
     },
     {
+      "symbol": "IMIE.MI",
+      "name": "SPDR MSCI All Country World Investable Market UCITS ETF (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "file": "IMIE.MI.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2011-12",
+      "lastMonth": "2026-08"
+    },
+    {
       "symbol": "INTC",
       "name": "Intel Corporation",
       "type": "Common Stock",
@@ -420,14 +442,25 @@
       "lastMonth": "2026-08"
     },
     {
+      "symbol": "ISAC.L",
+      "name": "iShares MSCI ACWI UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "World equity",
+      "file": "ISAC.L.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2011-12",
+      "lastMonth": "2026-08"
+    },
+    {
       "symbol": "IVV",
       "name": "iShares Core S&P 500 ETF",
       "type": "ETF",
       "currency": "USD",
       "category": "US ETFs",
       "file": "IVV.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2000-05",
+      "adjustedAvailable": true,
+      "firstMonth": "2000-06",
       "lastMonth": "2026-08"
     },
     {
@@ -593,6 +626,17 @@
       "file": "MU.json",
       "adjustedAvailable": false,
       "firstMonth": "1984-06",
+      "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "MWRD.MI",
+      "name": "Amundi MSCI World USD Acc",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "file": "MWRD.MI.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2024-02",
       "lastMonth": "2026-08"
     },
     {
@@ -822,8 +866,19 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "SPY.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1993-01",
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "SPYI.DE",
+      "name": "SPDR MSCI All Country World Investable Market UCITS ETF (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "file": "SPYI.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2011-08",
       "lastMonth": "2026-08"
     },
     {
@@ -932,8 +987,30 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "VEA.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2007-07",
+      "adjustedAvailable": true,
+      "firstMonth": "2007-08",
+      "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "VEVE.L",
+      "name": "Vanguard FTSE Developed World UCITS ETF (USD) Distributing",
+      "type": "ETF",
+      "currency": "GBP",
+      "category": "World equity",
+      "file": "VEVE.L.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2014-11",
+      "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "VHVG.L",
+      "name": "Vanguard FTSE Developed World UCITS ETF (USD) Accumulating",
+      "type": "ETF",
+      "currency": "GBP",
+      "category": "World equity",
+      "file": "VHVG.L.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2019-10",
       "lastMonth": "2026-08"
     },
     {
@@ -954,8 +1031,8 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "VOO.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2010-09",
+      "adjustedAvailable": true,
+      "firstMonth": "2010-10",
       "lastMonth": "2026-08"
     },
     {
@@ -965,8 +1042,8 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "VT.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2008-06",
+      "adjustedAvailable": true,
+      "firstMonth": "2008-07",
       "lastMonth": "2026-08"
     },
     {
@@ -976,7 +1053,7 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "VTI.json",
-      "adjustedAvailable": false,
+      "adjustedAvailable": true,
       "firstMonth": "2001-06",
       "lastMonth": "2026-08"
     },
@@ -997,8 +1074,8 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "VWO.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2005-03",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-04",
       "lastMonth": "2026-08"
     },
     {
@@ -1019,8 +1096,8 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "VXUS.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2011-01",
+      "adjustedAvailable": true,
+      "firstMonth": "2011-02",
       "lastMonth": "2026-08"
     },
     {
@@ -1046,6 +1123,17 @@
       "lastMonth": "2026-08"
     },
     {
+      "symbol": "WEBN.DE",
+      "name": "Amundi Prime All Country World UCITS ETF Acc",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "file": "WEBN.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2024-07",
+      "lastMonth": "2026-08"
+    },
+    {
       "symbol": "WFC",
       "name": "Wells Fargo & Company",
       "type": "Common Stock",
@@ -1065,6 +1153,17 @@
       "file": "WMT.json",
       "adjustedAvailable": false,
       "firstMonth": "1972-08",
+      "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "XDWD.DE",
+      "name": "Xtrackers MSCI World UCITS ETF 1C",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "World equity",
+      "file": "XDWD.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2014-09",
       "lastMonth": "2026-08"
     },
     {
