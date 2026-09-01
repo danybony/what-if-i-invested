@@ -28,10 +28,6 @@ type ConsentContextValue = {
   ready: boolean
   disclaimerAcknowledged: boolean
   acknowledgeDisclaimer: () => void
-  /** Re-opens the disclaimer as a dismissible review. */
-  reviewingDisclaimer: boolean
-  openDisclaimerReview: () => void
-  closeDisclaimerReview: () => void
   consent: ConsentRecord | null
   saveConsent: (categories: ConsentCategories) => void
   acceptAll: () => void
@@ -59,7 +55,6 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     getServerConsentSnapshot
   )
 
-  const [reviewingDisclaimer, setReviewingDisclaimer] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
 
   const saveConsent = useCallback((categories: ConsentCategories) => {
@@ -80,9 +75,6 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
       ready: stored.ready,
       disclaimerAcknowledged: stored.disclaimer !== null,
       acknowledgeDisclaimer: () => writeDisclaimer(),
-      reviewingDisclaimer,
-      openDisclaimerReview: () => setReviewingDisclaimer(true),
-      closeDisclaimerReview: () => setReviewingDisclaimer(false),
       consent: stored.consent,
       saveConsent,
       acceptAll,
@@ -93,7 +85,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
       closeSettings: () => setSettingsOpen(false),
       allows: (category) => hasConsent(category, stored.consent),
     }),
-    [stored, reviewingDisclaimer, settingsOpen, saveConsent, acceptAll, rejectAll, withdrawConsent]
+    [stored, settingsOpen, saveConsent, acceptAll, rejectAll, withdrawConsent]
   )
 
   return <ConsentContext.Provider value={value}>{children}</ConsentContext.Provider>

@@ -15,9 +15,10 @@
  * Bumped when the disclaimer's substance changes, so anyone who acknowledged an
  * earlier wording is asked again rather than being held to text they never saw.
  * v2 broadened it from a Basic/Advanced split to the estimate caveats that apply
- * across the whole site.
+ * across the whole site. v3 cut it back to the three points that have to be
+ * acknowledged and moved the detail to /disclaimer.
  */
-export const DISCLAIMER_VERSION = 2
+export const DISCLAIMER_VERSION = 3
 export const CONSENT_VERSION = 1
 
 const DISCLAIMER_KEY = 'whatifiinvested.disclaimer'

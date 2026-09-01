@@ -38,15 +38,10 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
                   <strong className="font-semibold text-ink-secondary">
                     Educational tool — not financial advice.
                   </strong>{' '}
-                  Every figure here is an estimate from the best data available to us and will
-                  differ from real-world results. Returns are assumed, not guaranteed, and shown
-                  before tax, inflation and fees. Past performance does not predict future results.
+                  Every figure is an estimate and will differ from real-world results. Past
+                  performance does not predict future results.
                 </p>
-                <p>
-                  Bank rates: ECB Data Portal (euro-area household deposits). Prices: Alpha
-                  Vantage, monthly adjusted closes. Both ship as static files with the site and
-                  are refreshed on a schedule, so nothing you do here is sent to a data provider.
-                </p>
+                <p>Prices: Alpha Vantage. Bank rates: ECB Data Portal.</p>
                 <ConsentFooterLinks />
               </div>
             </footer>
