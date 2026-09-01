@@ -34,10 +34,18 @@ const UNIVERSE_FILE = join(ROOT, 'data-source', 'symbol-universe.json')
 const DATA_DIR = join(ROOT, 'public', 'data')
 const PRICES_DIR = join(DATA_DIR, 'prices')
 
-const FAILURE_BUDGET = 0.25
+/**
+ * With a quota this small, some refusals every run are normal, not an outage —
+ * and the rotation retries them next time. So a run only fails when *nothing*
+ * succeeded, which is what a real upstream outage looks like. Anything that did
+ * succeed is written and committed either way.
+ */
 
 function parseArgs(argv) {
-  const args = { only: null, minIntervalMs: 1000, budget: 20 }
+  // Alpha Vantage asks for one request a second and refuses anything on the
+  // boundary, so leave real headroom. The daily quota, not the spacing, is what
+  // bounds a run.
+  const args = { only: null, minIntervalMs: 2500, budget: 20 }
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--only') {
       args.only = new Set(argv[++i].split(',').map((s) => s.trim().toUpperCase()))
@@ -197,11 +205,10 @@ async function main() {
     for (const failure of failures) console.log(`  ${failure.symbol}: ${failure.reason}`)
   }
 
-  const failureRate = queue.length === 0 ? 0 : failures.length / queue.length
-  if (failureRate > FAILURE_BUDGET) {
+  if (queue.length > 0 && failures.length === queue.length) {
     throw new Error(
-      `${(failureRate * 100).toFixed(0)}% of symbols failed, over the ${FAILURE_BUDGET * 100}% budget — ` +
-        'treating this as an upstream outage rather than publishing it'
+      `all ${queue.length} symbol(s) failed — treating this as an upstream outage. ` +
+        'Nothing already published has been changed.'
     )
   }
 }

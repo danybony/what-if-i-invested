@@ -30,7 +30,7 @@ on:
       interval:
         description: 'Minimum ms between API calls'
         required: false
-        default: '1000'
+        default: '2500'
         type: string
       budget:
         description: 'How many symbols to refresh this run'
@@ -80,7 +80,7 @@ jobs:
           fi
           node scripts/fetch-market-data.mjs \
             ${{ inputs.only && format('--only {0}', inputs.only) || '' }} \
-            --interval ${{ inputs.interval || '1000' }} \
+            --interval ${{ inputs.interval || '2500' }} \
             --budget ${{ inputs.budget || '16' }}
 
       - name: Commit refreshed data
