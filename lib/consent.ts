@@ -11,7 +11,13 @@
  * — is "strictly necessary", so storing it needs no prior consent.
  */
 
-export const DISCLAIMER_VERSION = 1
+/**
+ * Bumped when the disclaimer's substance changes, so anyone who acknowledged an
+ * earlier wording is asked again rather than being held to text they never saw.
+ * v2 broadened it from a Basic/Advanced split to the estimate caveats that apply
+ * across the whole site.
+ */
+export const DISCLAIMER_VERSION = 2
 export const CONSENT_VERSION = 1
 
 const DISCLAIMER_KEY = 'whatifiinvested.disclaimer'

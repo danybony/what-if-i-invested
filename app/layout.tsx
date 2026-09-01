@@ -38,9 +38,9 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
                   <strong className="font-semibold text-ink-secondary">
                     Educational tool — not financial advice.
                   </strong>{' '}
-                  Projections are illustrations, not predictions. Returns are assumed, not guaranteed,
-                  and shown before tax, inflation and fees. Past performance does not predict future
-                  results.
+                  Every figure here is an estimate from the best data available to us and will
+                  differ from real-world results. Returns are assumed, not guaranteed, and shown
+                  before tax, inflation and fees. Past performance does not predict future results.
                 </p>
                 <p>
                   Bank rates: ECB Data Portal (euro-area household deposits). Prices: Alpha
