@@ -60,9 +60,21 @@ export type BacktestPoint = {
   index: number
 }
 
+/**
+ * `message` is English and exists as a fallback; the UI renders the error from
+ * `code` and `detail` so it can speak the visitor's language. The engine stays
+ * free of anything that would have to be translated to stay correct.
+ */
 export type BacktestError = {
   code: 'no-holdings' | 'weights' | 'mixed-currency' | 'no-overlap' | 'too-short'
   message: string
+  detail: {
+    symbol?: string
+    currency?: string
+    otherCurrency?: string
+    totalWeight?: number
+    month?: string
+  }
 }
 
 export type BacktestResult = {
@@ -141,7 +153,10 @@ export function backtest(input: BacktestInput): BacktestResult | { ok: false; er
   const { holdings } = input
 
   if (holdings.length === 0) {
-    return { ok: false, error: { code: 'no-holdings', message: 'Add at least one holding.' } }
+    return {
+      ok: false,
+      error: { code: 'no-holdings', message: 'Add at least one holding.', detail: {} },
+    }
   }
 
   const totalWeight = holdings.reduce((sum, h) => sum + h.weight, 0)
@@ -151,6 +166,7 @@ export function backtest(input: BacktestInput): BacktestResult | { ok: false; er
       error: {
         code: 'weights',
         message: `Weights add up to ${(totalWeight * 100).toFixed(1)}% — they need to total 100%.`,
+        detail: { totalWeight },
       },
     }
   }
@@ -163,6 +179,7 @@ export function backtest(input: BacktestInput): BacktestResult | { ok: false; er
       error: {
         code: 'mixed-currency',
         message: `This portfolio is in ${currency} — ${foreign.symbol} trades in ${foreign.currency}. Currency conversion isn't modelled, so every holding has to share one currency.`,
+        detail: { currency, symbol: foreign.symbol, otherCurrency: foreign.currency },
       },
     }
   }
@@ -171,7 +188,11 @@ export function backtest(input: BacktestInput): BacktestResult | { ok: false; er
   if (empty) {
     return {
       ok: false,
-      error: { code: 'no-overlap', message: `No price history available for ${empty.symbol}.` },
+      error: {
+        code: 'no-overlap',
+        message: `No price history available for ${empty.symbol}.`,
+        detail: { symbol: empty.symbol },
+      },
     }
   }
 
@@ -199,6 +220,7 @@ export function backtest(input: BacktestInput): BacktestResult | { ok: false; er
       error: {
         code: 'too-short',
         message: `There is less than a month of overlapping history for these holdings (from ${effectiveStart}).`,
+        detail: { month: effectiveStart },
       },
     }
   }

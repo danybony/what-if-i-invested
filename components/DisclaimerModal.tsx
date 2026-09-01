@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { Button } from '@/components/Buttons'
 import { Modal } from '@/components/Modal'
 import { useConsent } from '@/components/ConsentProvider'
+import { useI18n } from '@/components/LocaleProvider'
 
 /**
  * The short version — the three things someone has to have read before using
@@ -12,22 +13,16 @@ import { useConsent } from '@/components/ConsentProvider'
  * screen a visitor meets is not a wall of caveats.
  */
 export function DisclaimerSummary() {
+  const { t } = useI18n()
+
   return (
     <div className="space-y-3 text-sm leading-relaxed text-ink-secondary">
       <p>
-        <strong className="font-semibold text-ink">
-          This site is for educational purposes only. It does not give financial advice.
-        </strong>{' '}
-        Nothing here is a recommendation to buy, sell or hold any investment.
+        <strong className="font-semibold text-ink">{t.disclaimerModal.leadStrong}</strong>{' '}
+        {t.disclaimerModal.lead}
       </p>
-      <p>
-        Every figure is an estimate, worked out from the best data available to us, and will
-        differ from real-world results.
-      </p>
-      <p>
-        Before making any investment decision, speak to someone licensed to advise you in your own
-        country.
-      </p>
+      <p>{t.disclaimerModal.estimates}</p>
+      <p>{t.disclaimerModal.speakToSomeone}</p>
     </div>
   )
 }
@@ -43,6 +38,7 @@ export function DisclaimerSummary() {
  */
 export function DisclaimerModal() {
   const { ready, disclaimerAcknowledged, acknowledgeDisclaimer } = useConsent()
+  const { t } = useI18n()
   const pathname = usePathname()
 
   if (!ready || disclaimerAcknowledged || pathname === '/disclaimer') return null
@@ -54,7 +50,7 @@ export function DisclaimerModal() {
       describedBy="disclaimer-body"
     >
       <h2 id="disclaimer-title" className="text-lg font-semibold tracking-tight text-ink">
-        Educational use only
+        {t.disclaimerModal.title}
       </h2>
       <div id="disclaimer-body" className="mt-3">
         <DisclaimerSummary />
@@ -66,10 +62,10 @@ export function DisclaimerModal() {
           rel="noopener noreferrer"
           className="text-sm text-invest underline underline-offset-2 hover:no-underline"
         >
-          More info
+          {t.disclaimerModal.moreInfo}
         </Link>
         <Button variant="primary" onClick={acknowledgeDisclaimer}>
-          I understand
+          {t.disclaimerModal.understand}
         </Button>
       </div>
     </Modal>

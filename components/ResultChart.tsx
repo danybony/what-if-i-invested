@@ -11,7 +11,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { formatCompact, formatCurrency } from '@/lib/format'
+import { useI18n } from '@/components/LocaleProvider'
 
 /**
  * One chart serves both modes. Investing is a single entity drawn as a
@@ -57,19 +57,20 @@ function ChartTooltip({
   bankLabel: string
   showBand: boolean
 }) {
+  const { t, f } = useI18n()
   if (!active || !payload?.length) return null
   const datum = payload[0].payload
 
   const rows: TooltipRow[] = []
   if (showBand && datum.high !== undefined) {
-    rows.push({ name: 'Best case', value: datum.high, color: 'var(--invest-edge)' })
+    rows.push({ name: t.chart.bestCase, value: datum.high, color: 'var(--invest-edge)' })
   }
   rows.push({ name: mainLabel, value: datum.main, color: 'var(--invest)' })
   if (showBand && datum.low !== undefined) {
-    rows.push({ name: 'Worst case', value: datum.low, color: 'var(--invest-edge)' })
+    rows.push({ name: t.chart.worstCase, value: datum.low, color: 'var(--invest-edge)' })
   }
   rows.push({ name: bankLabel, value: datum.bank, color: 'var(--bank)' })
-  rows.push({ name: 'Money paid in', value: datum.paidIn, color: 'var(--paid-in)', dashed: true })
+  rows.push({ name: t.chart.moneyPaidIn, value: datum.paidIn, color: 'var(--paid-in)', dashed: true })
 
   const gap = datum.main - datum.bank
 
@@ -91,14 +92,14 @@ function ChartTooltip({
               />
               {row.name}
             </dt>
-            <dd className="tabular font-medium text-ink">{formatCurrency(row.value, currency)}</dd>
+            <dd className="tabular font-medium text-ink">{f.currency(row.value, currency)}</dd>
           </div>
         ))}
       </dl>
       <div className="mt-2 flex items-center justify-between gap-4 border-t border-hairline pt-2">
-        <span className="text-ink-secondary">Ahead of the bank</span>
+        <span className="text-ink-secondary">{t.chart.aheadOfBank}</span>
         <span className="tabular font-semibold text-good">
-          +{formatCurrency(gap, currency)}
+          +{f.currency(gap, currency)}
         </span>
       </div>
     </div>
@@ -124,15 +125,18 @@ export function ResultChart({
   currency,
   mainLabel,
   bankLabel,
-  bandLabel = 'Range of outcomes',
+  bandLabel,
   showBand,
 }: ResultChartProps) {
+  const { t, f } = useI18n()
   const last = data[data.length - 1]
   const legend = [
-    ...(showBand ? [{ name: bandLabel, color: 'var(--invest-edge)', dashed: false }] : []),
+    ...(showBand
+      ? [{ name: bandLabel ?? t.chart.rangeOfOutcomes, color: 'var(--invest-edge)', dashed: false }]
+      : []),
     { name: mainLabel, color: 'var(--invest)', dashed: false },
     { name: bankLabel, color: 'var(--bank)', dashed: false },
-    { name: 'Money paid in', color: 'var(--paid-in)', dashed: true },
+    { name: t.chart.moneyPaidIn, color: 'var(--paid-in)', dashed: true },
   ]
 
   return (
@@ -152,7 +156,7 @@ export function ResultChart({
               minTickGap={28}
             />
             <YAxis
-              tickFormatter={(value: number) => formatCompact(value, currency)}
+              tickFormatter={(value: number) => f.compact(value, currency)}
               tick={{ fill: 'var(--text-muted)', fontSize: 11 }}
               tickLine={false}
               axisLine={false}
@@ -179,7 +183,7 @@ export function ResultChart({
                 fillOpacity={0.35}
                 isAnimationActive={false}
                 activeDot={false}
-                name={bandLabel}
+                name={bandLabel ?? t.chart.rangeOfOutcomes}
               />
             )}
 
@@ -191,7 +195,7 @@ export function ResultChart({
               dot={false}
               isAnimationActive={false}
               activeDot={false}
-              name="Money paid in"
+              name={t.chart.moneyPaidIn}
             />
             <Line
               dataKey="bank"
@@ -226,8 +230,8 @@ export function ResultChart({
         ))}
         {last && (
           <span className="ml-auto tabular text-ink-muted">
-            {last.label}: {formatCurrency(last.main, currency)} invested vs{' '}
-            {formatCurrency(last.bank, currency)} in the bank
+            {last.label}:{' '}
+            {t.chart.summary(f.currency(last.main, currency), f.currency(last.bank, currency))}
           </span>
         )}
       </figcaption>

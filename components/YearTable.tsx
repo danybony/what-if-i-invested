@@ -1,6 +1,6 @@
 'use client'
 
-import { formatCurrency } from '@/lib/format'
+import { useI18n } from '@/components/LocaleProvider'
 
 export type YearRow = {
   label: string
@@ -21,29 +21,32 @@ export function YearTable({
   mainLabel,
   bankLabel,
   showBand,
-  periodLabel = 'Year',
+  periodLabel,
 }: {
   rows: YearRow[]
   currency: string
   mainLabel: string
   bankLabel: string
   showBand: boolean
+  /** Defaults to the localised word for "Year". */
   periodLabel?: string
 }) {
+  const { t, f } = useI18n()
+
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[560px] border-collapse text-sm">
         <thead>
           <tr className="border-b border-hairline text-left text-xs text-ink-secondary">
             <th scope="col" className="py-2 pr-3 font-medium">
-              {periodLabel}
+              {periodLabel ?? t.table.year}
             </th>
             <th scope="col" className="py-2 pr-3 text-right font-medium">
-              Paid in
+              {t.table.paidIn}
             </th>
             {showBand && (
               <th scope="col" className="py-2 pr-3 text-right font-medium">
-                Worst
+                {t.table.worst}
               </th>
             )}
             <th scope="col" className="py-2 pr-3 text-right font-medium">
@@ -51,14 +54,14 @@ export function YearTable({
             </th>
             {showBand && (
               <th scope="col" className="py-2 pr-3 text-right font-medium">
-                Best
+                {t.table.best}
               </th>
             )}
             <th scope="col" className="py-2 pr-3 text-right font-medium">
               {bankLabel}
             </th>
             <th scope="col" className="py-2 text-right font-medium">
-              Difference
+              {t.table.difference}
             </th>
           </tr>
         </thead>
@@ -69,24 +72,24 @@ export function YearTable({
                 {row.label}
               </th>
               <td className="py-2 pr-3 text-right text-ink-secondary">
-                {formatCurrency(row.paidIn, currency)}
+                {f.currency(row.paidIn, currency)}
               </td>
               {showBand && (
                 <td className="py-2 pr-3 text-right text-ink-secondary">
-                  {formatCurrency(row.low ?? row.main, currency)}
+                  {f.currency(row.low ?? row.main, currency)}
                 </td>
               )}
               <td className="py-2 pr-3 text-right font-medium">
-                {formatCurrency(row.main, currency)}
+                {f.currency(row.main, currency)}
               </td>
               {showBand && (
                 <td className="py-2 pr-3 text-right text-ink-secondary">
-                  {formatCurrency(row.high ?? row.main, currency)}
+                  {f.currency(row.high ?? row.main, currency)}
                 </td>
               )}
-              <td className="py-2 pr-3 text-right">{formatCurrency(row.bank, currency)}</td>
+              <td className="py-2 pr-3 text-right">{f.currency(row.bank, currency)}</td>
               <td className="py-2 text-right font-medium text-good">
-                +{formatCurrency(row.main - row.bank, currency)}
+                +{f.currency(row.main - row.bank, currency)}
               </td>
             </tr>
           ))}

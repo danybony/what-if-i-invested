@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useId, useRef, useState } from 'react'
+import { useI18n } from '@/components/LocaleProvider'
+import { loadErrorMessage } from '@/lib/i18n/messages'
 import { loadSymbols, searchSymbols, type SymbolEntry } from '@/lib/marketData'
 
 /**
@@ -15,15 +17,17 @@ import { loadSymbols, searchSymbols, type SymbolEntry } from '@/lib/marketData'
 export function SymbolSearch({
   onSelect,
   disabled,
-  placeholder = 'Search a stock or ETF — e.g. VWCE.DE, Apple, S&P 500',
+  placeholder,
 }: {
   onSelect: (entry: SymbolEntry) => void
   disabled?: boolean
+  /** Defaults to the localised prompt. */
   placeholder?: string
 }) {
+  const { t } = useI18n()
   const [query, setQuery] = useState('')
   const [index, setIndex] = useState<SymbolEntry[] | null>(null)
-  const [loadError, setLoadError] = useState<string | null>(null)
+  const [loadError, setLoadError] = useState<unknown>(null)
   const [open, setOpen] = useState(false)
   const [highlighted, setHighlighted] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -35,8 +39,8 @@ export function SymbolSearch({
       .then((data) => {
         if (!cancelled) setIndex(data.symbols)
       })
-      .catch((error: Error) => {
-        if (!cancelled) setLoadError(error.message)
+      .catch((error: unknown) => {
+        if (!cancelled) setLoadError(error)
       })
     return () => {
       cancelled = true
@@ -71,9 +75,9 @@ export function SymbolSearch({
         aria-controls={listId}
         aria-autocomplete="list"
         className="field"
-        placeholder={index ? placeholder : 'Loading symbols…'}
+        placeholder={index ? (placeholder ?? t.search.placeholder) : t.search.loading}
         value={query}
-        disabled={disabled || (!index && !loadError)}
+        disabled={disabled || (!index && loadError === null)}
         onChange={(event) => {
           setQuery(event.target.value)
           setHighlighted(0)
@@ -95,7 +99,9 @@ export function SymbolSearch({
         }}
       />
 
-      {loadError && <p className="mt-1.5 text-[11px] text-ink-muted">{loadError}</p>}
+      {loadError !== null && (
+        <p className="mt-1.5 text-[11px] text-ink-muted">{loadErrorMessage(t, loadError)}</p>
+      )}
 
       {showList && (
         <ul
@@ -104,10 +110,7 @@ export function SymbolSearch({
           className="absolute z-20 mt-1 max-h-72 w-full overflow-auto rounded-lg border border-hairline bg-surface py-1 shadow-lg"
         >
           {hits.length === 0 && (
-            <li className="px-3 py-2 text-xs text-ink-muted">
-              Nothing matches “{trimmed}”. The site carries a curated list of popular funds and
-              shares rather than every ticker.
-            </li>
+            <li className="px-3 py-2 text-xs text-ink-muted">{t.search.noMatch(trimmed)}</li>
           )}
           {hits.map((entry, position) => (
             <li key={entry.symbol} role="option" aria-selected={position === highlighted}>

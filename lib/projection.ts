@@ -31,19 +31,20 @@ export const CONTRIBUTIONS_PER_YEAR: Record<ContributionFrequency, number> = {
   annually: 1,
 }
 
-export const COMPOUND_LABELS: Record<CompoundFrequency, string> = {
-  daily: 'Daily',
-  monthly: 'Monthly',
-  quarterly: 'Quarterly',
-  semiannually: 'Semi-annually',
-  annually: 'Annually',
-}
+/** Display order for the pickers. The names themselves are translated. */
+export const COMPOUND_FREQUENCIES: CompoundFrequency[] = [
+  'daily',
+  'monthly',
+  'quarterly',
+  'semiannually',
+  'annually',
+]
 
-export const CONTRIBUTION_LABELS: Record<ContributionFrequency, string> = {
-  monthly: 'Monthly',
-  quarterly: 'Quarterly',
-  annually: 'Annually',
-}
+export const CONTRIBUTION_FREQUENCIES: ContributionFrequency[] = [
+  'monthly',
+  'quarterly',
+  'annually',
+]
 
 /** A bank baseline: either one flat rate, or the real month-by-month history. */
 export type BankConfig =

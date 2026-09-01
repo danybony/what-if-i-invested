@@ -5,6 +5,7 @@ import { Button } from '@/components/Buttons'
 import { Modal } from '@/components/Modal'
 import { Toggle } from '@/components/ui'
 import { useConsent } from '@/components/ConsentProvider'
+import { useI18n } from '@/components/LocaleProvider'
 
 /**
  * Storage-consent bar and preferences panel.
@@ -23,6 +24,7 @@ export function CookieBanner() {
     acceptAll,
     rejectAll,
   } = useConsent()
+  const { t } = useI18n()
 
   const undecided = ready && disclaimerAcknowledged && consent === null
   const showBar = undecided && !settingsOpen
@@ -32,31 +34,26 @@ export function CookieBanner() {
       {showBar && (
         <div
           role="region"
-          aria-label="Storage and cookie consent"
+          aria-label={t.consent.regionAria}
           className="fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-surface/95 p-4 backdrop-blur sm:p-5"
         >
           <div className="mx-auto flex max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
             <div className="min-w-0 flex-1 text-xs leading-relaxed text-ink-secondary">
-              <p className="mb-1 text-sm font-semibold text-ink">Your data on this site</p>
+              <p className="mb-1 text-sm font-semibold text-ink">{t.consent.barTitle}</p>
               <p>
-                We store a small record in your browser to remember this choice and that you have
-                seen the disclaimer. That much is needed for the site to work. Anything beyond it is
-                optional and stays off unless you turn it on.{' '}
-                <span className="text-ink-muted">
-                  Nothing you enter leaves your device: there is no backend, no advertising and no
-                  profiling, and nothing is sold or shared.
-                </span>
+                {t.consent.barBody}{' '}
+                <span className="text-ink-muted">{t.consent.barQuiet}</span>
               </p>
             </div>
             <div className="flex shrink-0 flex-wrap items-center gap-2">
               <Button variant="neutral" onClick={openSettings}>
-                Manage
+                {t.consent.manage}
               </Button>
               <Button variant="neutral" onClick={rejectAll}>
-                Reject all
+                {t.consent.rejectAll}
               </Button>
               <Button variant="primary" onClick={acceptAll}>
-                Accept all
+                {t.consent.acceptAll}
               </Button>
             </div>
           </div>
@@ -74,6 +71,7 @@ export function CookieBanner() {
 
 function ConsentSettingsPanel() {
   const { consent, closeSettings, rejectAll, saveConsent, withdrawConsent } = useConsent()
+  const { t } = useI18n()
   const [analytics, setAnalytics] = useState(consent?.categories.analytics ?? false)
 
   return (
@@ -86,11 +84,10 @@ function ConsentSettingsPanel() {
       describedBy="consent-settings-body"
     >
       <h2 id="consent-settings-title" className="text-lg font-semibold tracking-tight text-ink">
-        Storage preferences
+        {t.consent.settingsTitle}
       </h2>
       <p id="consent-settings-body" className="mt-2 text-sm text-ink-secondary">
-        This site uses browser storage rather than server-side cookies, which privacy law treats the
-        same way. Here is everything it can store.
+        {t.consent.settingsBody}
       </p>
 
       <div className="mt-4 space-y-3">
@@ -99,8 +96,8 @@ function ConsentSettingsPanel() {
             checked
             disabled
             onChange={() => {}}
-            label="Strictly necessary — always on"
-            hint="Two records: that you acknowledged the disclaimer, and the choice you make here. Without them you would be asked again on every page. They hold no identifier and never leave your browser."
+            label={t.consent.necessaryLabel}
+            hint={t.consent.necessaryHint}
           />
         </div>
 
@@ -108,31 +105,29 @@ function ConsentSettingsPanel() {
           <Toggle
             checked={analytics}
             onChange={setAnalytics}
-            label="Analytics — optional"
-            hint="Anonymous, aggregated usage statistics showing which features get used. Nothing is loaded today, and this stays off until you switch it on; if analytics is ever added, it will not run without it."
+            label={t.consent.analyticsLabel}
+            hint={t.consent.analyticsHint}
           />
         </div>
       </div>
 
       <p className="mt-4 text-[11px] leading-relaxed text-ink-muted">
-        This is a static site with no backend. Prices and ECB interest rates are published as files
-        alongside the page and refreshed on a schedule, so your browser never contacts a data
-        provider and no server of ours logs what you look up — every calculation runs on your own
-        machine. You can change or withdraw this at any time from{' '}
-        <span className="whitespace-nowrap">“Storage preferences”</span> in the footer.
+        {t.consent.settingsFootnoteBefore}{' '}
+        <span className="whitespace-nowrap">{t.consent.settingsFootnoteLink}</span>{' '}
+        {t.consent.settingsFootnoteAfter}
       </p>
 
       <div className="mt-5 flex flex-wrap justify-end gap-2">
         {consent && (
           <Button variant="quiet" onClick={withdrawConsent}>
-            Withdraw and ask again
+            {t.consent.withdraw}
           </Button>
         )}
         <Button variant="neutral" onClick={rejectAll}>
-          Reject all
+          {t.consent.rejectAll}
         </Button>
         <Button variant="primary" onClick={() => saveConsent({ necessary: true, analytics })}>
-          Save choices
+          {t.consent.save}
         </Button>
       </div>
     </Modal>

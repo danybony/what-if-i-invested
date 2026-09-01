@@ -49,9 +49,22 @@ export type DepositRates = {
   source: string
 }
 
+/**
+ * Which dataset was missing. The UI renders the sentence, so the code — not an
+ * English string — is what travels out of here.
+ */
+export type MarketDataCode = 'symbols' | 'history' | 'rates'
+
 export class MarketDataError extends Error {
-  constructor(message: string) {
-    super(message)
+  constructor(
+    readonly code: MarketDataCode,
+    readonly symbol?: string
+  ) {
+    super(
+      symbol
+        ? `No published market data for ${symbol} (${code}).`
+        : `No published market data (${code}).`
+    )
     this.name = 'MarketDataError'
   }
 }
@@ -62,20 +75,20 @@ export class MarketDataError extends Error {
  */
 const inFlight = new Map<string, Promise<unknown>>()
 
-function loadJson<T>(path: string, missingMessage: string): Promise<T> {
+function loadJson<T>(path: string, code: MarketDataCode, symbol?: string): Promise<T> {
   const cached = inFlight.get(path) as Promise<T> | undefined
   if (cached) return cached
 
   const request = fetch(`${BASE_PATH}${path}`)
     .then(async (response) => {
-      if (!response.ok) throw new MarketDataError(missingMessage)
+      if (!response.ok) throw new MarketDataError(code, symbol)
       return (await response.json()) as T
     })
     .catch((error) => {
       // A failed load must not be cached, or a transient network blip would
       // stick for the rest of the session.
       inFlight.delete(path)
-      throw error instanceof MarketDataError ? error : new MarketDataError(missingMessage)
+      throw error instanceof MarketDataError ? error : new MarketDataError(code, symbol)
     })
 
   inFlight.set(path, request)
@@ -83,24 +96,15 @@ function loadJson<T>(path: string, missingMessage: string): Promise<T> {
 }
 
 export function loadSymbols(): Promise<SymbolsIndex> {
-  return loadJson<SymbolsIndex>(
-    '/data/symbols.json',
-    'The symbol list has not been published yet. Run the “Refresh market data” workflow.'
-  )
+  return loadJson<SymbolsIndex>('/data/symbols.json', 'symbols')
 }
 
 export function loadHistory(entry: SymbolEntry): Promise<PriceHistory> {
-  return loadJson<PriceHistory>(
-    `/data/prices/${entry.file}`,
-    `No published price history for ${entry.symbol} yet. Run the “Refresh market data” workflow.`
-  )
+  return loadJson<PriceHistory>(`/data/prices/${entry.file}`, 'history', entry.symbol)
 }
 
 export function loadRates(): Promise<DepositRates> {
-  return loadJson<DepositRates>(
-    '/data/rates.json',
-    'Bank rates have not been published yet.'
-  )
+  return loadJson<DepositRates>('/data/rates.json', 'rates')
 }
 
 /**

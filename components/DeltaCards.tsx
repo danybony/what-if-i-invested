@@ -1,6 +1,6 @@
 'use client'
 
-import { formatCurrency, formatPercent } from '@/lib/format'
+import { useI18n } from '@/components/LocaleProvider'
 
 /**
  * The headline. The gap between investing and leaving the money in the bank is
@@ -24,6 +24,7 @@ export function DeltaCards({
   /** Worst/best gap, when a range of outcomes is being shown. */
   gapRange?: { worst: number; best: number }
 }) {
+  const { t, f } = useI18n()
   const gap = invested - bank
   const multiple = bank > 0 ? invested / bank : null
   const growthOnContributions = paidIn > 0 ? invested / paidIn - 1 : 0
@@ -32,39 +33,41 @@ export function DeltaCards({
     <div className="grid gap-3 sm:grid-cols-3">
       <div className="rounded-xl border border-hairline bg-surface p-4 sm:col-span-3">
         <p className="text-xs font-medium text-ink-secondary">
-          What investing leaves you with, over and above the bank
+          {t.delta.headline}
         </p>
         <p className="mt-1 text-4xl font-semibold tracking-tight text-good sm:text-5xl">
-          +{formatCurrency(gap, currency)}
+          +{f.currency(gap, currency)}
         </p>
         <p className="mt-2 text-xs text-ink-secondary">
           {gapRange ? (
             <>
-              Between{' '}
+              {t.delta.rangeBefore}{' '}
               <strong className="tabular font-semibold text-ink">
-                +{formatCurrency(gapRange.worst, currency)}
+                +{f.currency(gapRange.worst, currency)}
               </strong>{' '}
-              and{' '}
+              {t.delta.rangeMiddle}{' '}
               <strong className="tabular font-semibold text-ink">
-                +{formatCurrency(gapRange.best, currency)}
+                +{f.currency(gapRange.best, currency)}
               </strong>{' '}
-              across the range of outcomes.
+              {t.delta.rangeAfter}
             </>
           ) : (
             <>
-              You would have put in{' '}
+              {t.delta.paidInBefore}{' '}
               <strong className="tabular font-semibold text-ink">
-                {formatCurrency(paidIn, currency)}
-              </strong>{' '}
-              either way.
+                {f.currency(paidIn, currency)}
+              </strong>
+              {t.delta.paidInAfter}
             </>
           )}
           {multiple !== null && multiple > 1.05 && (
             <>
               {' '}
-              That is{' '}
-              <strong className="tabular font-semibold text-ink">{multiple.toFixed(1)}×</strong> what
-              the bank would have left you.
+              {t.delta.multipleBefore}{' '}
+              <strong className="tabular font-semibold text-ink">
+                {f.decimal(multiple, 1)}×
+              </strong>{' '}
+              {t.delta.multipleAfter}
             </>
           )}
         </p>
@@ -72,14 +75,14 @@ export function DeltaCards({
 
       <Stat
         label={investedLabel}
-        value={formatCurrency(invested, currency)}
+        value={f.currency(invested, currency)}
         accent="var(--invest)"
-        note={`${formatPercent(growthOnContributions, 0)} more than you paid in`}
+        note={t.delta.moreThanPaidIn(f.percent(growthOnContributions, 0))}
       />
-      <Stat label={bankLabel} value={formatCurrency(bank, currency)} accent="var(--bank)" />
+      <Stat label={bankLabel} value={f.currency(bank, currency)} accent="var(--bank)" />
       <Stat
-        label="Money paid in"
-        value={formatCurrency(paidIn, currency)}
+        label={t.delta.moneyPaidIn}
+        value={f.currency(paidIn, currency)}
         accent="var(--paid-in)"
         dashed
       />

@@ -5,30 +5,26 @@ import { DeltaCards } from '@/components/DeltaCards'
 import { ResultChart, type ChartDatum } from '@/components/ResultChart'
 import { YearTable, type YearRow } from '@/components/YearTable'
 import { Callout, Card, Field, NumberInput, Select } from '@/components/ui'
-import { CURRENCIES, formatPercent } from '@/lib/format'
+import { CURRENCIES } from '@/lib/format'
 import { useCalculatorState } from '@/components/CalculatorState'
+import { useI18n } from '@/components/LocaleProvider'
 import { loadRates } from '@/lib/marketData'
 import { RATE_PRESETS } from '@/lib/presets'
-import {
-  COMPOUND_LABELS,
-  CONTRIBUTION_LABELS,
-  project,
-  type CompoundFrequency,
-  type ContributionFrequency,
-} from '@/lib/projection'
-
-const compoundOptions = (Object.keys(COMPOUND_LABELS) as CompoundFrequency[]).map((value) => ({
-  value,
-  label: COMPOUND_LABELS[value],
-}))
-
-const contributionOptions = (Object.keys(CONTRIBUTION_LABELS) as ContributionFrequency[]).map(
-  (value) => ({ value, label: CONTRIBUTION_LABELS[value] })
-)
+import { COMPOUND_FREQUENCIES, CONTRIBUTION_FREQUENCIES, project } from '@/lib/projection'
 
 export default function BasicModePage() {
   const { shared, setShared, basic, setBasic, setRateAndVariance } = useCalculatorState()
+  const { t, f } = useI18n()
   const [ecbRate, setEcbRate] = useState<{ month: string; rate: number } | null>(null)
+
+  const compoundOptions = COMPOUND_FREQUENCIES.map((value) => ({
+    value,
+    label: t.frequency.compound[value],
+  }))
+  const contributionOptions = CONTRIBUTION_FREQUENCIES.map((value) => ({
+    value,
+    label: t.frequency.contribution[value],
+  }))
 
   // Offered as a one-click fill, not applied automatically — the default stays
   // 0%, which is what most euro-area current accounts actually pay.
@@ -63,27 +59,31 @@ export default function BasicModePage() {
     () =>
       result.points.map((point) => ({
         x: point.year,
-        label: point.monthIndex === 0 ? 'Today' : `Year ${(point.monthIndex / 12).toFixed(1)}`,
+        label:
+          point.monthIndex === 0
+            ? t.table.today
+            : t.table.yearN(f.decimal(point.monthIndex / 12, 1)),
         main: point.average,
         low: point.worst,
         high: point.best,
         bank: point.bank,
         paidIn: point.contributed,
       })),
-    [result]
+    [result, t, f]
   )
 
   const tableRows: YearRow[] = useMemo(
     () =>
       result.yearlyPoints.map((point) => ({
-        label: point.monthIndex === 0 ? 'Start' : `Year ${point.monthIndex / 12}`,
+        label:
+          point.monthIndex === 0 ? t.table.start : t.table.yearN(String(point.monthIndex / 12)),
         paidIn: point.contributed,
         main: point.average,
         low: point.worst,
         high: point.best,
         bank: point.bank,
       })),
-    [result]
+    [result, t]
   )
 
   const showBand = basic.variance > 0
@@ -95,70 +95,69 @@ export default function BasicModePage() {
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <div className="mb-6 max-w-2xl">
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-          What if you invested it instead?
+          {t.basic.title}
         </h1>
         <p className="mt-2 text-sm text-ink-secondary">
-          Compound interest on one side, your bank account on the other. The number that matters is
-          the space between them.
+          {t.basic.intro}
         </p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
         <div className="min-w-0 space-y-4">
-          <Card title="Your money">
+          <Card title={t.basic.yourMoney}>
             <div className="space-y-3">
-              <Field label="Initial investment">
+              <Field label={t.basic.initial}>
                 <NumberInput
                   value={shared.initial}
                   onChange={(value) => setShared('initial', value)}
                   prefix="€"
                   min={0}
-                  ariaLabel="Initial investment"
+                  ariaLabel={t.basic.aria.initial}
                 />
               </Field>
               <div className="grid grid-cols-2 gap-3">
-                <Field label="Contribution">
+                <Field label={t.basic.contribution}>
                   <NumberInput
                     value={shared.contribution}
                     onChange={(value) => setShared('contribution', value)}
                     prefix="€"
                     min={0}
-                    ariaLabel="Recurring contribution"
+                    ariaLabel={t.basic.aria.contribution}
                   />
                 </Field>
-                <Field label="How often">
+                <Field label={t.basic.howOften}>
                   <Select
                     value={shared.contributionFrequency}
                     onChange={(value) => setShared('contributionFrequency', value)}
                     options={contributionOptions}
-                    ariaLabel="Contribution frequency"
+                    ariaLabel={t.basic.aria.contributionFrequency}
                   />
                 </Field>
               </div>
-              <Field label="Length of time" hint="Contributions are added at the end of each period.">
+              <Field label={t.basic.lengthOfTime} hint={t.basic.lengthHint}>
                 <NumberInput
                   value={basic.years}
                   onChange={(value) => setBasic('years', Math.max(1, Math.min(60, value)))}
-                  suffix="yrs"
+                  suffix={t.basic.years}
                   min={1}
                   max={60}
-                  ariaLabel="Length of time in years"
+                  ariaLabel={t.basic.aria.years}
                 />
               </Field>
-              <Field label="Currency">
+              <Field label={t.basic.currency}>
                 <Select
                   value={basic.currency}
                   onChange={(value) => setBasic('currency', value)}
                   options={CURRENCIES.map((code) => ({ value: code, label: code }))}
-                  ariaLabel="Currency"
+                  ariaLabel={t.basic.aria.currency}
                 />
               </Field>
             </div>
           </Card>
 
           <Card
-            title="Expected return"
-            description="Start from an asset class, then adjust either number."
+            title={t.basic.expectedReturn}
+            description={t.basic.expectedReturnHint}
           >
             <div className="space-y-3">
               <div className="flex flex-wrap gap-1.5">
@@ -168,7 +167,7 @@ export default function BasicModePage() {
                     <button
                       key={preset.id}
                       type="button"
-                      title={preset.note}
+                      title={t.presets[preset.id].note}
                       onClick={() => setRateAndVariance(preset.rate, preset.variance)}
                       className={`rounded-full border px-2.5 py-1 text-[11px] transition-colors ${
                         isActive
@@ -176,23 +175,23 @@ export default function BasicModePage() {
                           : 'border-hairline text-ink-secondary hover:text-ink'
                       }`}
                     >
-                      {preset.label}
+                      {t.presets[preset.id].label}
                     </button>
                   )
                 })}
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <Field label="Estimated interest rate">
+                <Field label={t.basic.rate}>
                   <NumberInput
                     value={round(basic.rate * 100)}
                     onChange={(value) => setBasic('rate', value / 100)}
                     suffix="%"
                     step={0.1}
-                    ariaLabel="Estimated interest rate"
+                    ariaLabel={t.basic.aria.rate}
                   />
                 </Field>
-                <Field label="Variance range">
+                <Field label={t.basic.variance}>
                   <NumberInput
                     value={round(basic.variance * 100)}
                     onChange={(value) => setBasic('variance', Math.max(0, value) / 100)}
@@ -200,45 +199,43 @@ export default function BasicModePage() {
                     suffix="%"
                     step={0.1}
                     min={0}
-                    ariaLabel="Interest rate variance range"
+                    ariaLabel={t.basic.aria.variance}
                   />
                 </Field>
               </div>
 
               <p className="text-[11px] leading-snug text-ink-muted">
-                {showBand ? (
-                  <>
-                    Best and worst cases are run at {formatPercent(result.rates.best)} and{' '}
-                    {formatPercent(result.rates.worst)}.
-                  </>
-                ) : (
-                  <>Set a variance range to see a best and worst case.</>
-                )}
+                {showBand
+                  ? t.basic.bandNote(
+                      f.percent(result.rates.best),
+                      f.percent(result.rates.worst)
+                    )
+                  : t.basic.noBandNote}
               </p>
 
-              <Field label="Compound frequency">
+              <Field label={t.basic.compoundFrequency}>
                 <Select
                   value={basic.compoundFrequency}
                   onChange={(value) => setBasic('compoundFrequency', value)}
                   options={compoundOptions}
-                  ariaLabel="Compound frequency"
+                  ariaLabel={t.basic.aria.compoundFrequency}
                 />
               </Field>
             </div>
           </Card>
 
           <Card
-            title="If you left it in the bank"
-            description="The comparison line. Most euro-area current accounts pay nothing at all."
+            title={t.basic.bankTitle}
+            description={t.basic.bankHint}
           >
-            <Field label="Savings rate">
+            <Field label={t.basic.savingsRate}>
               <NumberInput
                 value={round(shared.bankRate * 100)}
                 onChange={(value) => setShared('bankRate', value / 100)}
                 suffix="%"
                 step={0.1}
                 min={0}
-                ariaLabel="Bank savings rate"
+                ariaLabel={t.basic.aria.bankRate}
               />
             </Field>
             {ecbRate && (
@@ -247,7 +244,7 @@ export default function BasicModePage() {
                 onClick={() => setShared('bankRate', ecbRate.rate)}
                 className="mt-2 text-[11px] text-invest underline underline-offset-2 hover:no-underline"
               >
-                Use the current euro-area deposit rate ({formatPercent(ecbRate.rate, 2)})
+                {t.basic.useEcbRate(f.percent(ecbRate.rate, 2))}
               </button>
             )}
           </Card>
@@ -259,8 +256,8 @@ export default function BasicModePage() {
             invested={result.finalAverage}
             bank={result.finalBank}
             paidIn={result.totalContributed}
-            investedLabel={`Invested at ${formatPercent(basic.rate)}`}
-            bankLabel={`In the bank at ${formatPercent(shared.bankRate, 2)}`}
+            investedLabel={t.basic.investedAt(f.percent(basic.rate))}
+            bankLabel={t.basic.inTheBankAt(f.percent(shared.bankRate, 2))}
             gapRange={
               showBand ? { worst: result.gapWorst, best: result.gapBest } : undefined
             }
@@ -270,25 +267,24 @@ export default function BasicModePage() {
             <ResultChart
               data={chartData}
               currency={basic.currency}
-              mainLabel={`Invested at ${formatPercent(basic.rate)}`}
-              bankLabel="In the bank"
+              mainLabel={t.basic.investedAt(f.percent(basic.rate))}
+              bankLabel={t.basic.inTheBank}
               showBand={showBand}
             />
           </Card>
 
           {shared.bankRate === 0 && (
             <Callout>
-              With a 0% savings rate the bank line is simply the money you paid in — every euro of
-              the difference is compounding you did not get.
+              {t.basic.zeroRateNote}
             </Callout>
           )}
 
-          <Card title="Year by year">
+          <Card title={t.basic.yearByYear}>
             <YearTable
               rows={tableRows}
               currency={basic.currency}
-              mainLabel="Invested"
-              bankLabel="In the bank"
+              mainLabel={t.basic.invested}
+              bankLabel={t.basic.inTheBank}
               showBand={showBand}
             />
           </Card>

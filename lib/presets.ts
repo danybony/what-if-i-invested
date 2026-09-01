@@ -4,51 +4,29 @@ import type { CompoundFrequency, ContributionFrequency } from './projection'
  * Starting points for the two investor.gov-style fields. Every number stays
  * editable — these only save the user from inventing a rate from nothing.
  * Figures are rounded long-run nominal averages, not forecasts.
+ *
+ * The label and the explanatory note live in the dictionaries, keyed by `id`:
+ * they are prose, and prose is translated.
  */
+export type PresetId =
+  | 'global-equity'
+  | 'sp500'
+  | 'balanced'
+  | 'bonds'
+  | 'money-market'
+
 export type RatePreset = {
-  id: string
-  label: string
+  id: PresetId
   rate: number
   variance: number
-  note: string
 }
 
 export const RATE_PRESETS: RatePreset[] = [
-  {
-    id: 'global-equity',
-    label: 'Global equity ETF',
-    rate: 0.07,
-    variance: 0.05,
-    note: 'A world tracker such as an MSCI World or FTSE All-World fund.',
-  },
-  {
-    id: 'sp500',
-    label: 'S&P 500',
-    rate: 0.08,
-    variance: 0.06,
-    note: 'US large caps — higher long-run return, wider swings.',
-  },
-  {
-    id: 'balanced',
-    label: '60 / 40 portfolio',
-    rate: 0.055,
-    variance: 0.035,
-    note: 'Sixty percent shares, forty percent bonds.',
-  },
-  {
-    id: 'bonds',
-    label: 'Government bonds',
-    rate: 0.03,
-    variance: 0.02,
-    note: 'Investment-grade government debt.',
-  },
-  {
-    id: 'money-market',
-    label: 'Money market fund',
-    rate: 0.02,
-    variance: 0.01,
-    note: 'Short-term cash-like instruments that track policy rates.',
-  },
+  { id: 'global-equity', rate: 0.07, variance: 0.05 },
+  { id: 'sp500', rate: 0.08, variance: 0.06 },
+  { id: 'balanced', rate: 0.055, variance: 0.035 },
+  { id: 'bonds', rate: 0.03, variance: 0.02 },
+  { id: 'money-market', rate: 0.02, variance: 0.01 },
 ]
 
 /** The S&P 500 is the reference most people arrive with, so it leads. */

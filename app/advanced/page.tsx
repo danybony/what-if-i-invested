@@ -7,14 +7,11 @@ import { ResultChart, type ChartDatum } from '@/components/ResultChart'
 import { YearTable, type YearRow } from '@/components/YearTable'
 import { Callout, Card, Field, NumberInput, Select, Toggle } from '@/components/ui'
 import { backtest, type BankConfigInput } from '@/lib/backtest'
-import { formatMonth, formatPercent } from '@/lib/format'
 import { loadHistory, loadRates, type SymbolEntry } from '@/lib/marketData'
 import { useCalculatorState } from '@/components/CalculatorState'
-import { CONTRIBUTION_LABELS, type ContributionFrequency } from '@/lib/projection'
-
-const contributionOptions = (Object.keys(CONTRIBUTION_LABELS) as ContributionFrequency[]).map(
-  (value) => ({ value, label: CONTRIBUTION_LABELS[value] })
-)
+import { useI18n } from '@/components/LocaleProvider'
+import { backtestErrorMessage, loadErrorMessage } from '@/lib/i18n/messages'
+import { CONTRIBUTION_FREQUENCIES } from '@/lib/projection'
 
 function monthsAgo(count: number): string {
   const now = new Date()
@@ -24,11 +21,16 @@ function monthsAgo(count: number): string {
 
 export default function AdvancedModePage() {
   const { shared, setShared, advanced, setAdvanced, updateHoldings } = useCalculatorState()
+  const { t, f } = useI18n()
+  const contributionOptions = CONTRIBUTION_FREQUENCIES.map((value) => ({
+    value,
+    label: t.frequency.contribution[value],
+  }))
   const { holdings, startMonth, useHistoricalRates, reinvestDividends } = advanced
   const { initial, contribution, contributionFrequency, bankRate } = shared
 
   const [pending, setPending] = useState<string[]>([])
-  const [loadError, setLoadError] = useState<string | null>(null)
+  const [loadError, setLoadError] = useState<unknown>(null)
   const [ecbRates, setEcbRates] = useState<Record<string, number> | null>(null)
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export default function AdvancedModePage() {
           }))
         })
       } catch (error) {
-        setLoadError(error instanceof Error ? error.message : 'Could not load price history.')
+        setLoadError(error)
       } finally {
         setPending((previous) => previous.filter((item) => item !== symbol))
       }
@@ -146,38 +148,37 @@ export default function AdvancedModePage() {
     if (!result?.ok) return []
     return result.points.map((point) => ({
       x: point.year,
-      label: formatMonth(point.month),
+      label: f.month(point.month),
       main: point.portfolio,
       bank: point.bank,
       paidIn: point.contributed,
     }))
-  }, [result])
+  }, [result, f])
 
   const tableRows: YearRow[] = useMemo(() => {
     if (!result?.ok) return []
     return result.yearlyPoints.map((point) => ({
-      label: formatMonth(point.month),
+      label: f.month(point.month),
       paidIn: point.contributed,
       main: point.portfolio,
       bank: point.bank,
     }))
-  }, [result])
+  }, [result, f])
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <div className="mb-6 max-w-2xl">
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-          What if you had actually bought it?
+          {t.advanced.title}
         </h1>
         <p className="mt-2 text-sm text-ink-secondary">
-          Build a portfolio of real funds and shares, pick a start date, and see what those exact
-          holdings would have done with your money — against the same money left in the bank.
+          {t.advanced.intro}
         </p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[340px_minmax(0,1fr)]">
         <div className="min-w-0 space-y-4">
-          <Card title="Your portfolio" description="Weights must add up to 100%.">
+          <Card title={t.advanced.portfolioTitle} description={t.advanced.portfolioHint}>
             <PortfolioBuilder
               holdings={holdings}
               pending={pending}
@@ -186,50 +187,50 @@ export default function AdvancedModePage() {
               onWeightChange={setWeight}
               onEvenSplit={evenSplit}
             />
-            {loadError && (
+            {loadError !== null && (
               <div className="mt-3">
-                <Callout tone="error">{loadError}</Callout>
+                <Callout tone="error">{loadErrorMessage(t, loadError)}</Callout>
               </div>
             )}
           </Card>
 
-          <Card title="Your money">
+          <Card title={t.advanced.yourMoney}>
             <div className="space-y-3">
-              <Field label="Starting from">
+              <Field label={t.advanced.startingFrom}>
                 <input
                   type="month"
                   className="field"
                   value={startMonth}
                   max={monthsAgo(1)}
                   onChange={(event) => setAdvanced('startMonth', event.target.value)}
-                  aria-label="Start month"
+                  aria-label={t.advanced.aria.startMonth}
                 />
               </Field>
-              <Field label="Initial investment">
+              <Field label={t.basic.initial}>
                 <NumberInput
                   value={initial}
                   onChange={(next) => setShared('initial', next)}
                   prefix="€"
                   min={0}
-                  ariaLabel="Initial investment"
+                  ariaLabel={t.basic.aria.initial}
                 />
               </Field>
               <div className="grid grid-cols-2 gap-3">
-                <Field label="Contribution">
+                <Field label={t.basic.contribution}>
                   <NumberInput
                     value={contribution}
                     onChange={(next) => setShared('contribution', next)}
                     prefix="€"
                     min={0}
-                    ariaLabel="Recurring contribution"
+                    ariaLabel={t.basic.aria.contribution}
                   />
                 </Field>
-                <Field label="How often">
+                <Field label={t.basic.howOften}>
                   <Select
                     value={contributionFrequency}
                     onChange={(next) => setShared('contributionFrequency', next)}
                     options={contributionOptions}
-                    ariaLabel="Contribution frequency"
+                    ariaLabel={t.basic.aria.contributionFrequency}
                   />
                 </Field>
               </div>
@@ -237,36 +238,36 @@ export default function AdvancedModePage() {
                 checked={reinvestDividends && dividendsAvailable}
                 onChange={(next) => setAdvanced('reinvestDividends', next)}
                 disabled={!dividendsAvailable}
-                label="Reinvest dividends"
+                label={t.advanced.reinvest}
                 hint={
                   dividendsAvailable
-                    ? 'Off means price return only. On uses adjusted closes, so payouts are bought back in — the fair comparison for a distributing fund.'
-                    : `No dividend data is published for ${withoutAdjusted.join(', ')}, so only price return can be shown for this portfolio.`
+                    ? t.advanced.reinvestHint
+                    : t.advanced.reinvestUnavailable(withoutAdjusted.join(', '))
                 }
               />
             </div>
           </Card>
 
-          <Card title="If you left it in the bank">
+          <Card title={t.basic.bankTitle}>
             <div className="space-y-3">
-              <Field label="Savings rate">
+              <Field label={t.basic.savingsRate}>
                 <NumberInput
                   value={Math.round(bankRate * 100 * 1000) / 1000}
                   onChange={(value) => setShared('bankRate', value / 100)}
                   suffix="%"
                   step={0.1}
                   min={0}
-                  ariaLabel="Bank savings rate"
+                  ariaLabel={t.basic.aria.bankRate}
                 />
               </Field>
               <Toggle
                 checked={useHistoricalRates}
                 onChange={(next) => setAdvanced('useHistoricalRates', next)}
-                label="Use real historical ECB rates"
+                label={t.advanced.historicalRates}
                 hint={
                   ecbRates
-                    ? 'Applies the euro-area household deposit rate for each month of the backtest.'
-                    : 'ECB rates are unavailable right now.'
+                    ? t.advanced.historicalRatesHint
+                    : t.advanced.historicalRatesUnavailable
                 }
               />
             </div>
@@ -277,18 +278,18 @@ export default function AdvancedModePage() {
           {!result && (
             <Card>
               <div className="py-12 text-center">
-                <p className="text-sm font-medium">Add a holding to run the backtest</p>
+                <p className="text-sm font-medium">{t.advanced.emptyTitle}</p>
                 <p className="mx-auto mt-2 max-w-sm text-xs text-ink-secondary">
-                  Try <code className="tabular">VWCE.DE</code> for a world tracker,{' '}
-                  <code className="tabular">SWDA.MI</code> on Borsa Italiana, or a single share like{' '}
-                  <code className="tabular">AAPL</code>.
+                  {t.advanced.emptyHintBefore} <code className="tabular">VWCE.DE</code>{' '}
+                  {t.advanced.emptyHintWorld} <code className="tabular">SWDA.MI</code>{' '}
+                  {t.advanced.emptyHintMilan} <code className="tabular">AAPL</code>.
                 </p>
               </div>
             </Card>
           )}
 
           {result && !result.ok && (
-            <Callout tone="error">{result.error.message}</Callout>
+            <Callout tone="error">{backtestErrorMessage(t, f, result.error)}</Callout>
           )}
 
           {result?.ok && (
@@ -298,17 +299,21 @@ export default function AdvancedModePage() {
                 invested={result.finalValue}
                 bank={result.finalBank}
                 paidIn={result.totalContributed}
-                investedLabel="Your portfolio today"
+                investedLabel={t.advanced.portfolioToday}
                 bankLabel={
-                  useHistoricalRates ? 'In the bank at ECB rates' : `In the bank at ${formatPercent(bankRate, 2)}`
+                  useHistoricalRates
+                    ? t.advanced.inTheBankAtEcb
+                    : t.advanced.inTheBankAt(f.percent(bankRate, 2))
                 }
               />
 
               {result.clampedBy && (
                 <Callout>
-                  {result.clampedBy.symbol} only has prices from{' '}
-                  {formatMonth(result.clampedBy.firstMonth)}, so the backtest starts there rather
-                  than {formatMonth(startMonth)}.
+                  {t.advanced.clamped(
+                    result.clampedBy.symbol,
+                    f.month(result.clampedBy.firstMonth),
+                    f.month(startMonth)
+                  )}
                 </Callout>
               )}
 
@@ -316,56 +321,62 @@ export default function AdvancedModePage() {
                 <ResultChart
                   data={chartData}
                   currency={result.currency}
-                  mainLabel="Your portfolio"
-                  bankLabel="In the bank"
+                  mainLabel={t.advanced.portfolioToday}
+                  bankLabel={t.advanced.inTheBank}
                   showBand={false}
                 />
               </Card>
 
               <div className="grid gap-3 sm:grid-cols-3">
                 <Metric
-                  label="Your annual return"
-                  value={formatPercent(result.annualisedReturn)}
-                  note="Money-weighted, so it accounts for when you paid in."
+                  label={t.advanced.yourReturn}
+                  value={f.percent(result.annualisedReturn)}
+                  note={t.advanced.yourReturnNote}
                 />
                 <Metric
-                  label="The holdings' own return"
-                  value={formatPercent(result.indexCagr)}
-                  note="Annualised, ignoring contribution timing."
+                  label={t.advanced.holdingsReturn}
+                  value={f.percent(result.indexCagr)}
+                  note={t.advanced.holdingsReturnNote}
                 />
                 <Metric
-                  label="Worst fall along the way"
-                  value={formatPercent(result.maxDrawdown)}
-                  note="Deepest peak-to-trough drop you would have sat through."
+                  label={t.advanced.worstFall}
+                  value={f.percent(result.maxDrawdown)}
+                  note={t.advanced.worstFallNote}
                 />
               </div>
 
-              <Card title="Where the money ended up">
+              <Card title={t.advanced.whereMoneyEnded}>
                 <ul className="space-y-1.5 text-xs">
                   {result.unitsBought.map((holding) => (
                     <li key={holding.symbol} className="flex items-baseline justify-between gap-3">
                       <span className="tabular font-medium">{holding.symbol}</span>
                       <span className="tabular text-ink-secondary">
-                        {holding.units.toFixed(3)} units ·{' '}
-                        {formatPercent(holding.finalWeight, 1)} of the portfolio
+                        {t.advanced.unitsLine(
+                          f.decimal(holding.units, 3),
+                          f.percent(holding.finalWeight, 1)
+                        )}
                       </span>
                     </li>
                   ))}
                 </ul>
                 <p className="mt-3 text-[11px] text-ink-muted">
-                  Weights drift as prices move — there is no rebalancing, and no currency
-                  conversion, so every holding trades in {result.currency}.
+                  {t.advanced.driftNote(result.currency)}
                 </p>
               </Card>
 
-              <Card title={`Year by year — ${formatMonth(result.effectiveStart)} to ${formatMonth(result.endMonth)}`}>
+              <Card
+                title={t.advanced.yearByYear(
+                  f.month(result.effectiveStart),
+                  f.month(result.endMonth)
+                )}
+              >
                 <YearTable
                   rows={tableRows}
                   currency={result.currency}
-                  mainLabel="Portfolio"
-                  bankLabel="In the bank"
+                  mainLabel={t.advanced.portfolio}
+                  bankLabel={t.advanced.inTheBank}
                   showBand={false}
-                  periodLabel="Date"
+                  periodLabel={t.table.date}
                 />
               </Card>
             </>
