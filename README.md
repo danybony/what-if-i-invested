@@ -237,20 +237,32 @@ tested directly and why the backtest runs entirely in the browser.
 
 ## Deploying to GitHub Pages
 
-`.github/workflows/deploy-pages.yml` builds the export and publishes it. Two things have to be
-set up once, by hand:
+`.github/workflows/deploy-pages.yml` builds the export and publishes it, on every push to `main`
+and after each data refresh.
 
-1. **Settings → Pages → Source: GitHub Actions.**
-2. On a **private** repository, Pages needs a plan that includes it (Pro, Team or Enterprise).
-   On a free account the repository has to be public instead.
+The site has its **own custom domain**, `whatifiinvested.it`, set by `public/CNAME`. That matters
+for how it is served: the account's user site uses `www.danielebonaldo.com`, so project sites
+would normally be served from `www.danielebonaldo.com/<repo>/`. A project repo with its own CNAME
+overrides that and is served from its domain root instead — which is why this build sets no
+`NEXT_PUBLIC_BASE_PATH`, while other repos on the account are unaffected and keep their subpaths.
 
-The workflow sets `NEXT_PUBLIC_BASE_PATH` to the repo name, because a project site is served
-from `https://<user>.github.io/<repo>/`. On a custom domain, drop that env line and add a
-`public/CNAME`.
+Keeping the CNAME in `public/` rather than only in repo settings is deliberate: with
+Actions-based deployment the artifact is the source of truth, so a domain configured only in
+settings can be dropped on redeploy.
 
-`refresh-market-data.yml` calls the deploy workflow directly after committing new data — a push
-made with `GITHUB_TOKEN` deliberately does not trigger other workflows, so relying on the `push`
-trigger would leave fresh data unpublished.
+DNS for the apex domain points at GitHub's Pages addresses:
+
+| Record | Name | Value |
+|---|---|---|
+| A | `@` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` |
+| AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` |
+| CNAME | `www` | `danybony.github.io` |
+
+GitHub redirects `www` to the apex automatically once the custom domain is set.
+
+To deploy a fork without a domain, drop `public/CNAME` and set
+`NEXT_PUBLIC_BASE_PATH=/<repo-name>` in the build step — the config still supports the subpath
+case.
 
 ## Chart design
 

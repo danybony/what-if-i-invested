@@ -43,11 +43,10 @@ jobs:
 
       - run: npm test
 
+      # No NEXT_PUBLIC_BASE_PATH: this repo has its own custom domain
+      # (public/CNAME), so the site is served from the root rather than the
+      # /<repo>/ subpath a project site would otherwise use.
       - name: Build static export
-        # A project site is served from /<repo>/, so asset and data URLs need
-        # that prefix. Drop this line if you move to a custom domain.
-        env:
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
         run: npm run build
 
       # Pages serves the artifact as-is; without this, /_next/* 404s because

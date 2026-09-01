@@ -5,9 +5,9 @@ import type { NextConfig } from 'next'
  * fetched at build time by scripts/fetch-market-data.mjs and served from
  * public/data/, which is what lets GitHub Pages host the whole thing.
  *
- * A GitHub Pages *project* site lives under /<repo>/, so the workflow sets
- * NEXT_PUBLIC_BASE_PATH=/what-if-i-invested. Leave it unset for local dev or a
- * custom domain, where the site sits at the root.
+ * The deployed site has its own custom domain (public/CNAME), so it is served
+ * from the root and needs no base path. NEXT_PUBLIC_BASE_PATH stays supported
+ * for the subpath case — a fork without a domain, served from /<repo>/.
  */
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
