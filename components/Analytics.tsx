@@ -38,6 +38,10 @@ export function Analytics() {
   // this effect and the <Script> below does not matter.
   useEffect(() => {
     if (!granted) return
+    // A previous refusal in this session leaves gtag.js opted out. Consent has
+    // to lift that, or the tag loads into a permanently disabled state and
+    // sends nothing at all.
+    setOptOut(false)
     window.dataLayer = window.dataLayer ?? []
     if (!window.gtag) {
       window.gtag = function gtag() {
@@ -49,8 +53,12 @@ export function Analytics() {
     }
     window.gtag('js', new Date())
     window.gtag('config', MEASUREMENT_ID, {
-      // Client-side navigation means one automatic page_view would be the only
-      // one ever sent; the effect below sends them all instead.
+      // Page views are sent by the effect below instead. GA4's own
+      // history-based tracking was measured against this and got it wrong on a
+      // client-rendered export: it fired for two of three routes and reported
+      // the landing URL for all of them, because document.location is read once
+      // at config time. Turning off "Page changes based on browser history
+      // events" on the data stream stops it duplicating what we send.
       send_page_view: false,
       // The consent panel says there is no advertising and no profiling. These
       // two are what make that true rather than aspirational.
@@ -60,6 +68,9 @@ export function Analytics() {
     loaded.current = true
   }, [granted])
 
+  // One per route, with the location passed explicitly: gtag caches
+  // document.location from configuration time, so a client-side navigation
+  // would otherwise be filed against the page the visitor first landed on.
   useEffect(() => {
     if (!granted) return
     window.gtag?.('event', 'page_view', {
@@ -74,14 +85,15 @@ export function Analytics() {
   useEffect(() => {
     if (granted || !ready) return
     if (loaded.current) {
+      // Only a real withdrawal needs the opt-out. Setting it on every visit
+      // that has not consented yet would poison the tag for anyone who says
+      // yes afterwards.
       window.gtag?.('consent', 'update', { analytics_storage: 'denied' })
+      setOptOut(true)
       loaded.current = false
     }
-    if (MEASUREMENT_ID !== '') {
-      // Google's documented opt-out: gtag.js checks this before every hit, and
-      // before initialising if it is set early enough.
-      ;(window as unknown as Record<string, boolean>)[`ga-disable-${MEASUREMENT_ID}`] = true
-    }
+    // Cookies are cleared either way: a refusal should also tidy up whatever an
+    // earlier visit left behind.
     clearAnalyticsCookies()
   }, [granted, ready])
 
@@ -93,6 +105,12 @@ export function Analytics() {
       strategy="afterInteractive"
     />
   )
+}
+
+/** Google's documented opt-out: gtag.js checks it before every hit. */
+function setOptOut(value: boolean) {
+  if (MEASUREMENT_ID === '') return
+  ;(window as unknown as Record<string, boolean>)[`ga-disable-${MEASUREMENT_ID}`] = value
 }
 
 /**
