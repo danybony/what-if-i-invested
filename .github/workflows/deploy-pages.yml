@@ -46,8 +46,15 @@ jobs:
       # No NEXT_PUBLIC_BASE_PATH: this repo has its own custom domain
       # (public/CNAME), so the site is served from the root rather than the
       # /<repo>/ subpath a project site would otherwise use.
+      #
+      # The measurement ID is a repository *variable*, not a secret: it is
+      # visible in every page's source by design. Leaving it unset simply
+      # builds a site with no analytics, which is what a local or forked
+      # build should get.
       - name: Build static export
         run: npm run build
+        env:
+          NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.GA_MEASUREMENT_ID }}
 
       # Pages serves the artifact as-is; without this, /_next/* 404s because
       # Jekyll skips underscore-prefixed directories.

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
+import { Analytics } from '@/components/Analytics'
 import { CalculatorStateProvider } from '@/components/CalculatorState'
 import { ConsentProvider } from '@/components/ConsentProvider'
 import { CookieBanner } from '@/components/CookieBanner'
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
               <SiteFooter />
               <DisclaimerModal />
               <CookieBanner />
+              <Analytics />
             </CalculatorStateProvider>
           </ConsentProvider>
         </LocaleProvider>

@@ -299,7 +299,7 @@ export const en = {
     barBody:
       'We store a small record in your browser to remember this choice and that you have seen the disclaimer. That much is needed for the site to work. Anything beyond it is optional and stays off unless you turn it on.',
     barQuiet:
-      'Nothing you enter leaves your device: there is no backend, no advertising and no profiling, and nothing is sold or shared.',
+      'Nothing you type into the calculator leaves your device — every figure is worked out in your browser. There is no advertising and no profiling, and nothing is sold.',
     manage: 'Manage',
     rejectAll: 'Reject all',
     acceptAll: 'Accept all',
@@ -310,11 +310,11 @@ export const en = {
     necessaryLabel: 'Strictly necessary — always on',
     necessaryHint:
       'Three records: that you acknowledged the disclaimer, the choice you make here, and your language if you pick one. Without them you would be asked again on every page. They hold no identifier and never leave your browser.',
-    analyticsLabel: 'Analytics — optional',
+    analyticsLabel: 'Analytics — optional, uses Google Analytics',
     analyticsHint:
-      'Anonymous, aggregated usage statistics showing which features get used. Nothing is loaded today, and this stays off until you switch it on; if analytics is ever added, it will not run without it.',
+      'Google Analytics, which counts page views so we can see which parts of the site get used. The script is not loaded at all unless you switch this on, and advertising and profiling signals are turned off. Switch it back off and it stops and its cookies are deleted. What you type into the calculator is never sent.',
     settingsFootnoteBefore:
-      'This is a static site with no backend. Prices and ECB interest rates are published as files alongside the page and refreshed on a schedule, so your browser never contacts a data provider and no server of ours logs what you look up — every calculation runs on your own machine. You can change or withdraw this at any time from',
+      'This is a static site with no backend. Prices and ECB interest rates are published as files alongside the page and refreshed on a schedule, so your browser never contacts a price or rate provider, and no server of ours logs what you look up — every calculation runs on your own machine. You can change or withdraw this at any time from',
     settingsFootnoteLink: '“Storage preferences”',
     settingsFootnoteAfter: 'in the footer.',
     withdraw: 'Withdraw and ask again',

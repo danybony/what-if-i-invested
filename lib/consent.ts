@@ -19,12 +19,17 @@
  * acknowledged and moved the detail to /disclaimer.
  */
 export const DISCLAIMER_VERSION = 3
-export const CONSENT_VERSION = 1
+/**
+ * Bumped when what the visitor is agreeing to changes. v2 is the arrival of
+ * Google Analytics: until then the analytics category loaded nothing at all, so
+ * an earlier "accept" was agreement to something materially smaller.
+ */
+export const CONSENT_VERSION = 2
 
 const DISCLAIMER_KEY = 'whatifiinvested.disclaimer'
 const CONSENT_KEY = 'whatifiinvested.consent'
 
-/** `necessary` is not optional: it only covers these two records. */
+/** `necessary` is not optional: it only covers this site's own records. */
 export type ConsentCategories = {
   necessary: true
   analytics: boolean

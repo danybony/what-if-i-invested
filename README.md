@@ -22,8 +22,12 @@ npm run build    # production build
 
 No API keys. `npm run build` emits a static site into `out/`.
 
-Set `NEXT_PUBLIC_BASE_PATH=/what-if-i-invested` when building for a GitHub Pages *project* site,
-which is served from a subdirectory. Leave it unset for local dev or a custom domain.
+Two optional build-time variables:
+
+| Variable | Effect when unset |
+|---|---|
+| `NEXT_PUBLIC_BASE_PATH` | Site is served from the root. Set it to `/what-if-i-invested` for a GitHub Pages *project* site, which lives in a subdirectory. |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | No analytics at all — the component renders nothing, so local and forked builds never reach the property. CI supplies it from the `GA_MEASUREMENT_ID` repository *variable* (not a secret: the ID is in every page's source by design). |
 
 ## How the numbers are worked out
 
@@ -175,19 +179,27 @@ legal bases, and bundled consent is not valid consent.
 
 1. **Educational-use disclaimer** (`components/DisclaimerModal.tsx`) — shown on first visit and
    *not* dismissible: no backdrop click, no Escape, no close button. It has to be acknowledged.
-   Afterwards it is re-openable from the footer, where it *is* dismissible.
+   It carries only the three points that need agreeing to; the detail lives on `/disclaimer`,
+   linked from the dialog ("More info", in a new tab) and from the footer. The dialog suppresses
+   itself on that page, or the link would open onto a copy of the dialog it came from.
 2. **Storage consent** (`components/CookieBanner.tsx`) — appears only once the disclaimer is
    acknowledged, so the visitor never faces two overlays at once. *Reject all* is the same size
    and weight as *Accept all*, the analytics category ships switched **off**, and consent can be
    changed or withdrawn at any time from "Storage preferences" in the footer.
 
 Both answers are stored in `localStorage`, versioned, so materially changing the disclaimer text
-or the category list re-prompts everyone:
+or what the categories actually do re-prompts everyone. Analytics arriving took the consent
+record to v2: until then the category loaded nothing, so an earlier *accept* was agreement to
+something materially smaller.
 
 | Key | Holds |
 |---|---|
 | `whatifiinvested.disclaimer` | `{ version, acknowledgedAt }` |
 | `whatifiinvested.consent` | `{ version, decidedAt, categories: { necessary, analytics } }` |
+| `whatifiinvested.locale` | `'en'` or `'it'`, written only on an explicit choice |
+
+The language key is strictly necessary and needs no consent: it records a preference the visitor
+set themselves and nothing else. Auto-detection writes nothing at all.
 
 `lib/consent.ts` exposes this as a **`useSyncExternalStore` store** rather than reading storage
 in an effect. That gets hydration right by construction — the server renders the `ready: false`
@@ -196,10 +208,24 @@ tabs in step, since a decision in one fires `storage` in the other. Every access
 Safari private mode and browsers set to block site data *throw* rather than returning null, and
 the correct failure mode is to ask again, never to assume an answer.
 
-### Wiring up analytics later
+### Analytics
 
-Nothing on the site loads analytics today, and the copy in the panel says so. The gate already
-exists — read it before loading any non-essential script:
+Google Analytics (`components/Analytics.tsx`), and **nothing until it is asked for**. The panel
+promises that non-essential scripts do not run unless switched on, so the tag is not
+configured-and-denied via Consent Mode — the script is never added to the page at all while
+consent is absent. That is stricter, and it is the only reading of the promise the panel makes.
+
+- `send_page_view: false`, with a `page_view` fired per route change instead. Client-side
+  navigation would otherwise report one pageview for a whole session.
+- `allow_google_signals` and `allow_ad_personalization_signals` are **off**, which is what makes
+  the panel's "no advertising and no profiling" true rather than aspirational.
+- Withdrawal actually stops it: `ga-disable-<ID>`, a denied `analytics_storage` update, and its
+  cookies deleted across both the host and the registrable domain.
+
+Rejection is stored as a real decision (`analytics: false`), not as an absent record, so a
+refusal is remembered rather than re-asked on every visit.
+
+The gate is the same one any future script should read:
 
 ```tsx
 const { allows } = useConsent()
@@ -208,8 +234,26 @@ if (allows('analytics')) {
 }
 ```
 
-Rejection is stored as a real decision (`analytics: false`), not as an absent record, so a
-refusal is remembered rather than re-asked on every visit.
+## Language
+
+English and Italian, chosen from `navigator.languages` and overridable from the header toggle.
+There is no server to read `Accept-Language`, so detection happens in the browser: the
+prerendered HTML is always English and `LocaleProvider` hands React a fixed `'en'` server
+snapshot — the one React also uses while hydrating — so the first render agrees with the HTML it
+is hydrating, and the swap into Italian happens straight after.
+
+`lib/i18n/en.ts` is the source of truth and `it.ts` is typed as `Dictionary`, so **a key added in
+English fails the build until it is translated**. Interpolating entries are functions rather than
+templates with placeholders, because word order is not a constant across languages. A test walks
+every leaf, calling the functions with placeholder arguments, and fails on anything left in
+English.
+
+Numbers follow the display language rather than the currency: an Italian reader gets `72.910 €`
+and `8,0%` where an English one gets `€72,910` and `8.0%`.
+
+Consequence worth knowing: search engines only ever see the English text, since there is one set
+of URLs and the Italian arrives after hydration. Italian URLs under `/it/` would fix that and are
+additive from here.
 
 ## Layout
 

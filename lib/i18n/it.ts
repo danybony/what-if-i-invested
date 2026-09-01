@@ -300,7 +300,7 @@ export const it: Dictionary = {
     barBody:
       'Salviamo una piccola registrazione nel tuo browser per ricordare questa scelta e il fatto che hai letto le avvertenze. Questo è necessario perché il sito funzioni. Tutto il resto è facoltativo e resta disattivato finché non lo attivi tu.',
     barQuiet:
-      'Nulla di ciò che inserisci lascia il tuo dispositivo: non c’è un backend, non c’è pubblicità né profilazione, e nulla viene venduto o condiviso.',
+      'Nulla di ciò che inserisci nel calcolatore lascia il tuo dispositivo: ogni cifra è calcolata nel tuo browser. Non c’è pubblicità né profilazione, e nulla viene venduto.',
     manage: 'Gestisci',
     rejectAll: 'Rifiuta tutto',
     acceptAll: 'Accetta tutto',
@@ -311,11 +311,11 @@ export const it: Dictionary = {
     necessaryLabel: 'Strettamente necessari — sempre attivi',
     necessaryHint:
       'Tre registrazioni: che hai letto le avvertenze, la scelta che fai qui e la lingua, se ne selezioni una. Senza di esse ti verrebbe chiesto di nuovo a ogni pagina. Non contengono alcun identificativo e non lasciano mai il tuo browser.',
-    analyticsLabel: 'Statistiche — facoltative',
+    analyticsLabel: 'Statistiche — facoltative, usano Google Analytics',
     analyticsHint:
-      'Statistiche d’uso anonime e aggregate su quali funzioni vengono utilizzate. Oggi non viene caricato nulla e resta disattivato finché non lo attivi tu; se in futuro verranno aggiunte, non partiranno senza il tuo consenso.',
+      'Google Analytics, che conta le visite alle pagine per capire quali parti del sito vengono usate. Lo script non viene caricato affatto se non lo attivi, e i segnali pubblicitari e di profilazione sono disattivati. Se lo disattivi si ferma e i suoi cookie vengono eliminati. Quello che digiti nel calcolatore non viene mai inviato.',
     settingsFootnoteBefore:
-      'Questo è un sito statico senza backend. I prezzi e i tassi BCE sono pubblicati come file insieme alla pagina e aggiornati periodicamente, quindi il tuo browser non contatta mai un fornitore di dati e nessun nostro server registra cosa consulti: ogni calcolo avviene sul tuo dispositivo. Puoi modificare o revocare questa scelta in qualsiasi momento da',
+      'Questo è un sito statico senza backend. I prezzi e i tassi BCE sono pubblicati come file insieme alla pagina e aggiornati periodicamente, quindi il tuo browser non contatta mai un fornitore di prezzi o tassi e nessun nostro server registra cosa consulti: ogni calcolo avviene sul tuo dispositivo. Puoi modificare o revocare questa scelta in qualsiasi momento da',
     settingsFootnoteLink: '“Preferenze di archiviazione”',
     settingsFootnoteAfter: 'nel piè di pagina.',
     withdraw: 'Revoca e chiedimelo di nuovo',
