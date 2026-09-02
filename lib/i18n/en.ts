@@ -182,6 +182,8 @@ export const en = {
   portfolio: {
     empty:
       'Add the funds or shares you would have bought. Everything must trade in the same currency — conversion between currencies isn’t modelled.',
+    missingLead: 'Can’t find what you are looking for?',
+    missingLink: 'Ask for it to be added',
     historyFrom: (month: string) => `History from ${month}`,
     weightAria: (symbol: string) => `Weight for ${symbol}`,
     removeAria: (symbol: string) => `Remove ${symbol}`,
