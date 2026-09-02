@@ -91,11 +91,11 @@ export default function HomePage() {
 /**
  * A number that sits inside a sentence and can be typed over in place.
  *
- * The text is held locally while editing so a half-typed "1." or a cleared box
- * isn't rewritten under the cursor; the parsed value is pushed up on every
- * keystroke so the headline figure keeps pace, and the box is normalised on
- * blur. It never reads the prop back, which is safe here because this page is
- * the only thing that writes these fields.
+ * What was typed is held as a draft so a half-typed "1." or a cleared box isn't
+ * rewritten under the cursor; the parsed value is pushed up on every keystroke
+ * so the headline figure keeps pace. The draft is dropped on blur, and until
+ * there is one the box simply shows the value — which is how a figure that
+ * arrived in a shared link reaches a box that has already rendered.
  */
 function InlineNumber({
   value,
@@ -114,7 +114,8 @@ function InlineNumber({
   small?: boolean
   ariaLabel: string
 }) {
-  const [text, setText] = useState(() => String(value))
+  const [draft, setDraft] = useState<string | null>(null)
+  const text = draft ?? String(value)
   const pattern = allowNegative ? /[^0-9.,-]/g : /[^0-9.,]/g
 
   return (
@@ -127,11 +128,11 @@ function InlineNumber({
         aria-label={ariaLabel}
         onChange={(event) => {
           const cleaned = event.target.value.replace(pattern, '')
-          setText(cleaned)
+          setDraft(cleaned)
           onCommit(toNumber(cleaned, 0))
         }}
         onFocus={(event) => event.target.select()}
-        onBlur={() => setText(String(value))}
+        onBlur={() => setDraft(null)}
         style={{ width: `${Math.max(text.length, 1) + 0.5}ch` }}
         className={`border-b-2 border-dotted border-invest bg-transparent text-center font-semibold tabular text-invest outline-none focus:border-solid focus-visible:bg-sunken ${
           small ? 'pb-px' : 'pb-0.5'

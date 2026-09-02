@@ -20,7 +20,8 @@ function monthsAgo(count: number): string {
 }
 
 export default function AdvancedModePage() {
-  const { shared, setShared, advanced, setAdvanced, updateHoldings } = useCalculatorState()
+  const { shared, setShared, advanced, setAdvanced, updateHoldings, restoringSymbols } =
+    useCalculatorState()
   const { t, f } = useI18n()
   const contributionOptions = CONTRIBUTION_FREQUENCIES.map((value) => ({
     value,
@@ -181,7 +182,7 @@ export default function AdvancedModePage() {
           <Card title={t.advanced.portfolioTitle} description={t.advanced.portfolioHint}>
             <PortfolioBuilder
               holdings={holdings}
-              pending={pending}
+              pending={[...restoringSymbols, ...pending]}
               onAdd={addHolding}
               onRemove={removeHolding}
               onWeightChange={setWeight}

@@ -34,19 +34,35 @@ export const DEFAULT_PRESET =
   RATE_PRESETS.find((preset) => preset.id === 'sp500') ?? RATE_PRESETS[0]
 
 /** What both modes ask for; kept in one place so a tab switch preserves it. */
-export const DEFAULT_SHARED = {
+export type SharedInputs = {
+  initial: number
+  contribution: number
+  contributionFrequency: ContributionFrequency
+  /** Annual bank rate as a decimal. */
+  bankRate: number
+}
+
+export const DEFAULT_SHARED: SharedInputs = {
   initial: 1_000,
   contribution: 200,
-  contributionFrequency: 'monthly' as ContributionFrequency,
+  contributionFrequency: 'monthly',
   // Most euro-area current accounts pay nothing, so that is the honest default.
   bankRate: 0,
 }
 
-export const DEFAULT_BASIC = {
+export type BasicInputs = {
+  years: number
+  rate: number
+  variance: number
+  compoundFrequency: CompoundFrequency
+  currency: string
+}
+
+export const DEFAULT_BASIC: BasicInputs = {
   years: 20,
   rate: DEFAULT_PRESET.rate,
   variance: DEFAULT_PRESET.variance,
-  compoundFrequency: 'quarterly' as CompoundFrequency,
+  compoundFrequency: 'quarterly',
   currency: 'EUR',
 }
 
