@@ -6,6 +6,15 @@ import { useI18n } from '@/components/LocaleProvider'
 import type { PricePoint } from '@/lib/backtest'
 import type { SymbolEntry } from '@/lib/marketData'
 
+/**
+ * Where a request for a missing symbol goes.
+ *
+ * The universe is curated by hand (data-source/symbol-universe.json), so a
+ * ticker that isn't in it is a fixable gap rather than a dead end. There is no
+ * backend to receive the request, hence a form off-site.
+ */
+const REQUEST_SYMBOL_FORM = 'https://forms.gle/Xy49vCSJKT2zX1UcA'
+
 export type PortfolioHolding = {
   symbol: string
   name: string
@@ -45,6 +54,18 @@ export function PortfolioBuilder({
       {holdings.length === 0 && pending.length === 0 && (
         <p className="text-xs text-ink-muted">{t.portfolio.empty}</p>
       )}
+
+      <p className="text-[11px] text-ink-muted">
+        {t.portfolio.missingLead}{' '}
+        <a
+          href={REQUEST_SYMBOL_FORM}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-invest underline underline-offset-2 hover:no-underline"
+        >
+          {t.portfolio.missingLink}
+        </a>
+      </p>
 
       {(holdings.length > 0 || pending.length > 0) && (
         <ul className="space-y-1.5">

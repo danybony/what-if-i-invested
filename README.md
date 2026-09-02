@@ -149,6 +149,11 @@ across several days, which is what the workflow does until nothing is left to re
 To add a symbol, append it with a `symbol`, `name`, `type`, `currency` and `category`, run the
 mapper if it is not US-listed, then run the refresh.
 
+Because the universe is curated rather than exhaustive, the portfolio builder carries a link to a
+[Google Form](https://forms.gle/Xy49vCSJKT2zX1UcA) for requesting one that is missing — a ticker
+that is not there is a fixable gap, and with no backend a form off-site is the only way to hear
+about it. Requests arrive in that form's responses, and land here as an edit to the universe.
+
 A symbol Yahoo cannot resolve is **reported and skipped**, not fatal — one dead ticker must not
 cost the other 200. If more than 25% of the universe fails, the run aborts and publishes nothing,
 on the assumption that it is an upstream outage rather than 50 simultaneously delisted funds.

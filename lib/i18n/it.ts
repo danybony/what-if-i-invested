@@ -183,6 +183,8 @@ export const it: Dictionary = {
   portfolio: {
     empty:
       'Aggiungi i fondi o le azioni che avresti comprato. Devono essere tutti quotati nella stessa valuta: la conversione tra valute non è simulata.',
+    missingLead: 'Non trovi quello che cerchi?',
+    missingLink: 'Chiedi di aggiungerlo',
     historyFrom: (month: string) => `Storico da ${month}`,
     weightAria: (symbol: string) => `Peso di ${symbol}`,
     removeAria: (symbol: string) => `Rimuovi ${symbol}`,
