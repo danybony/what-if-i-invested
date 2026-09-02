@@ -255,15 +255,45 @@ Consequence worth knowing: search engines only ever see the English text, since 
 of URLs and the Italian arrives after hydration. Italian URLs under `/it/` would fix that and are
 additive from here.
 
+## Sharing a link
+
+The address bar is the save button. Every edit rewrites the query string, so the URL on screen is
+always the one worth copying, and opening it puts the calculator back where it was:
+
+```
+/basic/?initial=5000&years=30&rate=9&currency=USD
+/advanced/?holdings=VWCE.DE:60,AAPL:40&add=500&from=2016-01
+```
+
+Only fields that differ from the defaults are written — the common case is two or three changed
+numbers, and a link spelling out every field would be long for no gain. Each page writes only
+what it shows, so a Basic link is never padded with a portfolio the recipient cannot see. Rates
+travel as the percentages the inputs display (`rate=9`), and `lib/shareUrl.ts` clamps everything
+it reads back to the same limits the inputs impose, so a mangled URL loses the field it mangled
+rather than rendering a nonsense projection.
+
+Prices are far too big for a URL, so an Advanced link carries tickers and weights and the history
+is fetched again on arrival; a symbol that has since left the universe is dropped rather than
+failing the whole link.
+
+The URL cannot be read while rendering — the prerendered HTML is built from the defaults, and a
+first client render that disagreed with it would break hydration — so the link reaches React as
+an external store with the defaults as its server snapshot, the same bargain
+[Language](#language) strikes. Writes use `history.replaceState`: a shareable link is worth
+having, a history entry per keystroke is not. Nothing is written to browser storage, which would
+drag the consent banner into it.
+
 ## Layout
 
 ```
 app/
-  page.tsx              Basic mode
+  page.tsx              the opening question
+  basic/page.tsx        Basic mode
   advanced/page.tsx     Portfolio backtest
 lib/
   projection.ts         compounding engine (pure)
   backtest.ts           portfolio engine (pure)
+  shareUrl.ts           the inputs, to and from the query string
   marketData.ts         loads the published JSON; ranks symbol search
   consent.ts            disclaimer + storage-consent store
 components/             chart, cards, table, portfolio builder, consent UI
