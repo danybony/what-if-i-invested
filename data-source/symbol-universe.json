@@ -277,7 +277,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SXR8.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "VUSA.AS",
@@ -290,7 +295,12 @@
         "mic": "XAMS",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VUSA.AMS",
+        "currency": "EUR",
+        "region": "Amsterdam"
+      }
     },
     {
       "symbol": "VUAA.DE",
@@ -303,7 +313,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VUAA.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "SPY5.MI",
@@ -316,7 +331,12 @@
         "mic": "XMIL",
         "exchange": "MTA"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SPY5.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "EQQQ.AS",
@@ -329,7 +349,12 @@
         "mic": "XMIL",
         "exchange": "MTA"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "EQQQ.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "SXRV.DE",

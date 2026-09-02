@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T08:44:58.274Z",
+  "generatedAt": "2026-09-02T09:41:43.525Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -52,9 +52,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "AGG.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2003-09",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2003-10",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "AMAT",
@@ -96,9 +96,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "ARKK.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2014-10",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2014-11",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "AVGO",
@@ -283,9 +283,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "DIA.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1998-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "DIS",
@@ -297,6 +297,17 @@
       "adjustedAvailable": false,
       "firstMonth": "1970-01",
       "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "EQQQ.AS",
+      "name": "Invesco EQQQ NASDAQ-100 UCITS ETF Dist",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "file": "EQQQ.AS.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "EUNL.DE",
@@ -338,9 +349,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "GLD.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2008-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2004-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "GM",
@@ -481,9 +492,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "IWM.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2000-05",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2000-06",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "JNJ",
@@ -800,9 +811,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "SCHD.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2011-10",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2011-11",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "SHOP",
@@ -822,9 +833,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "SLV.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2006-04",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2006-05",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "SMH",
@@ -871,6 +882,17 @@
       "lastMonth": "2026-08"
     },
     {
+      "symbol": "SPY5.MI",
+      "name": "SPDR S&P 500 UCITS ETF (Dist)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "file": "SPY5.MI.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2012-04",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "SPYI.DE",
       "name": "SPDR MSCI All Country World Investable Market UCITS ETF (Acc)",
       "type": "ETF",
@@ -893,6 +915,17 @@
       "lastMonth": "2026-08"
     },
     {
+      "symbol": "SXR8.DE",
+      "name": "iShares Core S&P 500 UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "file": "SXR8.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2010-06",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "T",
       "name": "AT&T Inc.",
       "type": "Common Stock",
@@ -910,9 +943,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "TLT.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2002-07",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2002-08",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "TMO",
@@ -1020,9 +1053,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "VIG.json",
-      "adjustedAvailable": false,
+      "adjustedAvailable": true,
       "firstMonth": "2006-05",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VOO",
@@ -1056,6 +1089,28 @@
       "adjustedAvailable": true,
       "firstMonth": "2001-06",
       "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "VUAA.DE",
+      "name": "Vanguard S&P 500 UCITS ETF (USD) Accumulating (VUAA)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "file": "VUAA.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2020-03",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "VUSA.AS",
+      "name": "Vanguard S&P 500 UCITS ETF (USD) Distributing",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "file": "VUSA.AS.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2013-07",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VWCE.DE",
@@ -1107,9 +1162,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "VYM.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2006-11",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2006-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VZ",
@@ -1195,9 +1250,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "XLK.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1998-12",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "XLV",
