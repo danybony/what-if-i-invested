@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T09:41:43.525Z",
+  "generatedAt": "2026-09-03T09:54:24.605Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -81,13 +81,13 @@
     {
       "symbol": "AMZN",
       "name": "Amazon.com Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "AMZN.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1997-05",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "ARKK",
@@ -180,13 +180,13 @@
     {
       "symbol": "BRK-B",
       "name": "Berkshire Hathaway Inc. Class B",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "BRK-B.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1996-05",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "CAT",
@@ -198,6 +198,17 @@
       "adjustedAvailable": false,
       "firstMonth": "1970-01",
       "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "CNDX.L",
+      "name": "iShares NASDAQ 100 UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "US equity",
+      "file": "CNDX.L.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2010-10",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "COIN",
@@ -367,13 +378,13 @@
     {
       "symbol": "GOOGL",
       "name": "Alphabet Inc. Class A Common Stock",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "GOOGL.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2004-08",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2004-09",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "GS",
@@ -464,6 +475,17 @@
       "lastMonth": "2026-08"
     },
     {
+      "symbol": "IUSA.AS",
+      "name": "iShares Core S&P 500 UCITS ETF USD (Dist)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "file": "IUSA.AS.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "IVV",
       "name": "iShares Core S&P 500 ETF",
       "type": "ETF",
@@ -510,13 +532,13 @@
     {
       "symbol": "JPM",
       "name": "JPMorgan Chase & Co.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "JPM.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1980-03",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "KO",
@@ -576,13 +598,13 @@
     {
       "symbol": "META",
       "name": "Meta Platforms Inc. Class A Common Stock",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "META.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2012-05",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2012-06",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "MRK",
@@ -620,13 +642,13 @@
     {
       "symbol": "MSFT",
       "name": "Microsoft Corporation Common Stock",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "MSFT.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1986-03",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "MU",
@@ -686,13 +708,13 @@
     {
       "symbol": "NVDA",
       "name": "NVIDIA Corporation",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "NVDA.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1999-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "ORCL",
@@ -844,9 +866,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "SMH.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2000-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2000-07",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "SPGI",
@@ -926,6 +948,17 @@
       "lastMonth": "2026-09"
     },
     {
+      "symbol": "SXRV.DE",
+      "name": "iShares NASDAQ 100 UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "file": "SXRV.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2010-06",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "T",
       "name": "AT&T Inc.",
       "type": "Common Stock",
@@ -961,13 +994,13 @@
     {
       "symbol": "TSLA",
       "name": "Tesla, Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "TSLA.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2010-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2010-07",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "TXN",
@@ -1211,6 +1244,17 @@
       "lastMonth": "2026-08"
     },
     {
+      "symbol": "XDPU.DE",
+      "name": "Xtrackers S&P 500 UCITS ETF 4C",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "US equity",
+      "file": "XDPU.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2022-07",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "XDWD.DE",
       "name": "Xtrackers MSCI World UCITS ETF 1C",
       "type": "ETF",
@@ -1228,9 +1272,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "XLE.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1998-12",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "XLF",
@@ -1239,9 +1283,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "XLF.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1998-12",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "XLK",
@@ -1261,9 +1305,9 @@
       "currency": "USD",
       "category": "US ETFs",
       "file": "XLV.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1998-12",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "XOM",

@@ -367,7 +367,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SXRV.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "CNDX.L",
@@ -380,7 +385,12 @@
         "mic": "XLON",
         "exchange": "LSE"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "CNDX.LON",
+        "currency": "USD",
+        "region": "United Kingdom"
+      }
     },
     {
       "symbol": "XDPU.DE",
@@ -393,7 +403,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "XDPU.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "IUSA.AS",
@@ -406,7 +421,12 @@
         "mic": "XAMS",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IUSA.AMS",
+        "currency": "EUR",
+        "region": "Amsterdam"
+      }
     },
     {
       "symbol": "EIMI.MI",
