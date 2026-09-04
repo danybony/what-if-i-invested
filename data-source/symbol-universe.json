@@ -452,7 +452,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IS3N.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "VFEM.AS",
@@ -465,7 +470,12 @@
         "mic": "XAMS",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VFEM.AMS",
+        "currency": "EUR",
+        "region": "Amsterdam"
+      }
     },
     {
       "symbol": "XMME.DE",
@@ -478,7 +488,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "XMME.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "EMIM.AS",
@@ -491,7 +506,12 @@
         "mic": "XAMS",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "EMIM.AMS",
+        "currency": "EUR",
+        "region": "Amsterdam"
+      }
     },
     {
       "symbol": "MEUD.PA",

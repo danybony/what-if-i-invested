@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T09:54:24.605Z",
+  "generatedAt": "2026-09-04T09:42:43.006Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -103,13 +103,13 @@
     {
       "symbol": "AVGO",
       "name": "Broadcom Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "AVGO.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2009-08",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2009-09",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "AXP",
@@ -224,13 +224,13 @@
     {
       "symbol": "COST",
       "name": "Costco Wholesale Corporation",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "COST.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1986-07",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "CRM",
@@ -308,6 +308,17 @@
       "adjustedAvailable": false,
       "firstMonth": "1970-01",
       "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "EMIM.AS",
+      "name": "iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Emerging markets",
+      "file": "EMIM.AS.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2014-07",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "EQQQ.AS",
@@ -400,13 +411,13 @@
     {
       "symbol": "HD",
       "name": "The Home Depot, Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "HD.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1981-09",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "HON",
@@ -462,6 +473,17 @@
       "adjustedAvailable": false,
       "firstMonth": "1993-03",
       "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "IS3N.DE",
+      "name": "iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Emerging markets",
+      "file": "IS3N.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2014-07",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "ISAC.L",
@@ -521,13 +543,13 @@
     {
       "symbol": "JNJ",
       "name": "Johnson & Johnson",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "JNJ.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "JPM",
@@ -543,13 +565,13 @@
     {
       "symbol": "KO",
       "name": "The Coca-Cola Company",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "KO.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "LLY",
@@ -576,13 +598,13 @@
     {
       "symbol": "MA",
       "name": "Mastercard Incorporated Class A",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "MA.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2006-05",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2006-06",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "MCD",
@@ -730,13 +752,13 @@
     {
       "symbol": "PEP",
       "name": "PepsiCo, Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "PEP.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1972-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "PFE",
@@ -752,13 +774,13 @@
     {
       "symbol": "PG",
       "name": "Procter & Gamble Co.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "PG.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "PLTR",
@@ -1027,24 +1049,24 @@
     {
       "symbol": "UNH",
       "name": "UnitedHealth Group Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "UNH.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "V",
       "name": "Visa Inc. Class A",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "V.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2008-04",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VEA",
@@ -1067,6 +1089,17 @@
       "adjustedAvailable": true,
       "firstMonth": "2014-11",
       "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "VFEM.AS",
+      "name": "Vanguard FTSE Emerging Markets UCITS ETF (USD) Distributing",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Emerging markets",
+      "file": "VFEM.AS.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2013-07",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VHVG.L",
@@ -1235,13 +1268,13 @@
     {
       "symbol": "WMT",
       "name": "Walmart Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "WMT.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1972-08",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "XDPU.DE",
@@ -1310,15 +1343,26 @@
       "lastMonth": "2026-09"
     },
     {
+      "symbol": "XMME.DE",
+      "name": "Xtrackers MSCI Emerging Markets UCITS ETF 1C",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Emerging markets",
+      "file": "XMME.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2017-07",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "XOM",
       "name": "ExxonMobil Holdings Corporation Common Stock",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "XOM.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     }
   ]
 }
