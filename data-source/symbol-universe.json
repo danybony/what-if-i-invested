@@ -524,7 +524,12 @@
         "mic": "XPAR",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "MEUD.PAR",
+        "currency": "EUR",
+        "region": "Paris"
+      }
     },
     {
       "symbol": "EXSA.DE",
@@ -537,7 +542,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "EXSA.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "VERX.AS",
@@ -550,7 +560,12 @@
         "mic": "XAMS",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "VERX.AMS",
+        "currency": "EUR",
+        "region": "Amsterdam"
+      }
     },
     {
       "symbol": "SX5E.MI",
@@ -563,7 +578,12 @@
         "mic": "XSWX",
         "exchange": "SIX"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "EWSX.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "CSX5.DE",

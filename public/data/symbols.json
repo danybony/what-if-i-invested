@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T09:42:43.006Z",
+  "generatedAt": "2026-09-05T09:07:59.426Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -37,13 +37,13 @@
     {
       "symbol": "ADBE",
       "name": "Adobe Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "ADBE.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1986-08",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "AGG",
@@ -70,13 +70,13 @@
     {
       "symbol": "AMD",
       "name": "Advanced Micro Devices Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "AMD.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1980-03",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "AMZN",
@@ -235,24 +235,24 @@
     {
       "symbol": "CRM",
       "name": "Salesforce, Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "CRM.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2004-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2004-07",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "CSCO",
       "name": "Cisco Systems Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "CSCO.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1990-02",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "CSPX.MI",
@@ -301,13 +301,13 @@
     {
       "symbol": "DIS",
       "name": "The Walt Disney Company",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "DIS.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "EMIM.AS",
@@ -341,6 +341,17 @@
       "adjustedAvailable": true,
       "firstMonth": "2009-11",
       "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "EXSA.DE",
+      "name": "iShares STOXX Europe 600 UCITS ETF (DE)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Europe equity",
+      "file": "EXSA.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-05",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "F",
@@ -433,13 +444,13 @@
     {
       "symbol": "IBM",
       "name": "International Business Machines Corporation",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "IBM.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "IMIE.MI",
@@ -455,13 +466,13 @@
     {
       "symbol": "INTC",
       "name": "Intel Corporation",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "INTC.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1980-03",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "INTU",
@@ -629,6 +640,17 @@
       "lastMonth": "2026-09"
     },
     {
+      "symbol": "MEUD.PA",
+      "name": "Amundi Core Stoxx Europe 600 UCITS ETF Acc",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Europe equity",
+      "file": "MEUD.PA.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2013-08",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "MRK",
       "name": "Merck & Co., Inc.",
       "type": "Common Stock",
@@ -697,13 +719,13 @@
     {
       "symbol": "NFLX",
       "name": "Netflix Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "NFLX.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2002-05",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2002-06",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "NKE",
@@ -741,13 +763,13 @@
     {
       "symbol": "ORCL",
       "name": "Oracle Corporation",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "ORCL.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1986-03",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "PEP",
@@ -807,13 +829,13 @@
     {
       "symbol": "QCOM",
       "name": "QUALCOMM Incorporated",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "QCOM.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1991-12",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "QQQ",
@@ -959,6 +981,17 @@
       "lastMonth": "2026-08"
     },
     {
+      "symbol": "SX5E.MI",
+      "name": "Invesco EURO STOXX 50 UCITS ETF Acc",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Europe equity",
+      "file": "SX5E.MI.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2025-12",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "SXR8.DE",
       "name": "iShares Core S&P 500 UCITS ETF USD (Acc)",
       "type": "ETF",
@@ -1027,13 +1060,13 @@
     {
       "symbol": "TXN",
       "name": "Texas Instruments Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "TXN.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1972-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "UBER",
@@ -1078,6 +1111,17 @@
       "adjustedAvailable": true,
       "firstMonth": "2007-08",
       "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "VERX.AS",
+      "name": "Vanguard FTSE Developed Europe ex UK UCITS ETF (EUR) Distributing",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Europe equity",
+      "file": "VERX.AS.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2014-11",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VEVE.L",
