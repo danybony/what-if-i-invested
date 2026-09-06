@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T09:07:59.426Z",
+  "generatedAt": "2026-09-06T09:28:36.038Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -15,13 +15,13 @@
     {
       "symbol": "ABBV",
       "name": "AbbVie Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "ABBV.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1969-12",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2013-02",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "ABNB",
@@ -136,13 +136,13 @@
     {
       "symbol": "BAC",
       "name": "Bank of America Corp.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "BAC.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1973-02",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "BKNG",
@@ -266,15 +266,26 @@
       "lastMonth": "2026-08"
     },
     {
+      "symbol": "CSX5.DE",
+      "name": "iShares Core EURO STOXX 50 UCITS ETF",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Europe equity",
+      "file": "CSX5.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2010-12",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "CVX",
       "name": "Chevron Corp.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "CVX.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "DE",
@@ -411,13 +422,13 @@
     {
       "symbol": "GS",
       "name": "The Goldman Sachs Group, Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "GS.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1999-05",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "HD",
@@ -587,13 +598,13 @@
     {
       "symbol": "LLY",
       "name": "Eli Lilly and Company",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "LLY.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1972-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "LMT",
@@ -620,13 +631,13 @@
     {
       "symbol": "MCD",
       "name": "McDonald's Corp.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "MCD.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "META",
@@ -653,13 +664,13 @@
     {
       "symbol": "MRK",
       "name": "Merck & Co., Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "MRK.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "MRNA",
@@ -675,13 +686,13 @@
     {
       "symbol": "MS",
       "name": "Morgan Stanley Common Stock",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "MS.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1993-02",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "MSFT",
@@ -785,13 +796,13 @@
     {
       "symbol": "PFE",
       "name": "Pfizer Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "PFE.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1972-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "PG",
@@ -818,13 +829,13 @@
     {
       "symbol": "PYPL",
       "name": "PayPal Holdings, Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "PYPL.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2015-07",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2015-08",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "QCOM",
@@ -891,6 +902,17 @@
       "adjustedAvailable": false,
       "firstMonth": "2015-05",
       "lastMonth": "2026-08"
+    },
+    {
+      "symbol": "SJPA.DE",
+      "name": "iShares Core MSCI Japan IMI UCITS ETF",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Asia equity",
+      "file": "SJPA.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2009-11",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "SLV",
@@ -1038,13 +1060,13 @@
     {
       "symbol": "TMO",
       "name": "Thermo Fisher Scientific Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "TMO.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1980-03",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "TSLA",
@@ -1301,13 +1323,13 @@
     {
       "symbol": "WFC",
       "name": "Wells Fargo & Company",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "WFC.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1972-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "WMT",

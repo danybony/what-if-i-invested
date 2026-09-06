@@ -596,7 +596,12 @@
         "mic": "XLON",
         "exchange": "LSE"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "CSX5.LON",
+        "currency": "EUR",
+        "region": "United Kingdom"
+      }
     },
     {
       "symbol": "ISF.L",
@@ -635,7 +640,12 @@
         "mic": "XMIL",
         "exchange": "MTA"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "EUNN.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "VJPN.AS",
