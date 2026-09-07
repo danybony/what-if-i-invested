@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T09:28:36.038Z",
+  "generatedAt": "2026-09-07T10:23:17.650Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -26,13 +26,13 @@
     {
       "symbol": "ABNB",
       "name": "Airbnb Inc. Class A Common Stock",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "ABNB.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2020-12",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2021-01",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "ADBE",
@@ -54,6 +54,17 @@
       "file": "AGG.json",
       "adjustedAvailable": true,
       "firstMonth": "2003-10",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "AGGH.MI",
+      "name": "iShares Core Global Aggregate Bond UCITS ETF EUR Hedged (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "file": "AGGH.MI.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2021-06",
       "lastMonth": "2026-09"
     },
     {
@@ -125,13 +136,13 @@
     {
       "symbol": "BA",
       "name": "Boeing Co/The",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "BA.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "BAC",
@@ -191,13 +202,13 @@
     {
       "symbol": "CAT",
       "name": "Caterpillar Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "CAT.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "CNDX.L",
@@ -213,13 +224,13 @@
     {
       "symbol": "COIN",
       "name": "Coinbase Global Inc. Class A Common Stock",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "COIN.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2021-04",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2021-05",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "COST",
@@ -378,13 +389,13 @@
     {
       "symbol": "GE",
       "name": "General Electric Company",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "GE.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "GLD",
@@ -741,13 +752,13 @@
     {
       "symbol": "NKE",
       "name": "Nike, Inc. Class B Common Stock",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "NKE.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "NOW",
@@ -818,13 +829,13 @@
     {
       "symbol": "PLTR",
       "name": "Palantir Technologies Inc. Class A Common Stock",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "PLTR.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2020-09",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2020-10",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "PYPL",
@@ -873,13 +884,13 @@
     {
       "symbol": "SBUX",
       "name": "Starbucks Corp.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "SBUX.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1992-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "SCHD",
@@ -895,13 +906,13 @@
     {
       "symbol": "SHOP",
       "name": "Shopify Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "SHOP.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2015-05",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2015-06",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "SJPA.DE",
@@ -1038,13 +1049,13 @@
     {
       "symbol": "T",
       "name": "AT&T Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "T.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1983-11",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "TLT",
@@ -1093,13 +1104,13 @@
     {
       "symbol": "UBER",
       "name": "Uber Technologies Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "UBER.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2019-05",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2019-06",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "UNH",
@@ -1187,6 +1198,17 @@
       "file": "VIG.json",
       "adjustedAvailable": true,
       "firstMonth": "2006-05",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "VJPN.AS",
+      "name": "Vanguard FTSE Japan UCITS ETF (USD) Distributing",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Asia equity",
+      "file": "VJPN.AS.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2013-07",
       "lastMonth": "2026-09"
     },
     {
@@ -1301,13 +1323,13 @@
     {
       "symbol": "VZ",
       "name": "Verizon Communications Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "VZ.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1983-11",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "WEBN.DE",
