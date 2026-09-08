@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T10:23:17.650Z",
+  "generatedAt": "2026-09-08T09:45:24.716Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -125,13 +125,13 @@
     {
       "symbol": "AXP",
       "name": "American Express Company",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "AXP.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1972-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "BA",
@@ -169,13 +169,13 @@
     {
       "symbol": "BLK",
       "name": "BlackRock Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "BLK.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "BND",
@@ -301,13 +301,13 @@
     {
       "symbol": "DE",
       "name": "Deere & Company",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "DE.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1972-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "DIA",
@@ -354,6 +354,17 @@
       "lastMonth": "2026-09"
     },
     {
+      "symbol": "EUNA.DE",
+      "name": "iShares Core Global Aggregate Bond UCITS ETF EUR Hedged (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "file": "EUNA.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2018-01",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "EUNL.DE",
       "name": "iShares Core MSCI World UCITS ETF USD (Acc)",
       "type": "ETF",
@@ -378,13 +389,13 @@
     {
       "symbol": "F",
       "name": "Ford Motor Co.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "F.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1972-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "GE",
@@ -411,13 +422,13 @@
     {
       "symbol": "GM",
       "name": "General Motors Co.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "GM.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2009-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2010-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "GOOGL",
@@ -455,13 +466,13 @@
     {
       "symbol": "HON",
       "name": "Honeywell International Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "HON.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "IBM",
@@ -620,13 +631,13 @@
     {
       "symbol": "LMT",
       "name": "Lockheed Martin Corporation",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "LMT.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1977-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "MA",
@@ -686,13 +697,13 @@
     {
       "symbol": "MRNA",
       "name": "Moderna Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "MRNA.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2018-12",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2019-01",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "MS",
@@ -719,13 +730,13 @@
     {
       "symbol": "MU",
       "name": "Micron Technology Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "MU.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1984-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "MWRD.MI",
@@ -873,13 +884,13 @@
     {
       "symbol": "RTX",
       "name": "RTX Corporation",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "RTX.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1970-01",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "SBUX",
@@ -950,13 +961,13 @@
     {
       "symbol": "SPGI",
       "name": "S&P Global Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "SPGI.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1973-02",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2001-02",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "SPPW.DE",
@@ -1132,6 +1143,17 @@
       "file": "V.json",
       "adjustedAvailable": true,
       "firstMonth": "2008-04",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "VAGF.DE",
+      "name": "Vanguard Global Aggregate Bond UCITS ETF EUR Hedged Accumulating",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "file": "VAGF.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2019-07",
       "lastMonth": "2026-09"
     },
     {
