@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-09-08T09:45:24.716Z",
+  "generatedAt": "2026-09-09T09:50:26.446Z",
   "symbols": [
     {
       "symbol": "AAPL",
       "name": "Apple Inc",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "AAPL.json",
       "adjustedAvailable": true,
-      "firstMonth": "1980-12",
-      "lastMonth": "2026-08"
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "ABBV",
@@ -70,13 +70,13 @@
     {
       "symbol": "AMAT",
       "name": "Applied Materials Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "AMAT.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1980-03",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "AMD",
@@ -158,13 +158,13 @@
     {
       "symbol": "BKNG",
       "name": "Booking Holdings Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "BKNG.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1999-03",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "BLK",
@@ -373,7 +373,7 @@
       "file": "EUNL.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2009-11",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "EXSA.DE",
@@ -475,6 +475,17 @@
       "lastMonth": "2026-09"
     },
     {
+      "symbol": "IBGL.AS",
+      "name": "iShares € Govt Bond 15-30yr UCITS ETF EUR (Dist)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "file": "IBGL.AS.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2008-01",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "IBM",
       "name": "International Business Machines Corporation",
       "type": "EQUITY",
@@ -483,6 +494,17 @@
       "file": "IBM.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "IBTS.L",
+      "name": "iShares USD Treasury Bond 1-3yr UCITS ETF (Dist)",
+      "type": "ETF",
+      "currency": "GBP",
+      "category": "Bonds",
+      "file": "IBTS.L.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2006-07",
       "lastMonth": "2026-09"
     },
     {
@@ -510,13 +532,13 @@
     {
       "symbol": "INTU",
       "name": "Intuit Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "INTU.json",
-      "adjustedAvailable": false,
-      "firstMonth": "1993-03",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "IS3N.DE",
@@ -571,7 +593,7 @@
       "file": "IWDA.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2009-11",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "IWM",
@@ -774,13 +796,13 @@
     {
       "symbol": "NOW",
       "name": "ServiceNow Inc.",
-      "type": "Common Stock",
+      "type": "EQUITY",
       "currency": "USD",
       "category": "US shares",
       "file": "NOW.json",
-      "adjustedAvailable": false,
-      "firstMonth": "2012-06",
-      "lastMonth": "2026-08"
+      "adjustedAvailable": true,
+      "firstMonth": "2012-07",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "NVDA",
@@ -878,8 +900,8 @@
       "category": "US ETFs",
       "file": "QQQ.json",
       "adjustedAvailable": true,
-      "firstMonth": "1999-03",
-      "lastMonth": "2026-08"
+      "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "RTX",
@@ -978,7 +1000,7 @@
       "file": "SPPW.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2023-12",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "SPY",
@@ -1295,8 +1317,9 @@
       "currency": "EUR",
       "category": "World equity",
       "file": "VWCE.DE.json",
+      "adjustedAvailable": true,
       "firstMonth": "2019-08",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VWO",
@@ -1318,7 +1341,7 @@
       "file": "VWRL.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2013-07",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VXUS",
@@ -1406,7 +1429,7 @@
       "file": "XDWD.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2014-09",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "XLE",

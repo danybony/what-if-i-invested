@@ -730,7 +730,12 @@
         "mic": "XAMS",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IBGL.AMS",
+        "currency": "EUR",
+        "region": "Amsterdam"
+      }
     },
     {
       "symbol": "IBTS.L",
@@ -743,7 +748,12 @@
         "mic": "XLON",
         "exchange": "LSE"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IBTS.LON",
+        "currency": "GBP",
+        "region": "United Kingdom"
+      }
     },
     {
       "symbol": "IEAC.L",
