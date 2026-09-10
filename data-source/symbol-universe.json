@@ -766,7 +766,12 @@
         "mic": "XLON",
         "exchange": "LSE"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IEAC.LON",
+        "currency": "EUR",
+        "region": "United Kingdom"
+      }
     },
     {
       "symbol": "XGLE.DE",
@@ -779,7 +784,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "XGLE.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "VGEA.DE",

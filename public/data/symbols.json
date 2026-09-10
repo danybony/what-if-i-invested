@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T09:50:26.446Z",
+  "generatedAt": "2026-09-10T09:48:24.074Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -274,7 +274,7 @@
       "file": "CSPX.MI.json",
       "adjustedAvailable": true,
       "firstMonth": "2014-06",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "CSX5.DE",
@@ -508,6 +508,17 @@
       "lastMonth": "2026-09"
     },
     {
+      "symbol": "IEAC.L",
+      "name": "iShares Core € Corp Bond UCITS ETF EUR (Dist)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "file": "IEAC.L.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2009-04",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "IMIE.MI",
       "name": "SPDR MSCI All Country World Investable Market UCITS ETF (Acc)",
       "type": "ETF",
@@ -516,7 +527,7 @@
       "file": "IMIE.MI.json",
       "adjustedAvailable": true,
       "firstMonth": "2011-12",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "INTC",
@@ -560,7 +571,7 @@
       "file": "ISAC.L.json",
       "adjustedAvailable": true,
       "firstMonth": "2011-12",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "IUSA.AS",
@@ -582,7 +593,7 @@
       "file": "IVV.json",
       "adjustedAvailable": true,
       "firstMonth": "2000-06",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "IWDA.AS",
@@ -769,7 +780,7 @@
       "file": "MWRD.MI.json",
       "adjustedAvailable": true,
       "firstMonth": "2024-02",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "NFLX",
@@ -1011,7 +1022,7 @@
       "file": "SPY.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "SPY5.MI",
@@ -1033,7 +1044,7 @@
       "file": "SPYI.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2011-08",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "SQ",
@@ -1209,7 +1220,7 @@
       "file": "VEVE.L.json",
       "adjustedAvailable": true,
       "firstMonth": "2014-11",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VFEM.AS",
@@ -1231,7 +1242,7 @@
       "file": "VHVG.L.json",
       "adjustedAvailable": true,
       "firstMonth": "2019-10",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VIG",
@@ -1264,7 +1275,7 @@
       "file": "VOO.json",
       "adjustedAvailable": true,
       "firstMonth": "2010-10",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VT",
@@ -1286,7 +1297,7 @@
       "file": "VTI.json",
       "adjustedAvailable": true,
       "firstMonth": "2001-06",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "VUAA.DE",
@@ -1385,7 +1396,7 @@
       "file": "WEBN.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2024-07",
-      "lastMonth": "2026-08"
+      "lastMonth": "2026-09"
     },
     {
       "symbol": "WFC",
@@ -1429,6 +1440,17 @@
       "file": "XDWD.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2014-09",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "XGLE.DE",
+      "name": "Xtrackers II Eurozone Government Bond UCITS ETF 1C",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "file": "XGLE.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2007-08",
       "lastMonth": "2026-09"
     },
     {
