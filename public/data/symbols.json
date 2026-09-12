@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T09:46:47.303Z",
+  "generatedAt": "2026-09-12T09:25:28.669Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -530,6 +530,17 @@
       "lastMonth": "2026-09"
     },
     {
+      "symbol": "IHYG.L",
+      "name": "iShares € High Yield Corp Bond UCITS ETF EUR (Dist)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Bonds",
+      "file": "IHYG.L.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2010-10",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "IMIE.MI",
       "name": "SPDR MSCI All Country World Investable Market UCITS ETF (Acc)",
       "type": "ETF",
@@ -560,6 +571,17 @@
       "file": "INTU.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "IQQH.DE",
+      "name": "iShares Global Clean Energy Transition UCITS ETF",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Sector & thematic",
+      "file": "IQQH.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2007-12",
       "lastMonth": "2026-09"
     },
     {

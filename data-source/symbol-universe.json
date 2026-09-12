@@ -838,7 +838,12 @@
         "mic": "XLON",
         "exchange": "LSE"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IHYG.LON",
+        "currency": "EUR",
+        "region": "United Kingdom"
+      }
     },
     {
       "symbol": "IQQH.DE",
@@ -851,7 +856,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IQQH.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "XAIX.DE",
