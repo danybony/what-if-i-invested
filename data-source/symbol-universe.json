@@ -874,7 +874,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "XAIX.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "WTEC.DE",
@@ -887,7 +892,12 @@
         "mic": "XMIL",
         "exchange": "MTA"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SPFT.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "HEAL.DE",

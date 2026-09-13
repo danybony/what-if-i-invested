@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T09:25:28.669Z",
+  "generatedAt": "2026-09-13T10:20:22.684Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -1462,6 +1462,28 @@
       "file": "WMT.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "WTEC.DE",
+      "name": "SPDR MSCI World Technology UCITS ETF",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Sector & thematic",
+      "file": "WTEC.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2023-12",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "XAIX.DE",
+      "name": "Xtrackers Artificial Intelligence and Big Data ETF 1C",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Sector & thematic",
+      "file": "XAIX.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2019-03",
       "lastMonth": "2026-09"
     },
     {
