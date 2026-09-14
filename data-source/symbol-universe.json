@@ -910,7 +910,12 @@
         "mic": "XMIL",
         "exchange": "MTA"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "6VX.FRK",
+        "currency": "EUR",
+        "region": "Frankfurt"
+      }
     },
     {
       "symbol": "ESIT.MI",
@@ -923,7 +928,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "ESIT.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "SGLD.MI",

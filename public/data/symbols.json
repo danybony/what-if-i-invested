@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T10:20:22.684Z",
+  "generatedAt": "2026-09-14T10:44:16.278Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -354,6 +354,17 @@
       "lastMonth": "2026-09"
     },
     {
+      "symbol": "ESIT.MI",
+      "name": "iShares MSCI Europe Information Technology Sector UCITS ETF EUR (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Sector & thematic",
+      "file": "ESIT.MI.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2020-12",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "EUNA.DE",
       "name": "iShares Core Global Aggregate Bond UCITS ETF EUR Hedged (Acc)",
       "type": "ETF",
@@ -472,6 +483,17 @@
       "file": "HD.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "HEAL.DE",
+      "name": "iShares Healthcare Innovation UCITS ETF USD (Acc)",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Sector & thematic",
+      "file": "HEAL.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2021-02",
       "lastMonth": "2026-09"
     },
     {
