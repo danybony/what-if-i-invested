@@ -946,7 +946,12 @@
         "mic": "XMIL",
         "exchange": "MTA"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SGLD.AMS",
+        "currency": "EUR",
+        "region": "Amsterdam"
+      }
     },
     {
       "symbol": "IGLN.L",
@@ -959,7 +964,12 @@
         "mic": "XLON",
         "exchange": "LSE"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "IGLN.LON",
+        "currency": "USD",
+        "region": "United Kingdom"
+      }
     },
     {
       "symbol": "PPFB.DE",

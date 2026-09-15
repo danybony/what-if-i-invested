@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T10:44:16.278Z",
+  "generatedAt": "2026-09-15T10:08:20.786Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -552,6 +552,17 @@
       "lastMonth": "2026-09"
     },
     {
+      "symbol": "IGLN.L",
+      "name": "iShares Physical Gold ETC",
+      "type": "ETF",
+      "currency": "USD",
+      "category": "Commodities",
+      "file": "IGLN.L.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2011-05",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "IHYG.L",
       "name": "iShares € High Yield Corp Bond UCITS ETF EUR (Dist)",
       "type": "ETF",
@@ -1000,6 +1011,17 @@
       "file": "SCHD.json",
       "adjustedAvailable": true,
       "firstMonth": "2011-11",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "SGLD.MI",
+      "name": "Invesco Physical Gold ETC",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Commodities",
+      "file": "SGLD.MI.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2017-03",
       "lastMonth": "2026-09"
     },
     {
