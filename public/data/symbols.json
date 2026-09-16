@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T10:08:20.786Z",
+  "generatedAt": "2026-09-16T09:59:58.612Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -109,6 +109,17 @@
       "file": "ARKK.json",
       "adjustedAvailable": true,
       "firstMonth": "2014-11",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "ASML.AS",
+      "name": "ASML Holding N.V.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "ASML.AS.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
       "lastMonth": "2026-09"
     },
     {
@@ -945,6 +956,17 @@
       "file": "PLTR.json",
       "adjustedAvailable": true,
       "firstMonth": "2020-10",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "PPFB.DE",
+      "name": "iShares Physical Gold ETC",
+      "type": "ETF",
+      "currency": "EUR",
+      "category": "Commodities",
+      "file": "PPFB.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2021-08",
       "lastMonth": "2026-09"
     },
     {

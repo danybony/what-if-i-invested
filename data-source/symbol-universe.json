@@ -982,7 +982,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "PPFB.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "SPY",
@@ -2741,7 +2746,12 @@
         "mic": "XAMS",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "ASML.AMS",
+        "currency": "EUR",
+        "region": "Amsterdam"
+      }
     },
     {
       "symbol": "SAP.DE",
