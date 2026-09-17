@@ -2764,7 +2764,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SAP.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "SIE.DE",
@@ -2777,7 +2782,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SIE.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "ALV.DE",

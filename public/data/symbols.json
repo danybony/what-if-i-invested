@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T09:59:58.612Z",
+  "generatedAt": "2026-09-17T10:02:59.355Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -1014,6 +1014,17 @@
       "lastMonth": "2026-09"
     },
     {
+      "symbol": "SAP.DE",
+      "name": "SAP SE",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "SAP.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "SBUX",
       "name": "Starbucks Corp.",
       "type": "EQUITY",
@@ -1055,6 +1066,17 @@
       "file": "SHOP.json",
       "adjustedAvailable": true,
       "firstMonth": "2015-06",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "SIE.DE",
+      "name": "Siemens Aktiengesellschaft",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "SIE.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
       "lastMonth": "2026-09"
     },
     {
