@@ -2836,7 +2836,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "BMW.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "MBG.DE",
@@ -2849,7 +2854,12 @@
         "mic": "XETR",
         "exchange": "XETR"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "MBG.DEX",
+        "currency": "EUR",
+        "region": "XETRA"
+      }
     },
     {
       "symbol": "VOW3.DE",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T09:50:00.908Z",
+  "generatedAt": "2026-09-19T09:34:50.222Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -208,6 +208,17 @@
       "file": "BLK.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "BMW.DE",
+      "name": "Bayerische Motoren Werke AG",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "BMW.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
       "lastMonth": "2026-09"
     },
     {
@@ -780,6 +791,17 @@
       "file": "MA.json",
       "adjustedAvailable": true,
       "firstMonth": "2006-06",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "MBG.DE",
+      "name": "Mercedes-Benz Group AG",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "MBG.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
       "lastMonth": "2026-09"
     },
     {
