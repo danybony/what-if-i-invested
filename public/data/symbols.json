@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T09:34:50.222Z",
+  "generatedAt": "2026-09-20T09:51:07.488Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -373,6 +373,17 @@
       "file": "DIS.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "DTE.DE",
+      "name": "Deutsche Telekom AG",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "DTE.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
       "lastMonth": "2026-09"
     },
     {
@@ -1451,6 +1462,17 @@
       "file": "VOO.json",
       "adjustedAvailable": true,
       "firstMonth": "2010-10",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "VOW3.DE",
+      "name": "Volkswagen AG Preferred Stock",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "VOW3.DE.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
       "lastMonth": "2026-09"
     },
     {
