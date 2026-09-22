@@ -2944,7 +2944,12 @@
         "mic": "XPAR",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "OR.PAR",
+        "currency": "EUR",
+        "region": "Paris"
+      }
     },
     {
       "symbol": "TTE.PA",
@@ -2957,7 +2962,12 @@
         "mic": "XPAR",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "TTE.PAR",
+        "currency": "EUR",
+        "region": "Paris"
+      }
     },
     {
       "symbol": "SAN.PA",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T10:47:26.489Z",
+  "generatedAt": "2026-09-22T10:01:13.901Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -981,6 +981,17 @@
       "lastMonth": "2026-09"
     },
     {
+      "symbol": "OR.PA",
+      "name": "L'Oréal S.A.",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "OR.PA.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
+      "lastMonth": "2026-09"
+    },
+    {
       "symbol": "ORCL",
       "name": "Oracle Corporation",
       "type": "EQUITY",
@@ -1330,6 +1341,17 @@
       "file": "TSLA.json",
       "adjustedAvailable": true,
       "firstMonth": "2010-07",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "TTE.PA",
+      "name": "TotalEnergies SE",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "TTE.PA.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
       "lastMonth": "2026-09"
     },
     {
