@@ -2980,7 +2980,12 @@
         "mic": "XPAR",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "SAN.PAR",
+        "currency": "EUR",
+        "region": "Paris"
+      }
     },
     {
       "symbol": "BNP.PA",
@@ -2993,7 +2998,12 @@
         "mic": "XPAR",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "BNP.PAR",
+        "currency": "EUR",
+        "region": "Paris"
+      }
     },
     {
       "symbol": "RMS.PA",

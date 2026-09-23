@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T10:01:13.901Z",
+  "generatedAt": "2026-09-23T10:02:07.290Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -241,6 +241,17 @@
       "file": "BND.json",
       "adjustedAvailable": true,
       "firstMonth": "2007-05",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "BNP.PA",
+      "name": "BNP Paribas SA",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "BNP.PA.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
       "lastMonth": "2026-09"
     },
     {
@@ -1099,6 +1110,17 @@
       "file": "RTX.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "SAN.PA",
+      "name": "Sanofi SA",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "SAN.PA.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
       "lastMonth": "2026-09"
     },
     {
