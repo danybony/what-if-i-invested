@@ -3016,7 +3016,12 @@
         "mic": "XPAR",
         "exchange": "Euronext"
       },
-      "provider": "alphavantage"
+      "provider": "alphavantage",
+      "av": {
+        "symbol": "RMS.PAR",
+        "currency": "EUR",
+        "region": "Paris"
+      }
     },
     {
       "symbol": "NESN.SW",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T10:02:07.290Z",
+  "generatedAt": "2026-09-24T10:05:31.815Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -1099,6 +1099,17 @@
       "file": "QQQ.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
+      "lastMonth": "2026-09"
+    },
+    {
+      "symbol": "RMS.PA",
+      "name": "Hermès International Société en commandite par actions",
+      "type": "EQUITY",
+      "currency": "EUR",
+      "category": "European shares",
+      "file": "RMS.PA.json",
+      "adjustedAvailable": true,
+      "firstMonth": "2005-02",
       "lastMonth": "2026-09"
     },
     {
