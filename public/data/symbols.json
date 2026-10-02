@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T11:39:40.870Z",
+  "generatedAt": "2026-10-02T11:09:11.617Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -87,7 +87,7 @@
       "file": "ALV.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "AMAT",
@@ -186,7 +186,7 @@
       "file": "BAC.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "BAS.DE",
@@ -197,7 +197,7 @@
       "file": "BAS.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "BKNG",
@@ -351,7 +351,7 @@
       "file": "CSX5.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2010-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "CVX",
@@ -549,7 +549,7 @@
       "file": "GS.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "HD",
@@ -604,7 +604,7 @@
       "file": "IBM.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "IBTS.L",
@@ -1077,7 +1077,7 @@
       "file": "PYPL.json",
       "adjustedAvailable": true,
       "firstMonth": "2015-08",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "QCOM",
@@ -1088,7 +1088,7 @@
       "file": "QCOM.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "QQQ",
@@ -1209,7 +1209,7 @@
       "file": "SJPA.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2009-11",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "SLV",
@@ -1308,7 +1308,7 @@
       "file": "SX5E.MI.json",
       "adjustedAvailable": true,
       "firstMonth": "2025-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "SXR8.DE",
@@ -1396,7 +1396,7 @@
       "file": "TXN.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "UBER",
@@ -1682,7 +1682,7 @@
       "file": "WFC.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "WMT",
