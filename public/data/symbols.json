@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T11:09:11.617Z",
+  "generatedAt": "2026-10-03T10:27:46.365Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -362,7 +362,7 @@
       "file": "CVX.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "DE",
@@ -912,7 +912,7 @@
       "file": "MS.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "MSFT",
@@ -1033,7 +1033,7 @@
       "file": "PFE.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "PG",
