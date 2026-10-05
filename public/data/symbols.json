@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T11:09:05.677Z",
+  "generatedAt": "2026-10-05T12:20:21.924Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -32,7 +32,7 @@
       "file": "ABNB.json",
       "adjustedAvailable": true,
       "firstMonth": "2021-01",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "ADBE",
@@ -274,7 +274,7 @@
       "file": "CAT.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "CNDX.L",
@@ -296,7 +296,7 @@
       "file": "COIN.json",
       "adjustedAvailable": true,
       "firstMonth": "2021-05",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "COST",
@@ -406,7 +406,7 @@
       "file": "DTE.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "EMIM.AS",
@@ -505,7 +505,7 @@
       "file": "GE.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "GLD",
@@ -1055,7 +1055,7 @@
       "file": "PLTR.json",
       "adjustedAvailable": true,
       "firstMonth": "2020-10",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "PPFB.DE",
@@ -1187,7 +1187,7 @@
       "file": "SHOP.json",
       "adjustedAvailable": true,
       "firstMonth": "2015-06",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "SIE.DE",
@@ -1341,7 +1341,7 @@
       "file": "T.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "TLT",
@@ -1407,7 +1407,7 @@
       "file": "UBER.json",
       "adjustedAvailable": true,
       "firstMonth": "2019-06",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "UNH",
@@ -1440,7 +1440,7 @@
       "file": "VAGF.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2019-07",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "VEA",
@@ -1550,7 +1550,7 @@
       "file": "VOW3.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "VT",
@@ -1660,7 +1660,7 @@
       "file": "VZ.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "WEBN.DE",
