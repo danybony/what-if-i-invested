@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T12:20:21.924Z",
+  "generatedAt": "2026-10-06T12:04:20.141Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -76,7 +76,7 @@
       "file": "AIR.PA.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "ALV.DE",
@@ -164,7 +164,7 @@
       "file": "AXP.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "BA",
@@ -373,7 +373,7 @@
       "file": "DE.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "DIA",
@@ -450,7 +450,7 @@
       "file": "EUNA.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2018-01",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "EUNL.DE",
@@ -494,7 +494,7 @@
       "file": "F.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "GE",
@@ -527,7 +527,7 @@
       "file": "GM.json",
       "adjustedAvailable": true,
       "firstMonth": "2010-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "GOOGL",
@@ -582,7 +582,7 @@
       "file": "HON.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "IBGL.AS",
@@ -813,7 +813,7 @@
       "file": "LMT.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "MA",
@@ -846,7 +846,7 @@
       "file": "MC.PA.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "MCD",
@@ -901,7 +901,7 @@
       "file": "MRNA.json",
       "adjustedAvailable": true,
       "firstMonth": "2019-01",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "MS",
@@ -934,7 +934,7 @@
       "file": "MU.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "MWRD.MI",
@@ -1121,7 +1121,7 @@
       "file": "RTX.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "SAN.PA",
