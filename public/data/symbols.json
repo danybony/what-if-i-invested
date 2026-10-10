@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T11:56:45.786Z",
+  "generatedAt": "2026-10-10T11:13:12.224Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -241,7 +241,7 @@
       "file": "BND.json",
       "adjustedAvailable": true,
       "firstMonth": "2007-05",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "BNP.PA",
@@ -472,7 +472,7 @@
       "file": "EUNW.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2015-01",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "EXSA.DE",
@@ -1110,7 +1110,7 @@
       "file": "RMS.PA.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "RTX",
@@ -1275,7 +1275,7 @@
       "file": "SPY5.MI.json",
       "adjustedAvailable": true,
       "firstMonth": "2012-04",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "SPYI.DE",
@@ -1319,7 +1319,7 @@
       "file": "SXR8.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2010-06",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "SXRV.DE",
@@ -1451,7 +1451,7 @@
       "file": "VEA.json",
       "adjustedAvailable": true,
       "firstMonth": "2007-08",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "VERX.AS",
@@ -1495,7 +1495,7 @@
       "file": "VGEA.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2019-03",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "VHVG.L",
@@ -1561,7 +1561,7 @@
       "file": "VT.json",
       "adjustedAvailable": true,
       "firstMonth": "2008-07",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "VTI",
@@ -1583,7 +1583,7 @@
       "file": "VUAA.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2020-03",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "VUSA.AS",
@@ -1594,7 +1594,7 @@
       "file": "VUSA.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2013-07",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "VWCE.DE",
@@ -1616,7 +1616,7 @@
       "file": "VWO.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-04",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "VWRL.AS",
@@ -1638,7 +1638,7 @@
       "file": "VXUS.json",
       "adjustedAvailable": true,
       "firstMonth": "2011-02",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "VYM",
