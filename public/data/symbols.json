@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T09:59:45.509Z",
+  "generatedAt": "2026-10-16T09:54:07.920Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -43,7 +43,7 @@
       "file": "ADBE.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "AGG",
@@ -318,7 +318,7 @@
       "file": "CRM.json",
       "adjustedAvailable": true,
       "firstMonth": "2004-07",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "CSCO",
@@ -329,7 +329,7 @@
       "file": "CSCO.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "CSPX.MI",
@@ -395,7 +395,7 @@
       "file": "DIS.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "DTE.DE",
@@ -670,7 +670,7 @@
       "file": "INTC.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "INTU",
@@ -956,7 +956,7 @@
       "file": "NFLX.json",
       "adjustedAvailable": true,
       "firstMonth": "2002-06",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "NKE",
@@ -1011,7 +1011,7 @@
       "file": "ORCL.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-09"
+      "lastMonth": "2026-10"
     },
     {
       "symbol": "PEP",
