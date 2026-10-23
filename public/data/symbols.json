@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T10:15:51.118Z",
+  "generatedAt": "2026-10-23T10:08:51.596Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -471,7 +471,7 @@
       "category": "Bonds",
       "file": "EUNW.DE.json",
       "adjustedAvailable": true,
-      "firstMonth": "2015-01",
+      "firstMonth": "2025-11",
       "lastMonth": "2026-10"
     },
     {
@@ -1109,7 +1109,7 @@
       "category": "European shares",
       "file": "RMS.PA.json",
       "adjustedAvailable": true,
-      "firstMonth": "2005-02",
+      "firstMonth": "2025-11",
       "lastMonth": "2026-10"
     },
     {
@@ -1670,7 +1670,7 @@
       "category": "World equity",
       "file": "WEBN.DE.json",
       "adjustedAvailable": true,
-      "firstMonth": "2024-07",
+      "firstMonth": "2025-11",
       "lastMonth": "2026-10"
     },
     {
