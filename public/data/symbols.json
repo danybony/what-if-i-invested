@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T10:08:51.596Z",
+  "generatedAt": "2026-10-24T09:35:51.550Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -647,7 +647,7 @@
       "category": "Bonds",
       "file": "IHYG.L.json",
       "adjustedAvailable": true,
-      "firstMonth": "2010-10",
+      "firstMonth": "2025-11",
       "lastMonth": "2026-10"
     },
     {
