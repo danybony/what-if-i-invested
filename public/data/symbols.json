@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T12:50:11.955Z",
+  "generatedAt": "2026-11-04T13:02:18.484Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -10,7 +10,7 @@
       "file": "AAPL.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "ABBV",
@@ -98,7 +98,7 @@
       "file": "AMAT.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "AMD",
@@ -208,7 +208,7 @@
       "file": "BKNG.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "BLK",
@@ -461,7 +461,7 @@
       "file": "EUNL.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2009-11",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "EUNW.DE",
@@ -593,7 +593,7 @@
       "file": "IBGL.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2008-01",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "IBM",
@@ -615,7 +615,7 @@
       "file": "IBTS.L.json",
       "adjustedAvailable": true,
       "firstMonth": "2006-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "IEAC.L",
@@ -747,7 +747,7 @@
       "file": "IWDA.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2009-11",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "IWM",
@@ -1000,7 +1000,7 @@
       "file": "OR.PA.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "ORCL",
@@ -1099,7 +1099,7 @@
       "file": "QQQ.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "RMS.PA",
@@ -1385,7 +1385,7 @@
       "file": "TTE.PA.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "TXN",
@@ -1605,7 +1605,7 @@
       "file": "VWCE.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2019-08",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VWO",
@@ -1627,7 +1627,7 @@
       "file": "VWRL.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2013-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VXUS",
