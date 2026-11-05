@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T13:02:18.484Z",
+  "generatedAt": "2026-11-05T13:15:25.627Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -252,7 +252,7 @@
       "file": "BNP.PA.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "BRK-B",
@@ -626,7 +626,7 @@
       "file": "IEAC.L.json",
       "adjustedAvailable": true,
       "firstMonth": "2009-04",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "IGLN.L",
@@ -714,7 +714,7 @@
       "file": "ISAC.L.json",
       "adjustedAvailable": true,
       "firstMonth": "2011-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "IUSA.AS",
@@ -945,7 +945,7 @@
       "file": "MWRD.MI.json",
       "adjustedAvailable": true,
       "firstMonth": "2024-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "NFLX",
@@ -1132,7 +1132,7 @@
       "file": "SAN.PA.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "SAP.DE",
@@ -1253,7 +1253,7 @@
       "file": "SPPW.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2023-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "SPY",
@@ -1286,7 +1286,7 @@
       "file": "SPYI.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2011-06",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "SQ",
@@ -1473,7 +1473,7 @@
       "file": "VEVE.L.json",
       "adjustedAvailable": true,
       "firstMonth": "2014-11",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VFEM.AS",
@@ -1506,7 +1506,7 @@
       "file": "VHVG.L.json",
       "adjustedAvailable": true,
       "firstMonth": "2019-10",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VIG",
@@ -1670,8 +1670,8 @@
       "category": "World equity",
       "file": "WEBN.DE.json",
       "adjustedAvailable": true,
-      "firstMonth": "2025-11",
-      "lastMonth": "2026-10"
+      "firstMonth": "2024-07",
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "WFC",
@@ -1737,7 +1737,7 @@
       "file": "XDWD.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2014-09",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "XGLE.DE",
@@ -1748,7 +1748,7 @@
       "file": "XGLE.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2007-08",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "XLE",
