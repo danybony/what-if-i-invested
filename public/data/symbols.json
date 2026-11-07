@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T13:15:25.627Z",
+  "generatedAt": "2026-11-07T11:46:19.054Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -340,7 +340,7 @@
       "file": "CSPX.MI.json",
       "adjustedAvailable": true,
       "firstMonth": "2014-06",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "CSX5.DE",
@@ -471,8 +471,8 @@
       "category": "Bonds",
       "file": "EUNW.DE.json",
       "adjustedAvailable": true,
-      "firstMonth": "2025-11",
-      "lastMonth": "2026-10"
+      "firstMonth": "2015-01",
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "EXSA.DE",
@@ -659,7 +659,7 @@
       "file": "IMIE.MI.json",
       "adjustedAvailable": true,
       "firstMonth": "2011-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "INTC",
@@ -736,7 +736,7 @@
       "file": "IVV.json",
       "adjustedAvailable": true,
       "firstMonth": "2000-06",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "IWDA.AS",
@@ -1109,8 +1109,8 @@
       "category": "European shares",
       "file": "RMS.PA.json",
       "adjustedAvailable": true,
-      "firstMonth": "2025-11",
-      "lastMonth": "2026-10"
+      "firstMonth": "2005-02",
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "RTX",
@@ -1264,7 +1264,7 @@
       "file": "SPY.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "SPY5.MI",
@@ -1451,7 +1451,7 @@
       "file": "VEA.json",
       "adjustedAvailable": true,
       "firstMonth": "2007-08",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VERX.AS",
@@ -1495,7 +1495,7 @@
       "file": "VGEA.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2019-03",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VHVG.L",
@@ -1539,7 +1539,7 @@
       "file": "VOO.json",
       "adjustedAvailable": true,
       "firstMonth": "2010-10",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VOW3.DE",
@@ -1572,7 +1572,7 @@
       "file": "VTI.json",
       "adjustedAvailable": true,
       "firstMonth": "2001-06",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VUAA.DE",
@@ -1616,7 +1616,7 @@
       "file": "VWO.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-04",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VWRL.AS",
@@ -1638,7 +1638,7 @@
       "file": "VXUS.json",
       "adjustedAvailable": true,
       "firstMonth": "2011-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VYM",
