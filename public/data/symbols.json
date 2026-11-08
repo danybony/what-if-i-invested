@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T11:46:19.054Z",
+  "generatedAt": "2026-11-08T11:58:26.176Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -54,7 +54,7 @@
       "file": "AGG.json",
       "adjustedAvailable": true,
       "firstMonth": "2003-10",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "AGGH.MI",
@@ -241,7 +241,7 @@
       "file": "BND.json",
       "adjustedAvailable": true,
       "firstMonth": "2007-05",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "BNP.PA",
@@ -428,7 +428,7 @@
       "file": "EQQQ.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "ESIT.MI",
@@ -647,8 +647,8 @@
       "category": "Bonds",
       "file": "IHYG.L.json",
       "adjustedAvailable": true,
-      "firstMonth": "2025-11",
-      "lastMonth": "2026-10"
+      "firstMonth": "2010-10",
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "IMIE.MI",
@@ -691,8 +691,8 @@
       "category": "Sector & thematic",
       "file": "IQQH.DE.json",
       "adjustedAvailable": true,
-      "firstMonth": "2025-11",
-      "lastMonth": "2026-10"
+      "firstMonth": "2007-12",
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "IS3N.DE",
@@ -1165,7 +1165,7 @@
       "file": "SCHD.json",
       "adjustedAvailable": true,
       "firstMonth": "2011-11",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "SGLD.MI",
@@ -1275,7 +1275,7 @@
       "file": "SPY5.MI.json",
       "adjustedAvailable": true,
       "firstMonth": "2012-04",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "SPYI.DE",
@@ -1319,7 +1319,7 @@
       "file": "SXR8.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2010-06",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "SXRV.DE",
@@ -1561,7 +1561,7 @@
       "file": "VT.json",
       "adjustedAvailable": true,
       "firstMonth": "2008-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VTI",
@@ -1583,7 +1583,7 @@
       "file": "VUAA.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2020-03",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VUSA.AS",
@@ -1594,7 +1594,7 @@
       "file": "VUSA.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2013-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VWCE.DE",
@@ -1715,7 +1715,7 @@
       "file": "XAIX.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2019-03",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "XDPU.DE",
