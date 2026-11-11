@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T13:30:52.989Z",
+  "generatedAt": "2026-11-11T12:45:48.782Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -263,7 +263,7 @@
       "file": "BRK-B.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "CAT",
@@ -417,7 +417,7 @@
       "file": "EMIM.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2014-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "EQQQ.AS",
@@ -637,7 +637,7 @@
       "file": "IGLN.L.json",
       "adjustedAvailable": true,
       "firstMonth": "2011-05",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "IHYG.L",
@@ -703,7 +703,7 @@
       "file": "IS3N.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2014-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "ISAC.L",
@@ -725,7 +725,7 @@
       "file": "IUSA.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "IVV",
@@ -780,7 +780,7 @@
       "file": "JPM.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "KO",
@@ -824,7 +824,7 @@
       "file": "MA.json",
       "adjustedAvailable": true,
       "firstMonth": "2006-06",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "MBG.DE",
@@ -1176,7 +1176,7 @@
       "file": "SGLD.MI.json",
       "adjustedAvailable": true,
       "firstMonth": "2017-03",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "SHOP",
@@ -1429,7 +1429,7 @@
       "file": "V.json",
       "adjustedAvailable": true,
       "firstMonth": "2008-04",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VAGF.DE",
@@ -1484,7 +1484,7 @@
       "file": "VFEM.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2013-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VGEA.DE",
@@ -1726,7 +1726,7 @@
       "file": "XDPU.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2022-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "XDWD.DE",
@@ -1803,7 +1803,7 @@
       "file": "XMME.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2017-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "XOM",
