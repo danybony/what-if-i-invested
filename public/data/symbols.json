@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T13:49:25.130Z",
+  "generatedAt": "2026-11-13T13:10:34.843Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -43,7 +43,7 @@
       "file": "ADBE.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "AGG",
@@ -109,7 +109,7 @@
       "file": "AMD.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "AMZN",
@@ -318,7 +318,7 @@
       "file": "CRM.json",
       "adjustedAvailable": true,
       "firstMonth": "2004-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "CSCO",
@@ -329,7 +329,7 @@
       "file": "CSCO.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "CSPX.MI",
@@ -395,7 +395,7 @@
       "file": "DIS.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "DTE.DE",
@@ -483,7 +483,7 @@
       "file": "EXSA.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-05",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "F",
@@ -670,7 +670,7 @@
       "file": "INTC.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "INTU",
@@ -879,7 +879,7 @@
       "file": "MEUD.PA.json",
       "adjustedAvailable": true,
       "firstMonth": "2013-08",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "MRK",
@@ -956,7 +956,7 @@
       "file": "NFLX.json",
       "adjustedAvailable": true,
       "firstMonth": "2002-06",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "NKE",
@@ -1143,7 +1143,7 @@
       "file": "SAP.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "SBUX",
@@ -1198,7 +1198,7 @@
       "file": "SIE.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "SJPA.DE",
@@ -1462,7 +1462,7 @@
       "file": "VERX.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2014-11",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VEVE.L",
