@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T12:14:44.948Z",
+  "generatedAt": "2026-11-15T12:47:26.236Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -21,7 +21,7 @@
       "file": "ABBV.json",
       "adjustedAvailable": true,
       "firstMonth": "2013-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "ABNB",
@@ -230,7 +230,7 @@
       "file": "BMW.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "BND",
@@ -362,7 +362,7 @@
       "file": "CVX.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "DE",
@@ -549,7 +549,7 @@
       "file": "GS.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "HD",
@@ -802,7 +802,7 @@
       "file": "LLY.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "LMT",
@@ -835,7 +835,7 @@
       "file": "MBG.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2005-02",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "MC.PA",
@@ -857,7 +857,7 @@
       "file": "MCD.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "META",
@@ -890,7 +890,7 @@
       "file": "MRK.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "MRNA",
@@ -912,7 +912,7 @@
       "file": "MS.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "MSFT",
@@ -1033,7 +1033,7 @@
       "file": "PFE.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "PG",
@@ -1363,7 +1363,7 @@
       "file": "TMO.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "TSLA",
@@ -1528,7 +1528,7 @@
       "file": "VJPN.AS.json",
       "adjustedAvailable": true,
       "firstMonth": "2013-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VOO",
