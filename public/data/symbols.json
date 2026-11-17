@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T13:43:06.808Z",
+  "generatedAt": "2026-11-17T14:30:20.462Z",
   "symbols": [
     {
       "symbol": "AAPL",
@@ -450,7 +450,7 @@
       "file": "EUNA.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2018-01",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "EUNL.DE",
@@ -494,7 +494,7 @@
       "file": "F.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "GE",
@@ -901,7 +901,7 @@
       "file": "MRNA.json",
       "adjustedAvailable": true,
       "firstMonth": "2019-01",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "MS",
@@ -934,7 +934,7 @@
       "file": "MU.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "MWRD.MI",
@@ -1187,7 +1187,7 @@
       "file": "SHOP.json",
       "adjustedAvailable": true,
       "firstMonth": "2015-06",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "SIE.DE",
@@ -1341,7 +1341,7 @@
       "file": "T.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "TLT",
@@ -1440,7 +1440,7 @@
       "file": "VAGF.DE.json",
       "adjustedAvailable": true,
       "firstMonth": "2019-07",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "VEA",
@@ -1660,7 +1660,7 @@
       "file": "VZ.json",
       "adjustedAvailable": true,
       "firstMonth": "1999-12",
-      "lastMonth": "2026-10"
+      "lastMonth": "2026-11"
     },
     {
       "symbol": "WEBN.DE",
